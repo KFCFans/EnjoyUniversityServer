@@ -6,7 +6,7 @@
     <result column="avatar" property="avatar" jdbcType="VARCHAR" />
     <result column="nickname" property="nickname" jdbcType="VARCHAR" />
     <result column="gender" property="gender" jdbcType="INTEGER" />
-    <result column="class" property="class" jdbcType="VARCHAR" />
+    <result column="professionclass" property="professionclass" jdbcType="VARCHAR" />
     <result column="studentid" property="studentid" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
@@ -73,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    uid, avatar, nickname, gender, class, studentid, name, description, password, accesstoken, 
-    reputation
+    uid, avatar, nickname, gender, professionclass, studentid, name, description, password, 
+    accesstoken, reputation
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eu.pojo.UserinfoExample" >
     select
@@ -108,11 +108,11 @@
   </delete>
   <insert id="insert" parameterType="com.eu.pojo.Userinfo" >
     insert into userinfo (uid, avatar, nickname, 
-      gender, class, studentid, 
+      gender, professionclass, studentid, 
       name, description, password, 
       accesstoken, reputation)
     values (#{uid,jdbcType=BIGINT}, #{avatar,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=INTEGER}, #{class,jdbcType=VARCHAR}, #{studentid,jdbcType=BIGINT}, 
+      #{gender,jdbcType=INTEGER}, #{professionclass,jdbcType=VARCHAR}, #{studentid,jdbcType=BIGINT}, 
       #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{accesstoken,jdbcType=VARCHAR}, #{reputation,jdbcType=INTEGER})
   </insert>
@@ -131,8 +131,8 @@
       <if test="gender != null" >
         gender,
       </if>
-      <if test="class != null" >
-        class,
+      <if test="professionclass != null" >
+        professionclass,
       </if>
       <if test="studentid != null" >
         studentid,
@@ -166,8 +166,8 @@
       <if test="gender != null" >
         #{gender,jdbcType=INTEGER},
       </if>
-      <if test="class != null" >
-        #{class,jdbcType=VARCHAR},
+      <if test="professionclass != null" >
+        #{professionclass,jdbcType=VARCHAR},
       </if>
       <if test="studentid != null" >
         #{studentid,jdbcType=BIGINT},
@@ -210,8 +210,8 @@
       <if test="record.gender != null" >
         gender = #{record.gender,jdbcType=INTEGER},
       </if>
-      <if test="record.class != null" >
-        class = #{record.class,jdbcType=VARCHAR},
+      <if test="record.professionclass != null" >
+        professionclass = #{record.professionclass,jdbcType=VARCHAR},
       </if>
       <if test="record.studentid != null" >
         studentid = #{record.studentid,jdbcType=BIGINT},
@@ -242,7 +242,7 @@
       avatar = #{record.avatar,jdbcType=VARCHAR},
       nickname = #{record.nickname,jdbcType=VARCHAR},
       gender = #{record.gender,jdbcType=INTEGER},
-      class = #{record.class,jdbcType=VARCHAR},
+      professionclass = #{record.professionclass,jdbcType=VARCHAR},
       studentid = #{record.studentid,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
@@ -265,8 +265,8 @@
       <if test="gender != null" >
         gender = #{gender,jdbcType=INTEGER},
       </if>
-      <if test="class != null" >
-        class = #{class,jdbcType=VARCHAR},
+      <if test="professionclass != null" >
+        professionclass = #{professionclass,jdbcType=VARCHAR},
       </if>
       <if test="studentid != null" >
         studentid = #{studentid,jdbcType=BIGINT},
@@ -294,7 +294,7 @@
     set avatar = #{avatar,jdbcType=VARCHAR},
       nickname = #{nickname,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=INTEGER},
-      class = #{class,jdbcType=VARCHAR},
+      professionclass = #{professionclass,jdbcType=VARCHAR},
       studentid = #{studentid,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},

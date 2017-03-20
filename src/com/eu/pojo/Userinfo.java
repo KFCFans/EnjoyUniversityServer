@@ -9,7 +9,7 @@ public class Userinfo {
 
     private Integer gender;
 
-    private String class;
+    private String professionclass;
 
     private Long studentid;
 
@@ -55,12 +55,12 @@ public class Userinfo {
         this.gender = gender;
     }
 
-    public String getClass() {
-        return class;
+    public String getProfessionclass() {
+        return professionclass;
     }
 
-    public void setClass(String class) {
-        this.class = class == null ? null : class.trim();
+    public void setProfessionclass(String professionclass) {
+        this.professionclass = professionclass == null ? null : professionclass.trim();
     }
 
     public Long getStudentid() {

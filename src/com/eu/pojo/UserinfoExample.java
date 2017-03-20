@@ -364,73 +364,73 @@ public class UserinfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andClassIsNull() {
-            addCriterion("class is null");
+        public Criteria andProfessionclassIsNull() {
+            addCriterion("professionclass is null");
             return (Criteria) this;
         }
 
-        public Criteria andClassIsNotNull() {
-            addCriterion("class is not null");
+        public Criteria andProfessionclassIsNotNull() {
+            addCriterion("professionclass is not null");
             return (Criteria) this;
         }
 
-        public Criteria andClassEqualTo(String value) {
-            addCriterion("class =", value, "class");
+        public Criteria andProfessionclassEqualTo(String value) {
+            addCriterion("professionclass =", value, "professionclass");
             return (Criteria) this;
         }
 
-        public Criteria andClassNotEqualTo(String value) {
-            addCriterion("class <>", value, "class");
+        public Criteria andProfessionclassNotEqualTo(String value) {
+            addCriterion("professionclass <>", value, "professionclass");
             return (Criteria) this;
         }
 
-        public Criteria andClassGreaterThan(String value) {
-            addCriterion("class >", value, "class");
+        public Criteria andProfessionclassGreaterThan(String value) {
+            addCriterion("professionclass >", value, "professionclass");
             return (Criteria) this;
         }
 
-        public Criteria andClassGreaterThanOrEqualTo(String value) {
-            addCriterion("class >=", value, "class");
+        public Criteria andProfessionclassGreaterThanOrEqualTo(String value) {
+            addCriterion("professionclass >=", value, "professionclass");
             return (Criteria) this;
         }
 
-        public Criteria andClassLessThan(String value) {
-            addCriterion("class <", value, "class");
+        public Criteria andProfessionclassLessThan(String value) {
+            addCriterion("professionclass <", value, "professionclass");
             return (Criteria) this;
         }
 
-        public Criteria andClassLessThanOrEqualTo(String value) {
-            addCriterion("class <=", value, "class");
+        public Criteria andProfessionclassLessThanOrEqualTo(String value) {
+            addCriterion("professionclass <=", value, "professionclass");
             return (Criteria) this;
         }
 
-        public Criteria andClassLike(String value) {
-            addCriterion("class like", value, "class");
+        public Criteria andProfessionclassLike(String value) {
+            addCriterion("professionclass like", value, "professionclass");
             return (Criteria) this;
         }
 
-        public Criteria andClassNotLike(String value) {
-            addCriterion("class not like", value, "class");
+        public Criteria andProfessionclassNotLike(String value) {
+            addCriterion("professionclass not like", value, "professionclass");
             return (Criteria) this;
         }
 
-        public Criteria andClassIn(List<String> values) {
-            addCriterion("class in", values, "class");
+        public Criteria andProfessionclassIn(List<String> values) {
+            addCriterion("professionclass in", values, "professionclass");
             return (Criteria) this;
         }
 
-        public Criteria andClassNotIn(List<String> values) {
-            addCriterion("class not in", values, "class");
+        public Criteria andProfessionclassNotIn(List<String> values) {
+            addCriterion("professionclass not in", values, "professionclass");
             return (Criteria) this;
         }
 
-        public Criteria andClassBetween(String value1, String value2) {
-            addCriterion("class between", value1, value2, "class");
+        public Criteria andProfessionclassBetween(String value1, String value2) {
+            addCriterion("professionclass between", value1, value2, "professionclass");
             return (Criteria) this;
         }
 
-        public Criteria andClassNotBetween(String value1, String value2) {
-            addCriterion("class not between", value1, value2, "class");
+        public Criteria andProfessionclassNotBetween(String value1, String value2) {
+            addCriterion("professionclass not between", value1, value2, "professionclass");
             return (Criteria) this;
         }
 
