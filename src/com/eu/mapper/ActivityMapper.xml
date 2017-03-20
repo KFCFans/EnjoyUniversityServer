@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eu.mapper.ActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.eu.pojo.Activity" >
+    <id column="avid" property="avid" jdbcType="INTEGER" />
+    <result column="av_title" property="avTitle" jdbcType="VARCHAR" />
+    <result column="av_starttime" property="avStarttime" jdbcType="DATE" />
+    <result column="av_endtime" property="avEndtime" jdbcType="DATE" />
+    <result column="av_price" property="avPrice" jdbcType="REAL" />
+    <result column="av_detail" property="avDetail" jdbcType="VARCHAR" />
+    <result column="av_expectnum" property="avExpectnum" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="av_logo" property="avLogo" jdbcType="VARCHAR" />
+    <result column="av_state" property="avState" jdbcType="INTEGER" />
+    <result column="av_background" property="avBackground" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    avid, av_title, av_starttime, av_endtime, av_price, av_detail, av_expectnum, uid, 
+    av_logo, av_state, av_background
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eu.pojo.ActivityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from activity
+    where avid = #{avid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from activity
+    where avid = #{avid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.eu.pojo.ActivityExample" >
+    delete from activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.eu.pojo.Activity" >
+    insert into activity (avid, av_title, av_starttime, 
+      av_endtime, av_price, av_detail, 
+      av_expectnum, uid, av_logo, 
+      av_state, av_background)
+    values (#{avid,jdbcType=INTEGER}, #{avTitle,jdbcType=VARCHAR}, #{avStarttime,jdbcType=DATE}, 
+      #{avEndtime,jdbcType=DATE}, #{avPrice,jdbcType=REAL}, #{avDetail,jdbcType=VARCHAR}, 
+      #{avExpectnum,jdbcType=INTEGER}, #{uid,jdbcType=BIGINT}, #{avLogo,jdbcType=VARCHAR}, 
+      #{avState,jdbcType=INTEGER}, #{avBackground,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eu.pojo.Activity" >
+    insert into activity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="avid != null" >
+        avid,
+      </if>
+      <if test="avTitle != null" >
+        av_title,
+      </if>
+      <if test="avStarttime != null" >
+        av_starttime,
+      </if>
+      <if test="avEndtime != null" >
+        av_endtime,
+      </if>
+      <if test="avPrice != null" >
+        av_price,
+      </if>
+      <if test="avDetail != null" >
+        av_detail,
+      </if>
+      <if test="avExpectnum != null" >
+        av_expectnum,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="avLogo != null" >
+        av_logo,
+      </if>
+      <if test="avState != null" >
+        av_state,
+      </if>
+      <if test="avBackground != null" >
+        av_background,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="avid != null" >
+        #{avid,jdbcType=INTEGER},
+      </if>
+      <if test="avTitle != null" >
+        #{avTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="avStarttime != null" >
+        #{avStarttime,jdbcType=DATE},
+      </if>
+      <if test="avEndtime != null" >
+        #{avEndtime,jdbcType=DATE},
+      </if>
+      <if test="avPrice != null" >
+        #{avPrice,jdbcType=REAL},
+      </if>
+      <if test="avDetail != null" >
+        #{avDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="avExpectnum != null" >
+        #{avExpectnum,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="avLogo != null" >
+        #{avLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="avState != null" >
+        #{avState,jdbcType=INTEGER},
+      </if>
+      <if test="avBackground != null" >
+        #{avBackground,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.eu.pojo.ActivityExample" resultType="java.lang.Integer" >
+    select count(*) from activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update activity
+    <set >
+      <if test="record.avid != null" >
+        avid = #{record.avid,jdbcType=INTEGER},
+      </if>
+      <if test="record.avTitle != null" >
+        av_title = #{record.avTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.avStarttime != null" >
+        av_starttime = #{record.avStarttime,jdbcType=DATE},
+      </if>
+      <if test="record.avEndtime != null" >
+        av_endtime = #{record.avEndtime,jdbcType=DATE},
+      </if>
+      <if test="record.avPrice != null" >
+        av_price = #{record.avPrice,jdbcType=REAL},
+      </if>
+      <if test="record.avDetail != null" >
+        av_detail = #{record.avDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.avExpectnum != null" >
+        av_expectnum = #{record.avExpectnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.avLogo != null" >
+        av_logo = #{record.avLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.avState != null" >
+        av_state = #{record.avState,jdbcType=INTEGER},
+      </if>
+      <if test="record.avBackground != null" >
+        av_background = #{record.avBackground,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update activity
+    set avid = #{record.avid,jdbcType=INTEGER},
+      av_title = #{record.avTitle,jdbcType=VARCHAR},
+      av_starttime = #{record.avStarttime,jdbcType=DATE},
+      av_endtime = #{record.avEndtime,jdbcType=DATE},
+      av_price = #{record.avPrice,jdbcType=REAL},
+      av_detail = #{record.avDetail,jdbcType=VARCHAR},
+      av_expectnum = #{record.avExpectnum,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=BIGINT},
+      av_logo = #{record.avLogo,jdbcType=VARCHAR},
+      av_state = #{record.avState,jdbcType=INTEGER},
+      av_background = #{record.avBackground,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eu.pojo.Activity" >
+    update activity
+    <set >
+      <if test="avTitle != null" >
+        av_title = #{avTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="avStarttime != null" >
+        av_starttime = #{avStarttime,jdbcType=DATE},
+      </if>
+      <if test="avEndtime != null" >
+        av_endtime = #{avEndtime,jdbcType=DATE},
+      </if>
+      <if test="avPrice != null" >
+        av_price = #{avPrice,jdbcType=REAL},
+      </if>
+      <if test="avDetail != null" >
+        av_detail = #{avDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="avExpectnum != null" >
+        av_expectnum = #{avExpectnum,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="avLogo != null" >
+        av_logo = #{avLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="avState != null" >
+        av_state = #{avState,jdbcType=INTEGER},
+      </if>
+      <if test="avBackground != null" >
+        av_background = #{avBackground,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where avid = #{avid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eu.pojo.Activity" >
+    update activity
+    set av_title = #{avTitle,jdbcType=VARCHAR},
+      av_starttime = #{avStarttime,jdbcType=DATE},
+      av_endtime = #{avEndtime,jdbcType=DATE},
+      av_price = #{avPrice,jdbcType=REAL},
+      av_detail = #{avDetail,jdbcType=VARCHAR},
+      av_expectnum = #{avExpectnum,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=BIGINT},
+      av_logo = #{avLogo,jdbcType=VARCHAR},
+      av_state = #{avState,jdbcType=INTEGER},
+      av_background = #{avBackground,jdbcType=VARCHAR}
+    where avid = #{avid,jdbcType=INTEGER}
+  </update>
+</mapper>

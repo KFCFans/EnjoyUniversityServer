@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eu.mapper.ParticipateactivityMapper" >
+  <resultMap id="BaseResultMap" type="com.eu.pojo.Participateactivity" >
+    <id column="uid" property="uid" jdbcType="BIGINT" />
+    <id column="avid" property="avid" jdbcType="INTEGER" />
+    <result column="verifystate" property="verifystate" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    uid, avid, verifystate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eu.pojo.ParticipateactivityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from participateactivity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.eu.pojo.ParticipateactivityKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from participateactivity
+    where uid = #{uid,jdbcType=BIGINT}
+      and avid = #{avid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.eu.pojo.ParticipateactivityKey" >
+    delete from participateactivity
+    where uid = #{uid,jdbcType=BIGINT}
+      and avid = #{avid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.eu.pojo.ParticipateactivityExample" >
+    delete from participateactivity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.eu.pojo.Participateactivity" >
+    insert into participateactivity (uid, avid, verifystate
+      )
+    values (#{uid,jdbcType=BIGINT}, #{avid,jdbcType=INTEGER}, #{verifystate,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.eu.pojo.Participateactivity" >
+    insert into participateactivity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="avid != null" >
+        avid,
+      </if>
+      <if test="verifystate != null" >
+        verifystate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="avid != null" >
+        #{avid,jdbcType=INTEGER},
+      </if>
+      <if test="verifystate != null" >
+        #{verifystate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.eu.pojo.ParticipateactivityExample" resultType="java.lang.Integer" >
+    select count(*) from participateactivity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update participateactivity
+    <set >
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.avid != null" >
+        avid = #{record.avid,jdbcType=INTEGER},
+      </if>
+      <if test="record.verifystate != null" >
+        verifystate = #{record.verifystate,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update participateactivity
+    set uid = #{record.uid,jdbcType=BIGINT},
+      avid = #{record.avid,jdbcType=INTEGER},
+      verifystate = #{record.verifystate,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eu.pojo.Participateactivity" >
+    update participateactivity
+    <set >
+      <if test="verifystate != null" >
+        verifystate = #{verifystate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=BIGINT}
+      and avid = #{avid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eu.pojo.Participateactivity" >
+    update participateactivity
+    set verifystate = #{verifystate,jdbcType=INTEGER}
+    where uid = #{uid,jdbcType=BIGINT}
+      and avid = #{avid,jdbcType=INTEGER}
+  </update>
+</mapper>
