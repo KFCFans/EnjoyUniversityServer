@@ -19,9 +19,6 @@ import java.security.MessageDigest;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Created by lip on 17/3/21.
- */
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -54,14 +51,12 @@ public class UserServiceImpl implements UserService {
             status = 500;
             msg = e.getErrMsg();
         }
-        System.out.println(rsp.getBody());
+
         System.out.println(rsp.getResult().getSuccess());
 
 
        // 返回验证码数据
-        UserResult userResult   = new UserResult(status,msg,code);
-
-        return userResult;
+        return new UserResult(status,msg,code);
     }
 
     @Override
@@ -107,6 +102,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResult login(String username, String password) {
 
+        Userinfo userinfo;
         String md5pwd = DigestUtils.md5DigestAsHex(password.getBytes());
 
         UserinfoExample example = new UserinfoExample();
@@ -114,12 +110,12 @@ public class UserServiceImpl implements UserService {
         criteria.andUidEqualTo(Long.parseLong(username));
         try {
             List<Userinfo> list = userinfoMapper.selectByExample(example);
+            userinfo = list.get(0);
         }catch (Exception e){
             return new UserResult(500,"faild",e.getMessage());
         }
 
-        Userinfo userinfo = list.get(0);
-        System.out.println(userinfo.toString());
+
         if (!userinfo.getPassword().equals(md5pwd)){
 
             return new UserResult(400,"faild","用户名或密码错误");
