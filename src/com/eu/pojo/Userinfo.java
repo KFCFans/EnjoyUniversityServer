@@ -110,4 +110,29 @@ public class Userinfo {
     public void setReputation(Integer reputation) {
         this.reputation = reputation;
     }
+
+    @Override
+    public String toString() {
+        return "Userinfo{" +
+                "uid=" + uid +
+                ", avatar='" + avatar + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", gender=" + gender +
+                ", professionclass='" + professionclass + '\'' +
+                ", studentid=" + studentid +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", password='" + password + '\'' +
+                ", accesstoken='" + accesstoken + '\'' +
+                ", reputation=" + reputation +
+                '}';
+    }
+
+    // 判断是否合法（某些字段必须有值）
+    public Boolean isLegalToDataBase(){
+        if (uid==null||gender==null||studentid==null||name==null||password==null||reputation==null){
+            return false;
+        }
+        return true;
+    }
 }

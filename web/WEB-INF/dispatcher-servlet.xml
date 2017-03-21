@@ -9,6 +9,15 @@
 
     <!--配置视图渲染器-->
 
+    <!--拦截器配置-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/viewpager"/>
+            <mvc:exclude-mapping path="/user/**"/>
+            <bean class="com.eu.interceptor.TokenInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <!--扫描 Service 包-->
     <context:component-scan base-package="com.eu.controller"/>

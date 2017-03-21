@@ -22,7 +22,7 @@ public class TestController {
     @ResponseBody
     public String test(){
         //随机生成验证码
-        Integer randomcode = (int)(Math.random()*10000);
+        Integer randomcode = 1000+(int)(Math.random()*9000);
         return  randomcode.toString();
 
     }
