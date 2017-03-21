@@ -1,7 +1,7 @@
 package com.eu.service.impl;
 
 import com.eu.pojo.VerificationCode;
-import com.eu.service.LoginService;
+import com.eu.service.UserService;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
@@ -13,14 +13,13 @@ import org.springframework.stereotype.Service;
  * Created by lip on 17/3/21.
  */
 @Service
-public class LoginServiceImpl implements LoginService {
+public class UserServiceImpl implements UserService {
 
     @Override
     public VerificationCode verifyPhoneNumber(String phone) throws ApiException {
 
         //随机生成验证码
-        Integer randomcode = (int)(Math.random()*10000);
-
+        Integer randomcode = 1000+(int)(Math.random()*9000);
         String code = randomcode.toString();
 
         // 发送短信
@@ -34,8 +33,11 @@ public class LoginServiceImpl implements LoginService {
         req.setSmsTemplateCode( "SMS_56610387" );
         AlibabaAliqinFcSmsNumSendResponse rsp = client.execute(req);
         System.out.println(rsp.getBody());
+        System.out.println(rsp.getResult().getSuccess());
 
-        VerificationCode verificationCode = new VerificationCode(code,"success");
+
+       // 返回验证码数据
+        VerificationCode verificationCode = new VerificationCode(code,rsp.getResult().getSuccess());
 
         return verificationCode;
     }
