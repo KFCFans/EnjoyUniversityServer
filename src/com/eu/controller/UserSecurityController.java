@@ -2,7 +2,7 @@ package com.eu.controller;
 
 import com.eu.pojo.UserResult;
 import com.eu.pojo.Userinfo;
-import com.eu.service.UserService;
+import com.eu.service.UserSecurityService;
 import com.taobao.api.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,38 +15,38 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserSecurityController {
 
     @Autowired
-    private UserService userService;
+    private UserSecurityService userSecurityService;
 
     @RequestMapping("/verifyphone/{phone}")
     @ResponseBody
     public UserResult verifyPhoneNumber(@PathVariable String phone) throws ApiException {
 
-        return userService.verifyPhoneNumber(phone);
+        return userSecurityService.verifyPhoneNumber(phone);
 
     }
 
-    @RequestMapping("/checkphone/{phone}")
+    @RequestMapping("/checkuid/{phone}")
     @ResponseBody
-    public UserResult checkPhoneNumber(@PathVariable String phone){
+    public UserResult checkUid(@PathVariable String phone){
 
-        return userService.checkPhoneNumber(phone);
+        return userSecurityService.checkUid(phone);
     }
 
     @RequestMapping("/newuser")
     @ResponseBody
     public UserResult createUser(Userinfo userinfo){
 
-        return userService.createUser(userinfo);
+        return userSecurityService.createUser(userinfo);
     }
 
     @RequestMapping("/login")
     @ResponseBody
-    public UserResult login(String uid,String password){
+    public Userinfo login(String uid,String password){
 
-        return userService.login(uid, password);
+        return userSecurityService.login(uid, password);
     }
 
 }

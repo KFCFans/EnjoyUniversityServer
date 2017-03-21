@@ -3,8 +3,7 @@ package com.eu.service.impl;
 import com.eu.mapper.UserinfoMapper;
 import com.eu.pojo.UserResult;
 import com.eu.pojo.Userinfo;
-import com.eu.pojo.UserinfoExample;
-import com.eu.service.UserService;
+import com.eu.service.UserSecurityService;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
@@ -13,14 +12,11 @@ import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
-import sun.security.provider.MD5;
 
-import java.security.MessageDigest;
-import java.util.List;
 import java.util.UUID;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserSecurityServiceImpl implements UserSecurityService {
 
     @Autowired
     private UserinfoMapper userinfoMapper;
@@ -60,7 +56,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResult checkPhoneNumber(String phone) {
+    public UserResult checkUid(String phone) {
 
 
         String data = "false";
@@ -100,26 +96,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResult login(String username, String password) {
+    public Userinfo login(String username, String password) {
 
         Userinfo userinfo;
         String md5pwd = DigestUtils.md5DigestAsHex(password.getBytes());
 
-        UserinfoExample example = new UserinfoExample();
-        UserinfoExample.Criteria criteria = example.createCriteria();
-        criteria.andUidEqualTo(Long.parseLong(username));
         try {
-            List<Userinfo> list = userinfoMapper.selectByExample(example);
-            userinfo = list.get(0);
+            userinfo = userinfoMapper.selectByPrimaryKey(Long.parseLong(username));
         }catch (Exception e){
-            return new UserResult(500,"faild",e.getMessage());
+            return new Userinfo();
         }
 
 
         if (!userinfo.getPassword().equals(md5pwd)){
 
-            return new UserResult(400,"faild","用户名或密码错误");
+            return new Userinfo();
         }
-        return new UserResult(200,"OK",userinfo.getAccesstoken());
+        return userinfo;
     }
 }

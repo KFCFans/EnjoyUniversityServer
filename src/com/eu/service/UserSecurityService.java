@@ -7,15 +7,15 @@ import com.taobao.api.ApiException;
 /**
  * Created by lip on 17/3/21.
  */
-public interface UserService {
+public interface UserSecurityService {
 
 
     public UserResult verifyPhoneNumber(String phone) throws ApiException;
 
-    public UserResult checkPhoneNumber(String phone);
+    public UserResult checkUid(String phone);
 
     public UserResult createUser(Userinfo userinfo);
 
-    public UserResult login(String username,String password);
+    public Userinfo login(String username,String password);
 
 }
