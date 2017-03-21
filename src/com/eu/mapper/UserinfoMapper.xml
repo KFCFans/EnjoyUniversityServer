@@ -303,4 +303,8 @@
       reputation = #{reputation,jdbcType=INTEGER}
     where uid = #{uid,jdbcType=BIGINT}
   </update>
+
+  <select id="selectAccessTokenByPrimaryKey" parameterType="java.lang.Long" resultType="java.lang.String">
+    SELECT accesstoken from userinfo WHERE uid = #{uid}
+  </select>
 </mapper>

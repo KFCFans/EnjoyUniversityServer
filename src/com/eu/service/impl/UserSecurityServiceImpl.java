@@ -114,4 +114,13 @@ public class UserSecurityServiceImpl implements UserSecurityService {
         }
         return userinfo;
     }
+
+    @Override
+    public Boolean checkAccessToken(String uid,String accesstoken) {
+        String token = userinfoMapper.selectAccessTokenByPrimaryKey(Long.parseLong(uid));
+        if (token.equals(accesstoken)){
+            return true;
+        }
+        return false;
+    }
 }
