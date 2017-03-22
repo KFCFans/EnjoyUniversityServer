@@ -41,7 +41,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public List<Userinfo> getParticipatorList(List<Long> uidlist) {
-        
+
         return userinfoMapper.selectByPrimaryKeyList(uidlist);
     }
 

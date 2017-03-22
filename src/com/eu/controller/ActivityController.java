@@ -1,12 +1,15 @@
 package com.eu.controller;
 
 import com.eu.pojo.Activity;
+import com.eu.pojo.Userinfo;
 import com.eu.service.ActivityService;
+import com.eu.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,5 +51,6 @@ public class ActivityController {
     public List<Long> getParticipatorPhoneList(int avid){
         return activityService.getParticipatorPhoneList(avid);
     }
+
 
 }
