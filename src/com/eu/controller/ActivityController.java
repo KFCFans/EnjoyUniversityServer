@@ -81,5 +81,29 @@ public class ActivityController {
         return activityService.createActivity(activity);
     }
 
+    @RequestMapping("/manage")
+    @ResponseBody
+    public RequestResult manageParticipators(String uid,int avid,int verifystate,String reason){
+        return activityService.manageParticipators(uid, avid, verifystate,reason);
+    }
+
+    @RequestMapping("/startregister")
+    @ResponseBody
+    public RequestResult startActivityRegister(String uid,int avid){
+        return activityService.startRegister(uid, avid);
+    }
+
+    @RequestMapping("getregister")
+    @ResponseBody
+    public RequestResult getRegisterInfo(int avid){
+        return activityService.getRegisterInfo(avid);
+    }
+
+    @RequestMapping("/participateregister")
+    @ResponseBody
+    public RequestResult participateRegister(String uid,int avid){
+        return activityService.participateRegister(uid,avid);
+    }
+
 
 }

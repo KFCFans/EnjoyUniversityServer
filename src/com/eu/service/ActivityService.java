@@ -32,7 +32,15 @@ public interface ActivityService {
 
     public RequestResult createActivity(Activity activity);
 
-    public RequestResult manageParticipators(String uid,int avid,int verifystate);
+    public RequestResult manageParticipators(String uid,int avid,int verifystate,String reason);
+
+    public RequestResult startRegister(String uid,int avid);
+
+    public RequestResult getRegisterInfo(int avid);
+
+    public RequestResult participateRegister(String uid,int avid);
+
+
 
 
 

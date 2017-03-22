@@ -37,4 +37,10 @@ public class CommunityController {
         return communityService.getMyCollectedCommunities(uid);
     }
 
+    @RequestMapping("/phonelist")
+    @ResponseBody
+    public List<Long> getMemberPhoneList(int cmid){
+        return communityService.getMemberPhoneList(cmid);
+    }
+    
 }

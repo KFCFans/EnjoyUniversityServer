@@ -60,6 +60,19 @@ public class CommunityServiceImpl implements CommunityService {
         return selectCommunities(cmidList);
     }
 
+    @Override
+    public List<Long> getMemberPhoneList(int cmid) {
+
+        CommunityauthorityExample example = new CommunityauthorityExample();
+        CommunityauthorityExample.Criteria criteria = example.createCriteria();
+        criteria.andCmidEqualTo(cmid);
+        List<Communityauthority> communityauthorityList = communityauthorityMapper.selectByExample(example);
+        List<Long> phonelist = new ArrayList<>();
+        for (Communityauthority communityauthority:communityauthorityList){
+            phonelist.add(communityauthority.getUid());
+        }
+        return phonelist;
+    }
 
 
     /// 查询一组 id 对应的社团

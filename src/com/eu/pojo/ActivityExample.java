@@ -831,6 +831,126 @@ public class ActivityExample {
             addCriterion("av_background not between", value1, value2, "avBackground");
             return (Criteria) this;
         }
+
+        public Criteria andAvRegisterIsNull() {
+            addCriterion("av_register is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvRegisterIsNotNull() {
+            addCriterion("av_register is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvRegisterEqualTo(Integer value) {
+            addCriterion("av_register =", value, "avRegister");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvRegisterNotEqualTo(Integer value) {
+            addCriterion("av_register <>", value, "avRegister");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvRegisterGreaterThan(Integer value) {
+            addCriterion("av_register >", value, "avRegister");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvRegisterGreaterThanOrEqualTo(Integer value) {
+            addCriterion("av_register >=", value, "avRegister");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvRegisterLessThan(Integer value) {
+            addCriterion("av_register <", value, "avRegister");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvRegisterLessThanOrEqualTo(Integer value) {
+            addCriterion("av_register <=", value, "avRegister");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvRegisterIn(List<Integer> values) {
+            addCriterion("av_register in", values, "avRegister");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvRegisterNotIn(List<Integer> values) {
+            addCriterion("av_register not in", values, "avRegister");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvRegisterBetween(Integer value1, Integer value2) {
+            addCriterion("av_register between", value1, value2, "avRegister");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvRegisterNotBetween(Integer value1, Integer value2) {
+            addCriterion("av_register not between", value1, value2, "avRegister");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvEnrolldeadlineIsNull() {
+            addCriterion("av_enrolldeadline is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvEnrolldeadlineIsNotNull() {
+            addCriterion("av_enrolldeadline is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvEnrolldeadlineEqualTo(Date value) {
+            addCriterionForJDBCDate("av_enrolldeadline =", value, "avEnrolldeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvEnrolldeadlineNotEqualTo(Date value) {
+            addCriterionForJDBCDate("av_enrolldeadline <>", value, "avEnrolldeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvEnrolldeadlineGreaterThan(Date value) {
+            addCriterionForJDBCDate("av_enrolldeadline >", value, "avEnrolldeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvEnrolldeadlineGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("av_enrolldeadline >=", value, "avEnrolldeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvEnrolldeadlineLessThan(Date value) {
+            addCriterionForJDBCDate("av_enrolldeadline <", value, "avEnrolldeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvEnrolldeadlineLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("av_enrolldeadline <=", value, "avEnrolldeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvEnrolldeadlineIn(List<Date> values) {
+            addCriterionForJDBCDate("av_enrolldeadline in", values, "avEnrolldeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvEnrolldeadlineNotIn(List<Date> values) {
+            addCriterionForJDBCDate("av_enrolldeadline not in", values, "avEnrolldeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvEnrolldeadlineBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("av_enrolldeadline between", value1, value2, "avEnrolldeadline");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvEnrolldeadlineNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("av_enrolldeadline not between", value1, value2, "avEnrolldeadline");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

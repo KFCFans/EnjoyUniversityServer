@@ -13,6 +13,8 @@
     <result column="av_logo" property="avLogo" jdbcType="VARCHAR" />
     <result column="av_state" property="avState" jdbcType="INTEGER" />
     <result column="av_background" property="avBackground" jdbcType="VARCHAR" />
+    <result column="av_register" property="avRegister" jdbcType="INTEGER" />
+    <result column="av_enrolldeadline" property="avEnrolldeadline" jdbcType="DATE" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -74,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List" >
     avid, av_title, av_starttime, av_endtime, av_price, av_detail, av_expectnum, uid, 
-    av_logo, av_state, av_background
+    av_logo, av_state, av_background, av_register, av_enrolldeadline
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eu.pojo.ActivityExample" >
     select
@@ -110,11 +112,13 @@
     insert into activity (avid, av_title, av_starttime, 
       av_endtime, av_price, av_detail, 
       av_expectnum, uid, av_logo, 
-      av_state, av_background)
+      av_state, av_background, av_register, 
+      av_enrolldeadline)
     values (#{avid,jdbcType=INTEGER}, #{avTitle,jdbcType=VARCHAR}, #{avStarttime,jdbcType=DATE}, 
       #{avEndtime,jdbcType=DATE}, #{avPrice,jdbcType=REAL}, #{avDetail,jdbcType=VARCHAR}, 
       #{avExpectnum,jdbcType=INTEGER}, #{uid,jdbcType=BIGINT}, #{avLogo,jdbcType=VARCHAR}, 
-      #{avState,jdbcType=INTEGER}, #{avBackground,jdbcType=VARCHAR})
+      #{avState,jdbcType=INTEGER}, #{avBackground,jdbcType=VARCHAR}, #{avRegister,jdbcType=INTEGER}, 
+      #{avEnrolldeadline,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.eu.pojo.Activity" >
     insert into activity
@@ -152,6 +156,12 @@
       <if test="avBackground != null" >
         av_background,
       </if>
+      <if test="avRegister != null" >
+        av_register,
+      </if>
+      <if test="avEnrolldeadline != null" >
+        av_enrolldeadline,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="avid != null" >
@@ -186,6 +196,12 @@
       </if>
       <if test="avBackground != null" >
         #{avBackground,jdbcType=VARCHAR},
+      </if>
+      <if test="avRegister != null" >
+        #{avRegister,jdbcType=INTEGER},
+      </if>
+      <if test="avEnrolldeadline != null" >
+        #{avEnrolldeadline,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -231,6 +247,12 @@
       <if test="record.avBackground != null" >
         av_background = #{record.avBackground,jdbcType=VARCHAR},
       </if>
+      <if test="record.avRegister != null" >
+        av_register = #{record.avRegister,jdbcType=INTEGER},
+      </if>
+      <if test="record.avEnrolldeadline != null" >
+        av_enrolldeadline = #{record.avEnrolldeadline,jdbcType=DATE},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -248,7 +270,9 @@
       uid = #{record.uid,jdbcType=BIGINT},
       av_logo = #{record.avLogo,jdbcType=VARCHAR},
       av_state = #{record.avState,jdbcType=INTEGER},
-      av_background = #{record.avBackground,jdbcType=VARCHAR}
+      av_background = #{record.avBackground,jdbcType=VARCHAR},
+      av_register = #{record.avRegister,jdbcType=INTEGER},
+      av_enrolldeadline = #{record.avEnrolldeadline,jdbcType=DATE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -286,6 +310,12 @@
       <if test="avBackground != null" >
         av_background = #{avBackground,jdbcType=VARCHAR},
       </if>
+      <if test="avRegister != null" >
+        av_register = #{avRegister,jdbcType=INTEGER},
+      </if>
+      <if test="avEnrolldeadline != null" >
+        av_enrolldeadline = #{avEnrolldeadline,jdbcType=DATE},
+      </if>
     </set>
     where avid = #{avid,jdbcType=INTEGER}
   </update>
@@ -300,7 +330,9 @@
       uid = #{uid,jdbcType=BIGINT},
       av_logo = #{avLogo,jdbcType=VARCHAR},
       av_state = #{avState,jdbcType=INTEGER},
-      av_background = #{avBackground,jdbcType=VARCHAR}
+      av_background = #{avBackground,jdbcType=VARCHAR},
+      av_register = #{avRegister,jdbcType=INTEGER},
+      av_enrolldeadline = #{avEnrolldeadline,jdbcType=DATE}
     where avid = #{avid,jdbcType=INTEGER}
   </update>
 </mapper>

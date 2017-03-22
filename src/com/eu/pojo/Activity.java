@@ -25,6 +25,10 @@ public class Activity {
 
     private String avBackground;
 
+    private Integer avRegister;
+
+    private Date avEnrolldeadline;
+
     public Integer getAvid() {
         return avid;
     }
@@ -111,5 +115,21 @@ public class Activity {
 
     public void setAvBackground(String avBackground) {
         this.avBackground = avBackground == null ? null : avBackground.trim();
+    }
+
+    public Integer getAvRegister() {
+        return avRegister;
+    }
+
+    public void setAvRegister(Integer avRegister) {
+        this.avRegister = avRegister;
+    }
+
+    public Date getAvEnrolldeadline() {
+        return avEnrolldeadline;
+    }
+
+    public void setAvEnrolldeadline(Date avEnrolldeadline) {
+        this.avEnrolldeadline = avEnrolldeadline;
     }
 }

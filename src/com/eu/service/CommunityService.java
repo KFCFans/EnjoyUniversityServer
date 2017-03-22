@@ -15,4 +15,6 @@ public interface CommunityService {
 
     public List<Community> getMyCollectedCommunities(String uid);
 
+    public List<Long> getMemberPhoneList(int cmid);
+
 }

@@ -5,6 +5,7 @@
     <id column="uid" property="uid" jdbcType="BIGINT" />
     <id column="cmid" property="cmid" jdbcType="INTEGER" />
     <result column="position" property="position" jdbcType="INTEGER" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    uid, cmid, position
+    uid, cmid, position, reason
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eu.pojo.CommunityauthorityExample" >
     select
@@ -100,10 +101,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.eu.pojo.Communityauthority" >
-    insert into communityauthority (uid, cmid, position
-      )
-    values (#{uid,jdbcType=BIGINT}, #{cmid,jdbcType=INTEGER}, #{position,jdbcType=INTEGER}
-      )
+    insert into communityauthority (uid, cmid, position, 
+      reason)
+    values (#{uid,jdbcType=BIGINT}, #{cmid,jdbcType=INTEGER}, #{position,jdbcType=INTEGER}, 
+      #{reason,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.eu.pojo.Communityauthority" >
     insert into communityauthority
@@ -117,6 +118,9 @@
       <if test="position != null" >
         position,
       </if>
+      <if test="reason != null" >
+        reason,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="uid != null" >
@@ -127,6 +131,9 @@
       </if>
       <if test="position != null" >
         #{position,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -148,6 +155,9 @@
       <if test="record.position != null" >
         position = #{record.position,jdbcType=INTEGER},
       </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -157,7 +167,8 @@
     update communityauthority
     set uid = #{record.uid,jdbcType=BIGINT},
       cmid = #{record.cmid,jdbcType=INTEGER},
-      position = #{record.position,jdbcType=INTEGER}
+      position = #{record.position,jdbcType=INTEGER},
+      reason = #{record.reason,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -168,13 +179,17 @@
       <if test="position != null" >
         position = #{position,jdbcType=INTEGER},
       </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
     </set>
     where uid = #{uid,jdbcType=BIGINT}
       and cmid = #{cmid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.eu.pojo.Communityauthority" >
     update communityauthority
-    set position = #{position,jdbcType=INTEGER}
+    set position = #{position,jdbcType=INTEGER},
+      reason = #{reason,jdbcType=VARCHAR}
     where uid = #{uid,jdbcType=BIGINT}
       and cmid = #{cmid,jdbcType=INTEGER}
   </update>

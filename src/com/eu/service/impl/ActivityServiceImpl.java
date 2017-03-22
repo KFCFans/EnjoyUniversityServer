@@ -162,18 +162,74 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public RequestResult manageParticipators(String uid, int avid,int verifystate) {
+    public RequestResult manageParticipators(String uid, int avid,int verifystate,String reason) {
 
         Participateactivity participateactivity = new Participateactivity();
         participateactivity.setVerifystate(verifystate);
         participateactivity.setAvid(avid);
-        participateactivity.setUid(uid);
+        participateactivity.setReason(reason);
+        participateactivity.setUid(Long.parseLong(uid));
         try {
             participateactivityMapper.updateByPrimaryKey(participateactivity);
         }catch (Exception e){
             return new RequestResult(500,"faild",e.getMessage());
         }
 
+        return new RequestResult(200,"OK",null);
+    }
+
+    @Override
+    public RequestResult startRegister(String uid, int avid) {
+
+        if (!activityMapper.selectByPrimaryKey(avid).getUid().toString().equals(uid)){
+            return new RequestResult(400,"faild","没有权限发起签到");
+        }
+        //随机生成签到码
+        Integer randomcode = 1000+(int)(Math.random()*9000);
+
+        Activity activity = new Activity();
+        activity.setAvid(avid);
+        activity.setAvRegister(randomcode);
+        try {
+            activityMapper.updateByPrimaryKeySelective(activity);
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+        return new RequestResult(200,"OK",randomcode.toString());
+    }
+
+    @Override
+    public RequestResult getRegisterInfo(int avid) {
+
+        Integer code;
+        try {
+            code = activityMapper.selectByPrimaryKey(avid).getAvRegister();
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+        if (code == -1){
+            return new RequestResult(400,"faild","该活动无需签到");
+        }
+        if (code == 0 ){
+            return new RequestResult(400,"faild","尚未开始签到");
+        }
+        return new RequestResult(200,"OK",code.toString());
+
+
+    }
+
+    @Override
+    public RequestResult participateRegister(String uid, int avid) {
+
+        Participateactivity participateactivity = new Participateactivity();
+        participateactivity.setUid(Long.parseLong(uid));
+        participateactivity.setAvid(avid);
+        participateactivity.setVerifystate(1);
+        try {
+            participateactivityMapper.updateByPrimaryKeySelective(participateactivity);
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
         return new RequestResult(200,"OK",null);
     }
 
