@@ -1,6 +1,7 @@
 package com.eu.controller;
 
 import com.eu.pojo.Community;
+import com.eu.pojo.RequestResult;
 import com.eu.service.CommunityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,6 +42,12 @@ public class CommunityController {
     @ResponseBody
     public List<Long> getMemberPhoneList(int cmid){
         return communityService.getMemberPhoneList(cmid);
+    }
+
+    @RequestMapping("participatecm")
+    @ResponseBody
+    public RequestResult participateCommunity(String uid,String reason,int cmid){
+        return communityService.participateCommunity(uid, cmid, reason);
     }
     
 }

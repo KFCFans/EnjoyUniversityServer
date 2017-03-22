@@ -74,6 +74,22 @@ public class CommunityServiceImpl implements CommunityService {
         return phonelist;
     }
 
+    @Override
+    public RequestResult participateCommunity(String uid, int cmid, String reason) {
+
+        Communityauthority communityauthority = new Communityauthority();
+        communityauthority.setPosition(-3);
+        communityauthority.setReason(reason);
+        communityauthority.setCmid(cmid);
+        communityauthority.setUid(Long.parseLong(uid));
+        try {
+            communityauthorityMapper.insert(communityauthority);
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+        return new RequestResult(200,"OK",null);
+    }
+
 
     /// 查询一组 id 对应的社团
     private List<Community> selectCommunities(List<Integer> cmidlist){
