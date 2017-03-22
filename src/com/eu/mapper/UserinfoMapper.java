@@ -29,5 +29,5 @@ public interface UserinfoMapper {
     int updateByPrimaryKey(Userinfo record);
 
     // 自己添加的接口
-
+    List<Userinfo> selectByPrimaryKeyList(List<Long> uidlist);
 }

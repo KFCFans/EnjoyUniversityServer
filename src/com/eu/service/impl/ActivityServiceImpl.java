@@ -5,6 +5,7 @@ import com.eu.mapper.ActivitycollectionMapper;
 import com.eu.mapper.ParticipateactivityMapper;
 import com.eu.pojo.*;
 import com.eu.service.ActivityService;
+import com.eu.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Autowired
     private ParticipateactivityMapper participateactivityMapper;
+
 
     @Override
     public List<Activity> getCommonActivities() {
@@ -69,6 +71,22 @@ public class ActivityServiceImpl implements ActivityService {
 
         return selectActivities(avidlist);
     }
+
+    @Override
+    public List<Long> getParticipatorPhoneList(int avid) {
+
+        ParticipateactivityExample participateactivityExample = new ParticipateactivityExample();
+        ParticipateactivityExample.Criteria criteria = participateactivityExample.createCriteria();
+        criteria.andAvidEqualTo(avid);
+        List<Participateactivity> list = participateactivityMapper.selectByExample(participateactivityExample);
+        List<Long> phonelist = new ArrayList<>();
+        for(Participateactivity participateactivity:list){
+            phonelist.add(participateactivity.getUid());
+        }
+
+        return phonelist;
+    }
+
 
 
     /// 查询一组 id 对应的活动

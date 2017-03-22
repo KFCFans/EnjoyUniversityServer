@@ -19,6 +19,8 @@ public interface ActivityService {
 
     public List<Activity> getMyCollectedActivities(String  uid);
 
+    public List<Long> getParticipatorPhoneList(int avid);
+
 
 
 }

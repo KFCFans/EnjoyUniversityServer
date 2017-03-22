@@ -43,4 +43,10 @@ public class ActivityController {
         return activityService.getMyCollectedActivities(uid);
     }
 
+    @RequestMapping("/phonelist")
+    @ResponseBody
+    public List<Long> getParticipatorPhoneList(int avid){
+        return activityService.getParticipatorPhoneList(avid);
+    }
+
 }

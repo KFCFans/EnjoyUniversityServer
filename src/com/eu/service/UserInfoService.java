@@ -15,5 +15,7 @@ public interface UserInfoService {
 
     public Userinfo getUserInfoWithoutPermission(String uid);
 
+    public List<Userinfo> getParticipatorList(List<Long> uidlist);
+
 
 }

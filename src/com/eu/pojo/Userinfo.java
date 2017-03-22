@@ -121,6 +121,25 @@ public class Userinfo {
         this.verified = verified;
     }
 
+
+    @Override
+    public String toString() {
+        return "Userinfo{" +
+                "uid=" + uid +
+                ", avatar='" + avatar + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", gender=" + gender +
+                ", professionclass='" + professionclass + '\'' +
+                ", studentid=" + studentid +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", password='" + password + '\'' +
+                ", accesstoken='" + accesstoken + '\'' +
+                ", reputation=" + reputation +
+                ", verified=" + verified +
+                '}';
+    }
+
     // 判断符不符合规定
     public Boolean LegalToDataBase(){
         if (uid==null||gender==null||name==null||studentid==null||password==null){
@@ -140,5 +159,6 @@ public class Userinfo {
         setAccesstoken(null);
 
     }
+
 
 }
