@@ -1,7 +1,7 @@
 package com.eu.service.impl;
 
 import com.eu.mapper.UserinfoMapper;
-import com.eu.pojo.UserResult;
+import com.eu.pojo.RequestResult;
 import com.eu.pojo.Userinfo;
 import com.eu.pojo.UserinfoExample;
 import com.eu.service.UserSecurityService;
@@ -31,14 +31,14 @@ public class UserSecurityServiceImpl implements UserSecurityService {
      * @return 处理结果，200 成功返回验证码，400 失败返回错误信息，500 异常
      */
     @Override
-    public UserResult verifyPhoneNumber(String phone,int choice) {
+    public RequestResult verifyPhoneNumber(String phone, int choice) {
 
         if (choice == 0 && isUidExisted(phone)){
-            return new UserResult(400,"faild","当前用户已注册");
+            return new RequestResult(400,"faild","当前用户已注册");
         }
 
         if (choice == 1 && (!isUidExisted(phone))){
-            return new UserResult(400,"faild","用户不存在");
+            return new RequestResult(400,"faild","用户不存在");
         }
 
         Integer status = 200;
@@ -69,15 +69,15 @@ public class UserSecurityServiceImpl implements UserSecurityService {
 
 
        // 返回验证码数据
-        return new UserResult(status,msg,code);
+        return new RequestResult(status,msg,code);
     }
 
 
     @Override
-    public UserResult createUser(Userinfo userinfo) {
+    public RequestResult createUser(Userinfo userinfo) {
 
         if (!userinfo.LegalToDataBase()){
-            return new UserResult(400,"faild","请完善个人信息");
+            return new RequestResult(400,"faild","请完善个人信息");
         }
 
         // 利用 Spring自带的md5工具加密
@@ -91,15 +91,15 @@ public class UserSecurityServiceImpl implements UserSecurityService {
         try {
             userinfoMapper.insert(userinfo);
         }catch (Exception e){
-            return new UserResult(500,"faild",e.getMessage());
+            return new RequestResult(500,"faild",e.getMessage());
         }
 
 
-        return new UserResult(200,"OK",token);
+        return new RequestResult(200,"OK",token);
     }
 
     @Override
-    public UserResult updatePasswordByVerifyPhone(String uid, String newpwd) {
+    public RequestResult updatePasswordByVerifyPhone(String uid, String newpwd) {
 
         String token = UUID.randomUUID().toString();
 
@@ -112,18 +112,18 @@ public class UserSecurityServiceImpl implements UserSecurityService {
         try {
             userinfoMapper.updateByPrimaryKeySelective(userinfo);
         }catch (Exception e){
-            return new UserResult(500,"faild",e.getMessage());
+            return new RequestResult(500,"faild",e.getMessage());
         }
 
-        return new UserResult(200,"OK",token);
+        return new RequestResult(200,"OK",token);
     }
 
     @Override
-    public UserResult updatePasswordByOldPassword(String uid, String oldpwd, String newpwd) {
+    public RequestResult updatePasswordByOldPassword(String uid, String oldpwd, String newpwd) {
 
         Userinfo userinfo = userinfoMapper.selectByPrimaryKey(Long.parseLong(uid));
         if (!userinfo.getPassword().equals(DigestUtils.md5DigestAsHex(oldpwd.getBytes()))){
-            return new UserResult(400,"faild","密码错误");
+            return new RequestResult(400,"faild","密码错误");
         }
         //修改密码(直接调用通过手机验证后的方法)
         return updatePasswordByVerifyPhone(uid,newpwd);

@@ -87,6 +87,95 @@ public class ActivityServiceImpl implements ActivityService {
         return phonelist;
     }
 
+    @Override
+    public RequestResult deleteActivity(int avid,String uid) {
+
+        if (!activityMapper.selectByPrimaryKey(avid).getUid().toString().equals(uid)){
+            return new RequestResult(400,"faild","没有权限删除活动");
+        }
+
+        try {
+            activityMapper.deleteByPrimaryKey(avid);
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+
+        return new RequestResult(200,"OK",null);
+    }
+
+    @Override
+    public RequestResult changeActivity(Activity activity,String uid) {
+
+        if (!activityMapper.selectByPrimaryKey(activity.getAvid()).getUid().toString().equals(uid)){
+            return new RequestResult(400,"faild","没有权限修改活动");
+        }
+
+        try {
+            activityMapper.updateByPrimaryKeySelective(activity);
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+
+        return new RequestResult(200,"OK",null);
+    }
+
+    @Override
+    public RequestResult participateActivity(String uid, int avid) {
+
+        Participateactivity participateactivity = new Participateactivity();
+        participateactivity.setAvid(avid);
+        participateactivity.setUid(Long.parseLong(uid));
+//        participateactivity.setVerifystate(0);
+        try {
+            participateactivityMapper.insertSelective(participateactivity);
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+
+        return new RequestResult(200,"OK",null);
+    }
+
+    @Override
+    public RequestResult quitActivity(String uid, int avid) {
+
+        ParticipateactivityKey participateactivityKey = new ParticipateactivityKey();
+        participateactivityKey.setUid(Long.parseLong(uid));
+        participateactivityKey.setAvid(avid);
+        try {
+            participateactivityMapper.deleteByPrimaryKey(participateactivityKey);
+
+        }catch (Exception e){
+            return new RequestResult(500,"faild",null);
+        }
+        return new RequestResult(200,"OK",null);
+    }
+
+    @Override
+    public RequestResult createActivity(Activity activity) {
+
+        try {
+            activityMapper.insert(activity);
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+        return new RequestResult(200,"OK",null);
+    }
+
+    @Override
+    public RequestResult manageParticipators(String uid, int avid,int verifystate) {
+
+        Participateactivity participateactivity = new Participateactivity();
+        participateactivity.setVerifystate(verifystate);
+        participateactivity.setAvid(avid);
+        participateactivity.setUid(uid);
+        try {
+            participateactivityMapper.updateByPrimaryKey(participateactivity);
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+
+        return new RequestResult(200,"OK",null);
+    }
 
 
     /// 查询一组 id 对应的活动

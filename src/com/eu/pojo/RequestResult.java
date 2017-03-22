@@ -3,7 +3,7 @@ package com.eu.pojo;
 /**
  * Created by lip on 17/3/21.
  */
-public class UserResult {
+public class RequestResult {
 
     // 200 成功，400 失败， 500 异常
     private Integer status;
@@ -38,7 +38,7 @@ public class UserResult {
         this.data = data;
     }
 
-    public UserResult(Integer status, String msg, String data) {
+    public RequestResult(Integer status, String msg, String data) {
         this.status = status;
         this.msg = msg;
         this.data = data;
