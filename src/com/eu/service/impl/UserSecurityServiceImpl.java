@@ -3,6 +3,7 @@ package com.eu.service.impl;
 import com.eu.mapper.UserinfoMapper;
 import com.eu.pojo.UserResult;
 import com.eu.pojo.Userinfo;
+import com.eu.pojo.UserinfoExample;
 import com.eu.service.UserSecurityService;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -26,7 +28,7 @@ public class UserSecurityServiceImpl implements UserSecurityService {
      * 验证手机号
      * @param phone 手机号码
      * @param choice 业务选择，0代表注册验证（要求不存在手机号），1代表忘记密码验证（要求存在手机号）
-     * @return
+     * @return 处理结果，200 成功返回验证码，400 失败返回错误信息，500 异常
      */
     @Override
     public UserResult verifyPhoneNumber(String phone,int choice) {
@@ -149,12 +151,18 @@ public class UserSecurityServiceImpl implements UserSecurityService {
     }
 
     @Override
-    public Boolean checkAccessToken(String uid,String accesstoken) {
-        String token = userinfoMapper.selectAccessTokenByPrimaryKey(Long.parseLong(uid));
-        if (token.equals(accesstoken)){
-            return true;
+    public Boolean checkAccessToken(String accesstoken) {
+
+        UserinfoExample example = new UserinfoExample();
+        UserinfoExample.Criteria  criteria= example.createCriteria();
+        criteria.andAccesstokenEqualTo(accesstoken);
+        List<Userinfo> list = userinfoMapper.selectByExample(example);
+
+        if (list == null || list.size()==0){
+            return false;
         }
-        return false;
+
+        return true;
     }
 
     // 发送短信前验证

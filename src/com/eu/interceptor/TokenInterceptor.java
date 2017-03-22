@@ -6,7 +6,8 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * Created by lip on 17/3/21.
+ * Access Token 过滤器
+ * 用于验证身份信息，理论上 accesstoken 唯一
  */
 public class TokenInterceptor implements org.springframework.web.servlet.HandlerInterceptor {
 
@@ -17,10 +18,9 @@ public class TokenInterceptor implements org.springframework.web.servlet.Handler
     public boolean preHandle(javax.servlet.http.HttpServletRequest httpServletRequest, javax.servlet.http.HttpServletResponse httpServletResponse, Object o) throws Exception {
 
         String accesstoken = httpServletRequest.getParameter("accesstoken");
-        String uid = httpServletRequest.getParameter("uid");
 
         // Access Token 有效即跳转
-        if (userSecurityService.checkAccessToken(uid,accesstoken)){
+        if (userSecurityService.checkAccessToken(accesstoken)){
 
             return true;
         }

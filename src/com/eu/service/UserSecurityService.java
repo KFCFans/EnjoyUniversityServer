@@ -21,6 +21,6 @@ public interface UserSecurityService {
 
     public Userinfo login(String username,String password);
 
-    public Boolean checkAccessToken(String uid,String accesstoken);
+    public Boolean checkAccessToken(String accesstoken);
 
 }
