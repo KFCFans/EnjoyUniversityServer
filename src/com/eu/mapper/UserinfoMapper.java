@@ -29,5 +29,5 @@ public interface UserinfoMapper {
     int updateByPrimaryKey(Userinfo record);
 
     // 自己添加的接口
-    String selectAccessTokenByPrimaryKey(Long uid);
+
 }

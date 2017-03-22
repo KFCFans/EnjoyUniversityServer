@@ -11,6 +11,9 @@ import java.util.List;
  */
 public interface UserInfoService {
 
-    public Userinfo getUserInfo(String uid);
+    public Userinfo getUserInfoWithPermission(String uid,String accesstoken);
+
+    public Userinfo getUserInfoWithoutPermission(String uid);
+
 
 }

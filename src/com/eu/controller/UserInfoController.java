@@ -20,8 +20,14 @@ public class UserInfoController {
 
     @RequestMapping("/userinfo")
     @ResponseBody
-    public Userinfo getUserInfo(String uid){
-        return userInfoService.getUserInfo(uid);
+    public Userinfo getUserInfoWithPermission(String uid,String accesstoken){
+        return userInfoService.getUserInfoWithPermission(uid, accesstoken);
+    }
+
+    @RequestMapping("/introinfo")
+    @ResponseBody
+    public Userinfo getUserInfoWithoutPerssion(String uid){
+        return userInfoService.getUserInfoWithoutPermission(uid);
     }
 
 

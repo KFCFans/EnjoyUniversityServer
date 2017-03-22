@@ -121,10 +121,24 @@ public class Userinfo {
         this.verified = verified;
     }
 
-    public Boolean isLegalToDataBase(){
+    // 判断符不符合规定
+    public Boolean LegalToDataBase(){
         if (uid==null||gender==null||name==null||studentid==null||password==null){
             return false;
         }
         return true;
     }
+
+    // 除自己以外的人访问信息需要去掉密码
+    public void hidePersonalSecret(Boolean bool){
+
+        if (!bool){
+            return;
+        }
+        // 隐藏密码和token
+        setPassword(null);
+        setAccesstoken(null);
+
+    }
+
 }

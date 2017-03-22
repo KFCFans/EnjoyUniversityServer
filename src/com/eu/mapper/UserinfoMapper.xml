@@ -321,8 +321,6 @@
     where uid = #{uid,jdbcType=BIGINT}
   </update>
 
-  <select id="selectAccessTokenByPrimaryKey" parameterType="java.lang.Long" resultType="java.lang.String">
-    SELECT accesstoken from userinfo WHERE uid = #{uid}
-  </select>
+  <!--自己添加的语句-->
 
 </mapper>

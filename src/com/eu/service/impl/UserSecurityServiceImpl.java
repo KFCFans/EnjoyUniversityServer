@@ -76,7 +76,7 @@ public class UserSecurityServiceImpl implements UserSecurityService {
     @Override
     public UserResult createUser(Userinfo userinfo) {
 
-        if (!userinfo.isLegalToDataBase()){
+        if (!userinfo.LegalToDataBase()){
             return new UserResult(400,"faild","请完善个人信息");
         }
 
