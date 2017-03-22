@@ -23,6 +23,8 @@ public class Userinfo {
 
     private Integer reputation;
 
+    private Integer verified;
+
     public Long getUid() {
         return uid;
     }
@@ -111,26 +113,16 @@ public class Userinfo {
         this.reputation = reputation;
     }
 
-    @Override
-    public String toString() {
-        return "Userinfo{" +
-                "uid=" + uid +
-                ", avatar='" + avatar + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", gender=" + gender +
-                ", professionclass='" + professionclass + '\'' +
-                ", studentid=" + studentid +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", password='" + password + '\'' +
-                ", accesstoken='" + accesstoken + '\'' +
-                ", reputation=" + reputation +
-                '}';
+    public Integer getVerified() {
+        return verified;
     }
 
-    // 判断是否合法（某些字段必须有值）
+    public void setVerified(Integer verified) {
+        this.verified = verified;
+    }
+
     public Boolean isLegalToDataBase(){
-        if (uid==null||gender==null||studentid==null||name==null||password==null||reputation==null){
+        if (uid==null||gender==null||name==null||studentid==null||password==null){
             return false;
         }
         return true;

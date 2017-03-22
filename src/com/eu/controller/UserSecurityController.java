@@ -20,20 +20,14 @@ public class UserSecurityController {
     @Autowired
     private UserSecurityService userSecurityService;
 
-    @RequestMapping("/verifyphone/{phone}")
+    @RequestMapping("/verifyphone")
     @ResponseBody
-    public UserResult verifyPhoneNumber(@PathVariable String phone) throws ApiException {
+    public UserResult verifyPhoneNumber(String phone,Integer choice) throws ApiException {
 
-        return userSecurityService.verifyPhoneNumber(phone);
+        return userSecurityService.verifyPhoneNumber(phone,choice);
 
     }
 
-    @RequestMapping("/checkuid/{phone}")
-    @ResponseBody
-    public UserResult checkUid(@PathVariable String phone){
-
-        return userSecurityService.checkUid(phone);
-    }
 
     @RequestMapping("/newuser")
     @ResponseBody
@@ -47,6 +41,18 @@ public class UserSecurityController {
     public Userinfo login(String uid,String password){
 
         return userSecurityService.login(uid, password);
+    }
+
+    @RequestMapping("/changepwdbyphone")
+    @ResponseBody
+    public UserResult updatePasswordByVerifyPhone(String uid,String newpwd){
+        return userSecurityService.updatePasswordByVerifyPhone(uid,newpwd);
+    }
+
+    @RequestMapping("/changepwd")
+    @ResponseBody
+    public UserResult updatePasswordByOldPwd(String uid,String oldpwd,String newpwd){
+        return userSecurityService.updatePasswordByOldPassword(uid, oldpwd, newpwd);
     }
 
 }

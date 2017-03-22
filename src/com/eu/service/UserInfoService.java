@@ -13,15 +13,4 @@ public interface UserInfoService {
 
     public Userinfo getUserInfo(String uid);
 
-    public List<Activity> getMyCreatedActivities(String uid);
-
-    public List<Activity> getMyJoinedActivities(String uid);
-
-    public List<Activity> getMyCollectedActivities(String  uid);
-
-    public List<Community> getMyCommunities(String uid);
-
-    public List<Community> getMyCollectedCommunities(String uid);
-
-
 }

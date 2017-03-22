@@ -833,6 +833,66 @@ public class UserinfoExample {
             addCriterion("reputation not between", value1, value2, "reputation");
             return (Criteria) this;
         }
+
+        public Criteria andVerifiedIsNull() {
+            addCriterion("verified is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedIsNotNull() {
+            addCriterion("verified is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedEqualTo(Integer value) {
+            addCriterion("verified =", value, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedNotEqualTo(Integer value) {
+            addCriterion("verified <>", value, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedGreaterThan(Integer value) {
+            addCriterion("verified >", value, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedGreaterThanOrEqualTo(Integer value) {
+            addCriterion("verified >=", value, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedLessThan(Integer value) {
+            addCriterion("verified <", value, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedLessThanOrEqualTo(Integer value) {
+            addCriterion("verified <=", value, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedIn(List<Integer> values) {
+            addCriterion("verified in", values, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedNotIn(List<Integer> values) {
+            addCriterion("verified not in", values, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedBetween(Integer value1, Integer value2) {
+            addCriterion("verified between", value1, value2, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedNotBetween(Integer value1, Integer value2) {
+            addCriterion("verified not between", value1, value2, "verified");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

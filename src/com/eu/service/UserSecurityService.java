@@ -10,11 +10,14 @@ import com.taobao.api.ApiException;
 public interface UserSecurityService {
 
 
-    public UserResult verifyPhoneNumber(String phone) throws ApiException;
+    public UserResult verifyPhoneNumber(String phone,int choice) throws ApiException;
 
-    public UserResult checkUid(String phone);
 
     public UserResult createUser(Userinfo userinfo);
+
+    public UserResult updatePasswordByVerifyPhone(String uid,String newpwd);
+
+    public UserResult updatePasswordByOldPassword(String uid,String oldpwd,String newpwd);
 
     public Userinfo login(String username,String password);
 

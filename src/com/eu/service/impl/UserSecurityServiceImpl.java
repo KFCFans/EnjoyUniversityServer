@@ -21,8 +21,23 @@ public class UserSecurityServiceImpl implements UserSecurityService {
     @Autowired
     private UserinfoMapper userinfoMapper;
 
+
+    /**
+     * 验证手机号
+     * @param phone 手机号码
+     * @param choice 业务选择，0代表注册验证（要求不存在手机号），1代表忘记密码验证（要求存在手机号）
+     * @return
+     */
     @Override
-    public UserResult verifyPhoneNumber(String phone) {
+    public UserResult verifyPhoneNumber(String phone,int choice) {
+
+        if (choice == 0 && isUidExisted(phone)){
+            return new UserResult(400,"faild","当前用户已注册");
+        }
+
+        if (choice == 1 && (!isUidExisted(phone))){
+            return new UserResult(400,"faild","用户不存在");
+        }
 
         Integer status = 200;
         String msg = "OK";
@@ -55,20 +70,6 @@ public class UserSecurityServiceImpl implements UserSecurityService {
         return new UserResult(status,msg,code);
     }
 
-    @Override
-    public UserResult checkUid(String phone) {
-
-
-        String data = "false";
-        long uid = Long.parseLong(phone);
-
-        Userinfo userinfo = userinfoMapper.selectByPrimaryKey(uid);
-        if (userinfo==null){
-            data = "true";
-        }
-        UserResult userResult = new UserResult(200,"OK",data);
-        return userResult;
-    }
 
     @Override
     public UserResult createUser(Userinfo userinfo) {
@@ -94,6 +95,38 @@ public class UserSecurityServiceImpl implements UserSecurityService {
 
         return new UserResult(200,"OK",token);
     }
+
+    @Override
+    public UserResult updatePasswordByVerifyPhone(String uid, String newpwd) {
+
+        String token = UUID.randomUUID().toString();
+
+        Userinfo userinfo = new Userinfo();
+        userinfo.setUid(Long.parseLong(uid));
+        userinfo.setPassword(DigestUtils.md5DigestAsHex(newpwd.getBytes()));
+        userinfo.setAccesstoken(token);
+
+        // updateByPrimaryKeySelective 表示传入字段不为空才更新
+        try {
+            userinfoMapper.updateByPrimaryKeySelective(userinfo);
+        }catch (Exception e){
+            return new UserResult(500,"faild",e.getMessage());
+        }
+
+        return new UserResult(200,"OK",token);
+    }
+
+    @Override
+    public UserResult updatePasswordByOldPassword(String uid, String oldpwd, String newpwd) {
+
+        Userinfo userinfo = userinfoMapper.selectByPrimaryKey(Long.parseLong(uid));
+        if (!userinfo.getPassword().equals(DigestUtils.md5DigestAsHex(oldpwd.getBytes()))){
+            return new UserResult(400,"faild","密码错误");
+        }
+        //修改密码(直接调用通过手机验证后的方法)
+        return updatePasswordByVerifyPhone(uid,newpwd);
+    }
+
 
     @Override
     public Userinfo login(String username, String password) {
@@ -122,5 +155,15 @@ public class UserSecurityServiceImpl implements UserSecurityService {
             return true;
         }
         return false;
+    }
+
+    // 发送短信前验证
+    private Boolean isUidExisted(String phone){
+        long uid = Long.parseLong(phone);
+        Userinfo userinfo = userinfoMapper.selectByPrimaryKey(uid);
+        if (userinfo==null){
+            return false;
+        }
+        return true;
     }
 }
