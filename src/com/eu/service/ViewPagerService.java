@@ -1,6 +1,8 @@
 package com.eu.service;
 
+import com.eu.pojo.RequestResult;
 import com.eu.pojo.Viewpager;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -10,5 +12,9 @@ import java.util.List;
 public interface ViewPagerService {
 
     public List<Viewpager> getViewPagers();
+
+    public RequestResult addViewPagers(String url);
+
+    public RequestResult removeViewPagers(String url);
 
 }

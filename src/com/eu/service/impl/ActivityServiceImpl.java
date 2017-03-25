@@ -162,6 +162,35 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    public RequestResult collectActivity(String uid, int avid) {
+        ActivitycollectionKey activitycollectionKey = new ActivitycollectionKey();
+        activitycollectionKey.setUid(Long.parseLong(uid));
+        activitycollectionKey.setAvid(avid);
+        try {
+            activitycollectionMapper.insert(activitycollectionKey);
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+
+        return new RequestResult(200,"OK",null);
+    }
+
+    @Override
+    public RequestResult disCollectActivity(String uid, int avid) {
+        ActivitycollectionKey activitycollectionKey = new ActivitycollectionKey();
+        activitycollectionKey.setUid(Long.parseLong(uid));
+        activitycollectionKey.setAvid(avid);
+        try {
+            activitycollectionMapper.deleteByPrimaryKey(activitycollectionKey);
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+
+        return new RequestResult(200,"OK",null);
+    }
+
+
+    @Override
     public RequestResult manageParticipators(String uid, int avid,int verifystate,String reason) {
 
         Participateactivity participateactivity = new Participateactivity();

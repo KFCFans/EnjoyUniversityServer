@@ -105,5 +105,17 @@ public class ActivityController {
         return activityService.participateRegister(uid,avid);
     }
 
+    @RequestMapping("/collectav")
+    @ResponseBody
+    public RequestResult collectActivity(String uid,int avid){
+        return activityService.collectActivity(uid, avid);
+    }
+
+    @RequestMapping("discollectav")
+    @ResponseBody
+    public RequestResult disCollectActivity(String uid,int avid){
+        return activityService.disCollectActivity(uid, avid);
+    }
+
 
 }

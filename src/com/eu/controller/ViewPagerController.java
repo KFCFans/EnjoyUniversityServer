@@ -15,18 +15,19 @@ import java.util.List;
  */
 
 @Controller
+@RequestMapping("/viewpager")
 public class ViewPagerController {
 
     @Autowired
     public ViewPagerService viewPagerService;
 
-    @RequestMapping("/viewpager")
+    @RequestMapping("/show")
     @ResponseBody
     public List<Viewpager> getViewPagers(){
 
-
         return viewPagerService.getViewPagers();
-
     }
+
+
 
 }

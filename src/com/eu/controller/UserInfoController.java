@@ -1,5 +1,6 @@
 package com.eu.controller;
 
+import com.eu.pojo.RequestResult;
 import com.eu.pojo.Userinfo;
 import com.eu.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,25 @@ public class UserInfoController {
             list.add(Long.parseLong(uids[i]));
         }
         return userInfoService.getParticipatorList(list);
+    }
 
+    @RequestMapping("/reputation")
+    @ResponseBody
+    public RequestResult manageReputation(String uid,int reputation){
+        return userInfoService.changeReputation(uid, reputation);
+    }
+
+    @RequestMapping("/changeinfo")
+    @ResponseBody
+    public RequestResult changeUserInfo(Userinfo userinfo){
+        return userInfoService.changeUserInfo(userinfo);
+    }
+
+    // 此接口需要管理员权限，认证不是随便认证的
+    @RequestMapping("/verify")
+    @ResponseBody
+    public RequestResult verifyUser(String uid){
+        return userInfoService.verifyUser(uid);
     }
 
 
