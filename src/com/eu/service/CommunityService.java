@@ -31,4 +31,7 @@ public interface CommunityService {
     // 修改社团状态（开启／关闭招新）
     public RequestResult changeCommunityState(int cmid,int cmRecruit);
 
+    // 修改社团信息
+    public RequestResult changeCommunityInfo(Community community);
+
 }

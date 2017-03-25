@@ -162,6 +162,16 @@ public class CommunityServiceImpl implements CommunityService {
         return new RequestResult(200,"OK",null);
     }
 
+    @Override
+    public RequestResult changeCommunityInfo(Community community) {
+        try {
+            communityMapper.updateByPrimaryKeySelective(community);
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+        return new RequestResult(200,"OK",null);
+    }
+
 
     /// 查询一组 id 对应的社团
     private List<Community> selectCommunities(List<Integer> cmidlist){

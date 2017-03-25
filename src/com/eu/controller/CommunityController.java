@@ -73,4 +73,10 @@ public class CommunityController {
     public RequestResult changeActivityState(int cmid,int recruit){
         return communityService.changeCommunityState(cmid, recruit);
     }
+
+    @RequestMapping("/changecm")
+    @ResponseBody
+    public RequestResult changeCommunity(Community community){
+        return communityService.changeCommunityInfo(community);
+    }
 }
