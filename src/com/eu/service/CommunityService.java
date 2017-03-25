@@ -34,4 +34,10 @@ public interface CommunityService {
     // 修改社团信息
     public RequestResult changeCommunityInfo(Community community);
 
+    // 收藏社团
+    public RequestResult collectCommunity(String uid,int cmid);
+
+    // 取消收藏社团
+    public RequestResult disCollectCommunity(String uid,int cmid);
+
 }

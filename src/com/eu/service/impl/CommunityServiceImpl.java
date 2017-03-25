@@ -172,6 +172,34 @@ public class CommunityServiceImpl implements CommunityService {
         return new RequestResult(200,"OK",null);
     }
 
+    @Override
+    public RequestResult collectCommunity(String uid, int cmid) {
+        CommunitycollectionKey communitycollectionKey = new CommunitycollectionKey();
+        communitycollectionKey.setUid(Long.parseLong(uid));
+        communitycollectionKey.setCmid(cmid);
+        try {
+            communitycollectionMapper.insert(communitycollectionKey);
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+
+        return new RequestResult(200,"OK",null);
+    }
+
+    @Override
+    public RequestResult disCollectCommunity(String uid, int cmid) {
+        CommunitycollectionKey communitycollectionKey = new CommunitycollectionKey();
+        communitycollectionKey.setUid(Long.parseLong(uid));
+        communitycollectionKey.setCmid(cmid);
+        try {
+            communitycollectionMapper.deleteByPrimaryKey(communitycollectionKey);
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+
+        return new RequestResult(200,"OK",null);
+    }
+
 
     /// 查询一组 id 对应的社团
     private List<Community> selectCommunities(List<Integer> cmidlist){

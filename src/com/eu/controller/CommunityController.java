@@ -79,4 +79,16 @@ public class CommunityController {
     public RequestResult changeCommunity(Community community){
         return communityService.changeCommunityInfo(community);
     }
+
+    @RequestMapping("/collectcm")
+    @ResponseBody
+    public RequestResult collectCommunity(String uid,int cmid){
+        return communityService.collectCommunity(uid, cmid);
+    }
+
+    @RequestMapping("/discollectcm")
+    @ResponseBody
+    public RequestResult disCollectCommunity(String uid,int cmid){
+        return communityService.disCollectCommunity(uid, cmid);
+    }
 }
