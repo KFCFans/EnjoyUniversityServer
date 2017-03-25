@@ -90,6 +90,45 @@ public class CommunityServiceImpl implements CommunityService {
         return new RequestResult(200,"OK",null);
     }
 
+    @Override
+    public RequestResult leaveCommunity(String uid, int cmid) {
+
+        CommunityauthorityKey communityauthorityKey = new CommunityauthorityKey();
+        communityauthorityKey.setUid(Long.parseLong(uid));
+        communityauthorityKey.setCmid(cmid);
+        int succeed = 0;
+        try {
+            succeed=communityauthorityMapper.deleteByPrimaryKey(communityauthorityKey);
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+        if (succeed == 0){
+            return new RequestResult(400,"faild","删除失败");
+        }
+
+        return new RequestResult(200,"OK",null);
+    }
+
+    @Override
+    public RequestResult manageCommunity(String uid, int cmid, int position) {
+
+        Communityauthority communityauthority = new Communityauthority();
+        communityauthority.setPosition(position);
+        communityauthority.setUid(Long.parseLong(uid));
+        communityauthority.setCmid(cmid);
+        int succeed = 0;
+        try {
+            succeed=communityauthorityMapper.updateByPrimaryKeySelective(communityauthority);
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+        if (succeed == 0){
+            return new RequestResult(400,"faild","修改失败");
+        }
+
+        return new RequestResult(200,"OK",null);
+    }
+
 
     /// 查询一组 id 对应的社团
     private List<Community> selectCommunities(List<Integer> cmidlist){

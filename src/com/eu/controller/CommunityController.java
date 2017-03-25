@@ -49,5 +49,16 @@ public class CommunityController {
     public RequestResult participateCommunity(String uid,String reason,int cmid){
         return communityService.participateCommunity(uid, cmid, reason);
     }
-    
+
+    @RequestMapping("/leavecm")
+    @ResponseBody
+    public RequestResult leaveCommunity(String uid,int cmid){
+        return communityService.leaveCommunity(uid, cmid);
+    }
+
+    @RequestMapping("/managecm")
+    @ResponseBody
+    public RequestResult manageCommunity(String uid,int cmid,int position){
+        return communityService.manageCommunity(uid, cmid, position);
+    }
 }

@@ -20,4 +20,8 @@ public interface CommunityService {
 
     public RequestResult participateCommunity(String uid, int cmid,String reason);
 
+    public RequestResult leaveCommunity(String uid,int cmid);
+
+    public RequestResult manageCommunity(String uid,int cmid,int position);
+
 }
