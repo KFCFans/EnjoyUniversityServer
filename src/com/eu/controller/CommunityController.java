@@ -61,4 +61,16 @@ public class CommunityController {
     public RequestResult manageCommunity(String uid,int cmid,int position){
         return communityService.manageCommunity(uid, cmid, position);
     }
+
+    @RequestMapping("/recruitstate")
+    @ResponseBody
+    public RequestResult getActivityState(int cmid){
+        return communityService.getCommunityState(cmid);
+    }
+
+    @RequestMapping("/changerecruit")
+    @ResponseBody
+    public RequestResult changeActivityState(int cmid,int recruit){
+        return communityService.changeCommunityState(cmid, recruit);
+    }
 }

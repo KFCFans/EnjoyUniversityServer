@@ -129,6 +129,39 @@ public class CommunityServiceImpl implements CommunityService {
         return new RequestResult(200,"OK",null);
     }
 
+    @Override
+    public RequestResult getCommunityState(int cmid) {
+
+        Integer state = -1111;
+
+        try {
+            Community community = communityMapper.selectByPrimaryKey(cmid);
+            state = community.getCmRecruit();
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+        if (state==-1111){
+            return new RequestResult(400,"faild","查询失败");
+        }
+
+        return new RequestResult(200,"OK",state.toString());
+    }
+
+    @Override
+    public RequestResult changeCommunityState(int cmid, int cmRecruit) {
+
+        Community community = new Community();
+        community.setCmid(cmid);
+        community.setCmRecruit(cmRecruit);
+        try {
+            communityMapper.updateByPrimaryKeySelective(community);
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+
+        return new RequestResult(200,"OK",null);
+    }
+
 
     /// 查询一组 id 对应的社团
     private List<Community> selectCommunities(List<Integer> cmidlist){

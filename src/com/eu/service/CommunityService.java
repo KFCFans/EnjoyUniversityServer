@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface CommunityService {
 
+    //FIXME: 只有正在招新的社团才能显示在推荐列表中
     public List<Community> getCommonCommunities();
 
     public List<Community> getMyCommunities(String uid);
@@ -23,5 +24,11 @@ public interface CommunityService {
     public RequestResult leaveCommunity(String uid,int cmid);
 
     public RequestResult manageCommunity(String uid,int cmid,int position);
+
+    // 获取社团状态（是否正在招新）
+    public RequestResult getCommunityState(int cmid);
+
+    // 修改社团状态（开启／关闭招新）
+    public RequestResult changeCommunityState(int cmid,int cmRecruit);
 
 }
