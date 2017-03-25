@@ -117,5 +117,11 @@ public class ActivityController {
         return activityService.disCollectActivity(uid, avid);
     }
 
+    @RequestMapping("/search")
+    @ResponseBody
+    public List<Activity> searchActivities(String keyword){
+        return activityService.searchActivities(keyword);
+    }
+
 
 }

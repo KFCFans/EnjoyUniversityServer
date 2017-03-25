@@ -40,4 +40,7 @@ public interface CommunityService {
     // 取消收藏社团
     public RequestResult disCollectCommunity(String uid,int cmid);
 
+    // 搜索社团
+    public List<Community> searchCommunity(String keyword);
+
 }

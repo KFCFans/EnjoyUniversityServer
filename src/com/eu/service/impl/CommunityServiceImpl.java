@@ -200,6 +200,20 @@ public class CommunityServiceImpl implements CommunityService {
         return new RequestResult(200,"OK",null);
     }
 
+    @Override
+    public List<Community> searchCommunity(String keyword) {
+        CommunityExample example = new CommunityExample();
+        CommunityExample.Criteria criteria = example.createCriteria();
+        criteria.andCmNameLike("%"+keyword+"%");
+        List<Community> list;
+        try {
+            list = communityMapper.selectByExample(example);
+        }catch (Exception e){
+            return null;
+        }
+        return list;
+    }
+
 
     /// 查询一组 id 对应的社团
     private List<Community> selectCommunities(List<Integer> cmidlist){

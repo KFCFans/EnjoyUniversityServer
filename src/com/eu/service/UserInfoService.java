@@ -25,4 +25,6 @@ public interface UserInfoService {
     public RequestResult verifyUser(String uid);
 
 
+
+
 }

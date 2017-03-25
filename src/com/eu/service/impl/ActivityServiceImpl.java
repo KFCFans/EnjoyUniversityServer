@@ -262,6 +262,22 @@ public class ActivityServiceImpl implements ActivityService {
         return new RequestResult(200,"OK",null);
     }
 
+    @Override
+    public List<Activity> searchActivities(String keyword) {
+
+        ActivityExample example = new ActivityExample();
+        ActivityExample.Criteria criteria = example.createCriteria();
+        criteria.andAvTitleLike("%"+keyword+"%");
+        List<Activity> list;
+        try {
+            list = activityMapper.selectByExample(example);
+        }catch (Exception e){
+            return null;
+        }
+
+        return list;
+    }
+
 
     /// 查询一组 id 对应的活动
     private List<Activity> selectActivities(List<Integer> avidlist){

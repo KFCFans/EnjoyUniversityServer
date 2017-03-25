@@ -91,4 +91,10 @@ public class CommunityController {
     public RequestResult disCollectCommunity(String uid,int cmid){
         return communityService.disCollectCommunity(uid, cmid);
     }
+
+    @RequestMapping("/search")
+    @ResponseBody
+    public List<Community> searchCommunity(String keyword){
+        return communityService.searchCommunity(keyword);
+    }
 }

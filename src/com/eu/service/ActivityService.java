@@ -44,6 +44,9 @@ public interface ActivityService {
 
     public RequestResult participateRegister(String uid,int avid);
 
+    // 搜索活动
+    public List<Activity> searchActivities(String keyword);
+
 
 
 
