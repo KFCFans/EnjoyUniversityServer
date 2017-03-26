@@ -22,8 +22,8 @@ public class CommunityController {
 
     @RequestMapping("/commomcm")
     @ResponseBody
-    private List<Community> getCommomCommunities(){
-        return communityService.getCommonCommunities();
+    private List<Community> getCommomCommunities(int page,int rows){
+        return communityService.getCommonCommunities(page, rows);
     }
 
     @RequestMapping("/joinedcm")

@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface ActivityService {
 
-    public List<Activity> getCommonActivities();
+    public List<Activity> getCommonActivities(int page,int rows);
 
     public List<Activity> getMyCreatedActivities(String uid);
 

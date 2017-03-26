@@ -22,8 +22,8 @@ public class ActivityController {
 
     @RequestMapping("/commomav")
     @ResponseBody
-    public List<Activity> getCommomActivities(){
-        return activityService.getCommonActivities();
+    public List<Activity> getCommomActivities(int page,int rows){
+        return activityService.getCommonActivities(page, rows);
     }
 
     @RequestMapping("/createdav")

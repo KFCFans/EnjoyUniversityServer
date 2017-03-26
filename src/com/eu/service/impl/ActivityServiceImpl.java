@@ -6,6 +6,7 @@ import com.eu.mapper.ParticipateactivityMapper;
 import com.eu.pojo.*;
 import com.eu.service.ActivityService;
 import com.eu.service.UserInfoService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,9 +30,16 @@ public class ActivityServiceImpl implements ActivityService {
 
 
     @Override
-    public List<Activity> getCommonActivities() {
+    public List<Activity> getCommonActivities(int page,int rows) {
 
-        return activityMapper.selectByExample(new ActivityExample());
+        // 设置默认值
+        if (rows == 0){
+            rows = 20;
+        }
+        PageHelper.startPage(page,rows);
+        List<Activity> activityList = activityMapper.selectByExample(new ActivityExample());
+
+        return activityList;
     }
 
     @Override

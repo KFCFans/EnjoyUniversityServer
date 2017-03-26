@@ -5,6 +5,7 @@ import com.eu.mapper.CommunityauthorityMapper;
 import com.eu.mapper.CommunitycollectionMapper;
 import com.eu.pojo.*;
 import com.eu.service.CommunityService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,12 @@ public class CommunityServiceImpl implements CommunityService {
     private CommunitycollectionMapper communitycollectionMapper;
 
     @Override
-    public List<Community> getCommonCommunities() {
+    public List<Community> getCommonCommunities(int page,int rows) {
+
+        if (rows == 0){
+            rows = 20;
+        }
+        PageHelper.startPage(page, rows);
         return communityMapper.selectByExample(new CommunityExample());
     }
 

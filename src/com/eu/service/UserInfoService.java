@@ -24,6 +24,9 @@ public interface UserInfoService {
 
     public RequestResult verifyUser(String uid);
 
+    // FIXME: 搜索功能，用户的手机号，名称，昵称，班级学院皆可用于搜索 & 分页的实现
+    public List<Userinfo> searchUser(String keyword);
+
 
 
 

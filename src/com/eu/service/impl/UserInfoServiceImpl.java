@@ -85,5 +85,23 @@ public class UserInfoServiceImpl implements UserInfoService {
         return new RequestResult(200,"OK",null);
     }
 
+    @Override
+    public List<Userinfo> searchUser(String keyword) {
+
+        List<Userinfo> userinfoList;
+        UserinfoExample nicknameexample = new UserinfoExample();
+
+        UserinfoExample.Criteria criteria = nicknameexample.createCriteria();
+        criteria.andNicknameLike("%"+keyword+"%");
+
+        try {
+            userinfoList = userinfoMapper.selectByExample(nicknameexample);
+        }catch (Exception e){
+            return null;
+        }
+
+        return userinfoList;
+    }
+
 
 }
