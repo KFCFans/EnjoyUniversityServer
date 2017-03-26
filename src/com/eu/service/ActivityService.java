@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface ActivityService {
 
-    public List<Activity> getCommonActivities(int page,int rows);
+    public List<Activity> getCommonActivities(Integer page,Integer rows);
 
     public List<Activity> getMyCreatedActivities(String uid);
 
@@ -45,7 +45,7 @@ public interface ActivityService {
     public RequestResult participateRegister(String uid,int avid);
 
     // 搜索活动
-    public List<Activity> searchActivities(String keywor,int page,int rows);
+    public List<Activity> searchActivities(String keywor,Integer page,Integer rows);
 
 
 

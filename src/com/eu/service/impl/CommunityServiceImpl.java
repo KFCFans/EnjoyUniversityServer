@@ -28,11 +28,19 @@ public class CommunityServiceImpl implements CommunityService {
     private CommunitycollectionMapper communitycollectionMapper;
 
     @Override
-    public List<Community> getCommonCommunities(int page,int rows) {
+    public List<Community> getCommonCommunities(Integer page,Integer rows) {
 
-        if (rows == 0){
+        // Java 没有默认值，说多了都是泪啊
+        if (page == null){
+            page = 1;
+        }
+        if (rows ==null){
             rows = 15;
         }
+        if (rows == 0 ){
+            rows = 15;
+        }
+
         PageHelper.startPage(page, rows);
         return communityMapper.selectByExample(new CommunityExample());
     }
@@ -207,10 +215,21 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
-    public List<Community> searchCommunity(String keyword,int page,int rows) {
-        if (rows == 0){
+    public List<Community> searchCommunity(String keyword,Integer page,Integer rows) {
+
+        // Java 没有默认值，说多了都是泪啊
+        if (page == null){
+            page = 1;
+        }
+        if (rows ==null){
             rows = 15;
         }
+        if (rows == 0 ){
+            rows = 15;
+        }
+        System.out.println("rows->"+rows);
+        System.out.println("page->"+page);
+
         CommunityExample example = new CommunityExample();
         CommunityExample.Criteria criteria = example.createCriteria();
         criteria.andCmNameLike("%"+keyword+"%");

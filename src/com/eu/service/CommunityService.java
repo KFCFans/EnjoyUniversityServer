@@ -11,7 +11,7 @@ import java.util.List;
 public interface CommunityService {
 
     //FIXME: 只有正在招新的社团才能显示在推荐列表中
-    public List<Community> getCommonCommunities(int page,int rows);
+    public List<Community> getCommonCommunities(Integer page,Integer rows);
 
     public List<Community> getMyCommunities(String uid);
 
@@ -41,6 +41,6 @@ public interface CommunityService {
     public RequestResult disCollectCommunity(String uid,int cmid);
 
     // 搜索社团
-    public List<Community> searchCommunity(String keyword,int page,int rows);
+    public List<Community> searchCommunity(String keyword,Integer page,Integer rows);
 
 }

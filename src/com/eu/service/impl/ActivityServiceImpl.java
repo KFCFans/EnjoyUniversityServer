@@ -30,12 +30,19 @@ public class ActivityServiceImpl implements ActivityService {
 
 
     @Override
-    public List<Activity> getCommonActivities(int page,int rows) {
+    public List<Activity> getCommonActivities(Integer page,Integer rows) {
 
-        // 设置默认值
-        if (rows == 0){
+        // Java 没有默认值，说多了都是泪啊
+        if (page == null){
+            page = 1;
+        }
+        if (rows ==null){
             rows = 15;
         }
+        if (rows == 0 ){
+            rows = 15;
+        }
+
         PageHelper.startPage(page,rows);
         List<Activity> activityList = activityMapper.selectByExample(new ActivityExample());
 
@@ -271,12 +278,18 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Activity> searchActivities(String keyword,int page,int rows) {
+    public List<Activity> searchActivities(String keyword,Integer page,Integer rows) {
 
-        if (rows == 0){
+        // Java 没有默认值，说多了都是泪啊
+        if (page == null){
+            page = 1;
+        }
+        if (rows ==null){
             rows = 15;
         }
-
+        if (rows == 0 ){
+            rows = 15;
+        }
 
         ActivityExample example = new ActivityExample();
         ActivityExample.Criteria criteria = example.createCriteria();

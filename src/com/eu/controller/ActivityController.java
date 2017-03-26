@@ -23,7 +23,7 @@ public class ActivityController {
 
     @RequestMapping("/commomav")
     @ResponseBody
-    public List<Activity> getCommomActivities(int page,int rows){
+    public List<Activity> getCommomActivities(Integer page,Integer rows){
         return activityService.getCommonActivities(page, rows);
     }
 
@@ -122,7 +122,6 @@ public class ActivityController {
     @ResponseBody
     public List<Activity> searchActivities(String keyword, Integer page, Integer rows){
 
-        //FIXME: 需要解决 int 不能接受空
 
         return activityService.searchActivities(keyword,page,rows);
     }
