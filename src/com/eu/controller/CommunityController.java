@@ -22,7 +22,7 @@ public class CommunityController {
 
     @RequestMapping("/commomcm")
     @ResponseBody
-    private List<Community> getCommomCommunities(int page,int rows){
+    public List<Community> getCommomCommunities(int page,int rows){
         return communityService.getCommonCommunities(page, rows);
     }
 
@@ -94,7 +94,7 @@ public class CommunityController {
 
     @RequestMapping("/search")
     @ResponseBody
-    public List<Community> searchCommunity(String keyword){
-        return communityService.searchCommunity(keyword);
+    public List<Community> searchCommunity(String keyword,int page,int rows){
+        return communityService.searchCommunity(keyword,page,rows);
     }
 }

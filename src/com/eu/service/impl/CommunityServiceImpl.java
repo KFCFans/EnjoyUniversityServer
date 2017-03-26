@@ -31,7 +31,7 @@ public class CommunityServiceImpl implements CommunityService {
     public List<Community> getCommonCommunities(int page,int rows) {
 
         if (rows == 0){
-            rows = 20;
+            rows = 15;
         }
         PageHelper.startPage(page, rows);
         return communityMapper.selectByExample(new CommunityExample());
@@ -207,12 +207,16 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
-    public List<Community> searchCommunity(String keyword) {
+    public List<Community> searchCommunity(String keyword,int page,int rows) {
+        if (rows == 0){
+            rows = 15;
+        }
         CommunityExample example = new CommunityExample();
         CommunityExample.Criteria criteria = example.createCriteria();
         criteria.andCmNameLike("%"+keyword+"%");
         List<Community> list;
         try {
+            PageHelper.startPage(page,rows);
             list = communityMapper.selectByExample(example);
         }catch (Exception e){
             return null;

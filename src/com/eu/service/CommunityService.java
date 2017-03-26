@@ -41,6 +41,6 @@ public interface CommunityService {
     public RequestResult disCollectCommunity(String uid,int cmid);
 
     // 搜索社团
-    public List<Community> searchCommunity(String keyword);
+    public List<Community> searchCommunity(String keyword,int page,int rows);
 
 }

@@ -34,7 +34,7 @@ public class ActivityServiceImpl implements ActivityService {
 
         // 设置默认值
         if (rows == 0){
-            rows = 20;
+            rows = 15;
         }
         PageHelper.startPage(page,rows);
         List<Activity> activityList = activityMapper.selectByExample(new ActivityExample());
@@ -271,13 +271,19 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Activity> searchActivities(String keyword) {
+    public List<Activity> searchActivities(String keyword,int page,int rows) {
+
+        if (rows == 0){
+            rows = 15;
+        }
+
 
         ActivityExample example = new ActivityExample();
         ActivityExample.Criteria criteria = example.createCriteria();
         criteria.andAvTitleLike("%"+keyword+"%");
         List<Activity> list;
         try {
+            PageHelper.startPage(page,rows);
             list = activityMapper.selectByExample(example);
         }catch (Exception e){
             return null;

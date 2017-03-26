@@ -6,6 +6,7 @@ import com.eu.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -119,8 +120,11 @@ public class ActivityController {
 
     @RequestMapping("/search")
     @ResponseBody
-    public List<Activity> searchActivities(String keyword){
-        return activityService.searchActivities(keyword);
+    public List<Activity> searchActivities(String keyword, Integer page, Integer rows){
+
+        //FIXME: 需要解决 int 不能接受空
+
+        return activityService.searchActivities(keyword,page,rows);
     }
 
 
