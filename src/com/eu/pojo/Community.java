@@ -17,6 +17,8 @@ public class Community {
 
     private Integer cmRecruit;
 
+    private Integer cmHeat;
+
     public Integer getCmid() {
         return cmid;
     }
@@ -79,5 +81,13 @@ public class Community {
 
     public void setCmRecruit(Integer cmRecruit) {
         this.cmRecruit = cmRecruit;
+    }
+
+    public Integer getCmHeat() {
+        return cmHeat;
+    }
+
+    public void setCmHeat(Integer cmHeat) {
+        this.cmHeat = cmHeat;
     }
 }

@@ -643,6 +643,66 @@ public class CommunityExample {
             addCriterion("cm_recruit not between", value1, value2, "cmRecruit");
             return (Criteria) this;
         }
+
+        public Criteria andCmHeatIsNull() {
+            addCriterion("cm_heat is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmHeatIsNotNull() {
+            addCriterion("cm_heat is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmHeatEqualTo(Integer value) {
+            addCriterion("cm_heat =", value, "cmHeat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmHeatNotEqualTo(Integer value) {
+            addCriterion("cm_heat <>", value, "cmHeat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmHeatGreaterThan(Integer value) {
+            addCriterion("cm_heat >", value, "cmHeat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmHeatGreaterThanOrEqualTo(Integer value) {
+            addCriterion("cm_heat >=", value, "cmHeat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmHeatLessThan(Integer value) {
+            addCriterion("cm_heat <", value, "cmHeat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmHeatLessThanOrEqualTo(Integer value) {
+            addCriterion("cm_heat <=", value, "cmHeat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmHeatIn(List<Integer> values) {
+            addCriterion("cm_heat in", values, "cmHeat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmHeatNotIn(List<Integer> values) {
+            addCriterion("cm_heat not in", values, "cmHeat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmHeatBetween(Integer value1, Integer value2) {
+            addCriterion("cm_heat between", value1, value2, "cmHeat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmHeatNotBetween(Integer value1, Integer value2) {
+            addCriterion("cm_heat not between", value1, value2, "cmHeat");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
