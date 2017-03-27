@@ -126,6 +126,13 @@ public class CommunityServiceImpl implements CommunityService {
         return new RequestResult(200,"OK",null);
     }
 
+    /**
+     * 设置管理员
+     * @param uid 要设置的人的 uid
+     * @param cmid  要设置社团的 cmid
+     * @param position 要设置的职位
+     * @return
+     */
     @Override
     public RequestResult manageCommunity(String uid, int cmid, int position) {
 

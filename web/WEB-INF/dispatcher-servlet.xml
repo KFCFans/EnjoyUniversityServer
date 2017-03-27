@@ -13,10 +13,11 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/viewpager"/>
+            <mvc:exclude-mapping path="/viewpager/**"/>
             <mvc:exclude-mapping path="/user/**"/>
             <mvc:exclude-mapping path="/activity/commonav"/>
             <mvc:exclude-mapping path="/community/commoncm"/>
+            <mvc:exclude-mapping path="/activity/autocloseav"/>
             <bean class="com.eu.interceptor.TokenInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

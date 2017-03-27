@@ -25,7 +25,7 @@ public class ViewPagerServiceImpl implements ViewPagerService {
     }
 
     /**
-     * 批量增加 ViewPager
+     * 批量增加 ViewPager 暂时不开放此接口，此服务器为用户提供服务，用户无权限更改 ViewPager
      * @param url
      * @return
      */
