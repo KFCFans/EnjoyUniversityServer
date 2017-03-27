@@ -300,9 +300,12 @@ public class ActivityServiceImpl implements ActivityService {
         Activity activity = new Activity();
         activity.setAvRegister(-1);
 
-        activityMapper.updateByExampleSelective(activity,example);
+        List<Activity> activityList = activityMapper.selectByExample(example);
+        List<Integer> avid = new ArrayList<>();
+        for(Activity activity1:activityList){
+            closeFinishedActivity(activity1.getAvid());
+        }
 
-        System.out.println(date);
         return null;
     }
 
