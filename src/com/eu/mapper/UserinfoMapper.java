@@ -30,4 +30,12 @@ public interface UserinfoMapper {
 
     // 自己添加的接口
     List<Userinfo> selectByPrimaryKeyList(List<Long> uidlist);
+
+    //UPDATE userinfo set reputation = reputation - 5 WHERE uid in (15061884292,15061881234)
+
+    void deductReputation(List<Long> uidlist);
+
+    void increaseReputation(List<Long> uidlist);
+
+    void correctReputation(List<Long> uidlist);
 }

@@ -126,5 +126,21 @@ public class ActivityController {
         return activityService.searchActivities(keyword,page,rows);
     }
 
+    @RequestMapping("/closeav")
+    @ResponseBody
+    public RequestResult closeActivity(int avid){
+        return activityService.closeFinishedActivity(avid);
+    }
+
+    /**
+     * 此接口不由 App 执行，服务器定时执行此接口，关闭到期的活动
+     * @return 由于服务器执行，没有返回值
+     */
+    @RequestMapping("/autocloseav")
+    @ResponseBody
+    public RequestResult autoCloseActicities(){
+        return activityService.autoCloseFinishedActivities();
+    }
+
 
 }

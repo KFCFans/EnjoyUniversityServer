@@ -41,8 +41,11 @@ public class CommunityServiceImpl implements CommunityService {
             rows = 15;
         }
 
+        CommunityExample example = new CommunityExample();
+        example.setOrderByClause("cm_heat desc");
+
         PageHelper.startPage(page, rows);
-        return communityMapper.selectByExample(new CommunityExample());
+        return communityMapper.selectByExample(example);
     }
 
     @Override

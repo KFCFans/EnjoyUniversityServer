@@ -26,6 +26,13 @@ public interface UserInfoService {
 
     public List<Userinfo> searchUser(String keyword,Integer page,Integer rows);
 
+    // 批量修改节操值
+    public RequestResult deductReputation(List<Long> uidlist);
+
+    public RequestResult increaseReputation(List<Long> uidlist);
+
+    public RequestResult correctReputation(List<Long> uidlist);
+
 
 
 

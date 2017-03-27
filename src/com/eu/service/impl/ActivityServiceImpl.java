@@ -10,9 +10,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by lip on 17/3/22.
@@ -28,6 +26,9 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Autowired
     private ParticipateactivityMapper participateactivityMapper;
+
+    @Autowired
+    private UserInfoService userInfoService;
 
 
     @Override
@@ -283,6 +284,29 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    public RequestResult autoCloseFinishedActivities() {
+
+        // 获取一天前的时间
+        Date date =new Date();
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        calendar.add(calendar.DATE,-1);
+        date = calendar.getTime();
+
+        ActivityExample example = new ActivityExample();
+        ActivityExample.Criteria criteria = example.createCriteria();
+        criteria.andAvEndtimeLessThanOrEqualTo(date);
+
+        Activity activity = new Activity();
+        activity.setAvRegister(-1);
+
+        activityMapper.updateByExampleSelective(activity,example);
+
+        System.out.println(date);
+        return null;
+    }
+
+    @Override
     public List<Activity> searchActivities(String keyword,Integer page,Integer rows) {
 
         // Java 没有默认值，说多了都是泪啊
@@ -308,6 +332,51 @@ public class ActivityServiceImpl implements ActivityService {
         }
 
         return list;
+    }
+
+    /**
+     * 只有发起活动这才有资格结束活动，在调用接口前需要做权限判断
+     * @param avid 活动 ID
+     * @return  200 400 500
+     */
+    @Override
+    public RequestResult closeFinishedActivity(int avid) {
+
+        int flag = 0;
+        Activity activity = new Activity();
+        activity.setAvid(avid);
+        activity.setAvRegister(-1);
+        try {
+           flag= activityMapper.updateByPrimaryKeySelective(activity);
+        }catch (Exception e){
+            return new RequestResult(500,"faild",e.getMessage());
+        }
+        if (flag == 0){
+            return new RequestResult(400,"faild","没有活动被关闭");
+        }
+
+        ParticipateactivityExample example = new ParticipateactivityExample();
+        ParticipateactivityExample.Criteria criteria = example.createCriteria();
+        criteria.andAvidEqualTo(avid);
+        List<Participateactivity> participateactivityList = participateactivityMapper.selectByExample(example);
+        List<Long> deductuidlist = new ArrayList<>();
+        List<Long> increaseuidlist = new ArrayList<>();
+        for (Participateactivity participateactivity:participateactivityList){
+            if (participateactivity.getVerifystate() == 0){
+                deductuidlist.add(participateactivity.getUid());
+            }
+            if (participateactivity.getVerifystate() == 1){
+                increaseuidlist.add(participateactivity.getUid());
+            }
+        }
+
+        userInfoService.deductReputation(deductuidlist);
+        userInfoService.increaseReputation(increaseuidlist);
+        if (increaseuidlist.size() > 0){
+            userInfoService.correctReputation(increaseuidlist);
+        }
+
+        return new RequestResult(200,"OK",null);
     }
 
 

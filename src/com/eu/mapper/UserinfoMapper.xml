@@ -332,4 +332,31 @@
       </foreach>
     </if>
   </select>
+
+  <select id="deductReputation" parameterType="java.lang.Long">
+    UPDATE userinfo set reputation = reputation - 5 WHERE uid in
+    <if test="list!=null">
+      <foreach collection="list" open="(" close=")" item="uid" separator=",">
+        #{uid}
+      </foreach>
+    </if>
+  </select>
+
+  <select id="increaseReputation" parameterType="java.lang.Long">
+    UPDATE userinfo set reputation = reputation + 5 WHERE uid in
+    <if test="list!=null">
+      <foreach collection="list" open="(" close=")" item="uid" separator=",">
+        #{uid}
+      </foreach>
+    </if>
+  </select>
+
+  <select id="correctReputation" parameterType="java.lang.Long">
+    UPDATE userinfo set reputation = 100 WHERE reputation > 100 and uid in
+    <if test="list!=null">
+      <foreach collection="list" open="(" close=")" item="uid" separator=",">
+        #{uid}
+      </foreach>
+    </if>
+  </select>
 </mapper>

@@ -47,6 +47,12 @@ public interface ActivityService {
     // 搜索活动
     public List<Activity> searchActivities(String keywor,Integer page,Integer rows);
 
+    // 结束活动
+    public RequestResult closeFinishedActivity(int avid);
+
+    // 非 APP 调用接口，服务器每隔一段时间调用一次。用于判断过期
+    public RequestResult autoCloseFinishedActivities();
+
 
 
 
