@@ -21,7 +21,7 @@ public class ActivityController {
     @Autowired
     private ActivityService activityService;
 
-    @RequestMapping("/commomav")
+    @RequestMapping("/commonav")
     @ResponseBody
     public List<Activity> getCommomActivities(Integer page,Integer rows){
         return activityService.getCommonActivities(page, rows);

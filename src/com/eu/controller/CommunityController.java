@@ -20,7 +20,7 @@ public class CommunityController {
     @Autowired
     private CommunityService communityService;
 
-    @RequestMapping("/commomcm")
+    @RequestMapping("/commoncm")
     @ResponseBody
     public List<Community> getCommomCommunities(Integer page,Integer rows){
         return communityService.getCommonCommunities(page, rows);

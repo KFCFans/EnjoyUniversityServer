@@ -65,5 +65,11 @@ public class UserInfoController {
         return userInfoService.verifyUser(uid);
     }
 
+    @RequestMapping("/search")
+    @ResponseBody
+    public List<Userinfo> searchUser(String keyword,Integer page,Integer rows){
+        return userInfoService.searchUser(keyword, page, rows);
+    }
+
 
 }

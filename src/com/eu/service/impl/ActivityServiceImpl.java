@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,8 +44,12 @@ public class ActivityServiceImpl implements ActivityService {
             rows = 15;
         }
 
+        ActivityExample example = new ActivityExample();
+        ActivityExample.Criteria criteria = example.createCriteria();
+        criteria.andAvStarttimeGreaterThan(new Date());
+        example.setOrderByClause("av_starttime asc");
         PageHelper.startPage(page,rows);
-        List<Activity> activityList = activityMapper.selectByExample(new ActivityExample());
+        List<Activity> activityList = activityMapper.selectByExample(example);
 
         return activityList;
     }

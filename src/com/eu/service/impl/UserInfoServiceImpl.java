@@ -3,6 +3,7 @@ package com.eu.service.impl;
 import com.eu.mapper.*;
 import com.eu.pojo.*;
 import com.eu.service.UserInfoService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -86,16 +87,28 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public List<Userinfo> searchUser(String keyword) {
+    public List<Userinfo> searchUser(String keyword,Integer page,Integer rows) {
+
+        // Java 没有默认值，说多了都是泪啊
+        if (page == null){
+            page = 1;
+        }
+        if (rows ==null){
+            rows = 15;
+        }
+        if (rows == 0 ){
+            rows = 15;
+        }
 
         List<Userinfo> userinfoList;
-        UserinfoExample nicknameexample = new UserinfoExample();
+        UserinfoExample example = new UserinfoExample();
 
-        UserinfoExample.Criteria criteria = nicknameexample.createCriteria();
-        criteria.andNicknameLike("%"+keyword+"%");
+        UserinfoExample.Criteria criteria = example.createCriteria();
+        criteria.andNameLike("%"+keyword+"%");
 
         try {
-            userinfoList = userinfoMapper.selectByExample(nicknameexample);
+            PageHelper.startPage(page,rows);
+            userinfoList = userinfoMapper.selectByExample(example);
         }catch (Exception e){
             return null;
         }
