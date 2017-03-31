@@ -32,27 +32,42 @@ public class ActivityServiceImpl implements ActivityService {
 
 
     @Override
-    public List<Activity> getCommonActivities(Integer page,Integer rows) {
+    public List<Activity> getCommonActivities(String mintime, String maxtime, Integer count) {
 
-        // Java 没有默认值，说多了都是泪啊
-        if (page == null){
-            page = 1;
-        }
-        if (rows ==null){
-            rows = 15;
-        }
-        if (rows == 0 ){
-            rows = 15;
+        // count 默认 10 条
+        if (count == null||count == 0){
+            count = 10;
         }
 
+        // 初始化查询条件
         ActivityExample example = new ActivityExample();
         ActivityExample.Criteria criteria = example.createCriteria();
         criteria.andAvStarttimeGreaterThan(new Date());
-        example.setOrderByClause("av_starttime asc");
-        PageHelper.startPage(page,rows);
-        List<Activity> activityList = activityMapper.selectByExample(example);
+        example.setOrderByClause("av_starttime asc LIMIT "+count.toString());
 
-        return activityList;
+        // 若都没有参数，则是第一次加载数据，获取最新的数据
+        if ((mintime ==null || mintime.isEmpty())&&(maxtime ==null || maxtime.isEmpty())){
+
+            return activityMapper.selectByExample(example);
+
+        }
+        // 只有最小时间，表示下拉刷新，获取比 mintime 时间小的活动
+        else if ((mintime !=null && !mintime.isEmpty())&&(maxtime ==null || maxtime.isEmpty())){
+
+            criteria.andAvStarttimeLessThan(new Date(Long.parseLong(mintime)));
+            return activityMapper.selectByExample(example);
+
+        }
+        // 只有最大时间，表示上拉加载更多，获取比 maxtime 时间大的活动
+        else if ((mintime ==null || mintime.isEmpty())&&(maxtime !=null && !maxtime.isEmpty())){
+
+
+            // 时间越大，越安全
+            criteria.andAvStarttimeGreaterThan(new Date(Long.parseLong(maxtime)));
+            return activityMapper.selectByExample(example);
+        }
+
+        return null;
     }
 
     @Override

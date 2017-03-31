@@ -23,8 +23,8 @@ public class ActivityController {
 
     @RequestMapping("/commonav")
     @ResponseBody
-    public List<Activity> getCommomActivities(Integer page,Integer rows){
-        return activityService.getCommonActivities(page, rows);
+    public List<Activity> getCommomActivities(String mintime,String maxtime,Integer count){
+        return activityService.getCommonActivities(mintime, maxtime, count);
     }
 
     @RequestMapping("/createdav")

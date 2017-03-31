@@ -12,7 +12,15 @@ import java.util.List;
  */
 public interface ActivityService {
 
-    public List<Activity> getCommonActivities(Integer page,Integer rows);
+
+    /**
+     * 返回最新的活动
+     * @param mintime 最小的活动时间，若指定此参数，则返回比 mintime 还要小的活动（用于下拉刷新），默认空
+     * @param maxtime 最大的活动时间，若指定此参数，则返回比 maxtime 还要大的活动（用于上拉加载），默认空
+     * @param count 返回的数据条数
+     * @return
+     */
+    public List<Activity> getCommonActivities(String mintime,String maxtime,Integer count);
 
     public List<Activity> getMyCreatedActivities(String uid);
 
