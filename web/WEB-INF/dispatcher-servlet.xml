@@ -18,6 +18,7 @@
             <mvc:exclude-mapping path="/activity/commonav"/>
             <mvc:exclude-mapping path="/community/commoncm"/>
             <mvc:exclude-mapping path="/activity/autocloseav"/>
+            <mvc:exclude-mapping path="/common/**"/>
             <bean class="com.eu.interceptor.TokenInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

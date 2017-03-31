@@ -19,6 +19,14 @@ public class TokenInterceptor implements org.springframework.web.servlet.Handler
 
         String accesstoken = httpServletRequest.getParameter("accesstoken");
 
+        if (accesstoken == null||accesstoken.equals("")){
+            // Access Token 无效输出错误消息
+            httpServletResponse.setCharacterEncoding("utf-8");
+            httpServletResponse.getWriter().write("[{\"status\":401,\"data\":\"需要验证身份信息\"}]");
+
+            return false;
+        }
+
         // Access Token 有效即跳转
         if (userSecurityService.checkAccessToken(accesstoken)){
 
@@ -27,7 +35,7 @@ public class TokenInterceptor implements org.springframework.web.servlet.Handler
 
         // Access Token 无效输出错误消息
         httpServletResponse.setCharacterEncoding("utf-8");
-        httpServletResponse.getWriter().write("[{\"status\":400,\"data\":\"身份消息已过期，请重新登陆\"}]");
+        httpServletResponse.getWriter().write("[{\"status\":403,\"data\":\"身份消息已过期，请重新登陆\"}]");
 
         return false;
     }
