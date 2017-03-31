@@ -29,6 +29,8 @@ public class Activity {
 
     private Date avEnrolldeadline;
 
+    private String avPlace;
+
     public Integer getAvid() {
         return avid;
     }
@@ -131,5 +133,13 @@ public class Activity {
 
     public void setAvEnrolldeadline(Date avEnrolldeadline) {
         this.avEnrolldeadline = avEnrolldeadline;
+    }
+
+    public String getAvPlace() {
+        return avPlace;
+    }
+
+    public void setAvPlace(String avPlace) {
+        this.avPlace = avPlace == null ? null : avPlace.trim();
     }
 }

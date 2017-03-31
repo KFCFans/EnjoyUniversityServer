@@ -951,6 +951,76 @@ public class ActivityExample {
             addCriterionForJDBCDate("av_enrolldeadline not between", value1, value2, "avEnrolldeadline");
             return (Criteria) this;
         }
+
+        public Criteria andAvPlaceIsNull() {
+            addCriterion("av_place is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvPlaceIsNotNull() {
+            addCriterion("av_place is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvPlaceEqualTo(String value) {
+            addCriterion("av_place =", value, "avPlace");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvPlaceNotEqualTo(String value) {
+            addCriterion("av_place <>", value, "avPlace");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvPlaceGreaterThan(String value) {
+            addCriterion("av_place >", value, "avPlace");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvPlaceGreaterThanOrEqualTo(String value) {
+            addCriterion("av_place >=", value, "avPlace");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvPlaceLessThan(String value) {
+            addCriterion("av_place <", value, "avPlace");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvPlaceLessThanOrEqualTo(String value) {
+            addCriterion("av_place <=", value, "avPlace");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvPlaceLike(String value) {
+            addCriterion("av_place like", value, "avPlace");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvPlaceNotLike(String value) {
+            addCriterion("av_place not like", value, "avPlace");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvPlaceIn(List<String> values) {
+            addCriterion("av_place in", values, "avPlace");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvPlaceNotIn(List<String> values) {
+            addCriterion("av_place not in", values, "avPlace");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvPlaceBetween(String value1, String value2) {
+            addCriterion("av_place between", value1, value2, "avPlace");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvPlaceNotBetween(String value1, String value2) {
+            addCriterion("av_place not between", value1, value2, "avPlace");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
