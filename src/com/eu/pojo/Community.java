@@ -11,13 +11,15 @@ public class Community {
 
     private String cmBackground;
 
-    private String cmType;
+    private Integer cmType;
 
-    private String cmAttr;
+    private Integer cmAttr;
 
     private Integer cmRecruit;
 
     private Integer cmHeat;
+
+    private String cmAnnouncement;
 
     public Integer getCmid() {
         return cmid;
@@ -59,20 +61,20 @@ public class Community {
         this.cmBackground = cmBackground == null ? null : cmBackground.trim();
     }
 
-    public String getCmType() {
+    public Integer getCmType() {
         return cmType;
     }
 
-    public void setCmType(String cmType) {
-        this.cmType = cmType == null ? null : cmType.trim();
+    public void setCmType(Integer cmType) {
+        this.cmType = cmType;
     }
 
-    public String getCmAttr() {
+    public Integer getCmAttr() {
         return cmAttr;
     }
 
-    public void setCmAttr(String cmAttr) {
-        this.cmAttr = cmAttr == null ? null : cmAttr.trim();
+    public void setCmAttr(Integer cmAttr) {
+        this.cmAttr = cmAttr;
     }
 
     public Integer getCmRecruit() {
@@ -89,5 +91,13 @@ public class Community {
 
     public void setCmHeat(Integer cmHeat) {
         this.cmHeat = cmHeat;
+    }
+
+    public String getCmAnnouncement() {
+        return cmAnnouncement;
+    }
+
+    public void setCmAnnouncement(String cmAnnouncement) {
+        this.cmAnnouncement = cmAnnouncement == null ? null : cmAnnouncement.trim();
     }
 }

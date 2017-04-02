@@ -454,62 +454,52 @@ public class CommunityExample {
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeEqualTo(String value) {
+        public Criteria andCmTypeEqualTo(Integer value) {
             addCriterion("cm_type =", value, "cmType");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeNotEqualTo(String value) {
+        public Criteria andCmTypeNotEqualTo(Integer value) {
             addCriterion("cm_type <>", value, "cmType");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeGreaterThan(String value) {
+        public Criteria andCmTypeGreaterThan(Integer value) {
             addCriterion("cm_type >", value, "cmType");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeGreaterThanOrEqualTo(String value) {
+        public Criteria andCmTypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("cm_type >=", value, "cmType");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeLessThan(String value) {
+        public Criteria andCmTypeLessThan(Integer value) {
             addCriterion("cm_type <", value, "cmType");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeLessThanOrEqualTo(String value) {
+        public Criteria andCmTypeLessThanOrEqualTo(Integer value) {
             addCriterion("cm_type <=", value, "cmType");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeLike(String value) {
-            addCriterion("cm_type like", value, "cmType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCmTypeNotLike(String value) {
-            addCriterion("cm_type not like", value, "cmType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCmTypeIn(List<String> values) {
+        public Criteria andCmTypeIn(List<Integer> values) {
             addCriterion("cm_type in", values, "cmType");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeNotIn(List<String> values) {
+        public Criteria andCmTypeNotIn(List<Integer> values) {
             addCriterion("cm_type not in", values, "cmType");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeBetween(String value1, String value2) {
+        public Criteria andCmTypeBetween(Integer value1, Integer value2) {
             addCriterion("cm_type between", value1, value2, "cmType");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeNotBetween(String value1, String value2) {
+        public Criteria andCmTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("cm_type not between", value1, value2, "cmType");
             return (Criteria) this;
         }
@@ -524,62 +514,52 @@ public class CommunityExample {
             return (Criteria) this;
         }
 
-        public Criteria andCmAttrEqualTo(String value) {
+        public Criteria andCmAttrEqualTo(Integer value) {
             addCriterion("cm_attr =", value, "cmAttr");
             return (Criteria) this;
         }
 
-        public Criteria andCmAttrNotEqualTo(String value) {
+        public Criteria andCmAttrNotEqualTo(Integer value) {
             addCriterion("cm_attr <>", value, "cmAttr");
             return (Criteria) this;
         }
 
-        public Criteria andCmAttrGreaterThan(String value) {
+        public Criteria andCmAttrGreaterThan(Integer value) {
             addCriterion("cm_attr >", value, "cmAttr");
             return (Criteria) this;
         }
 
-        public Criteria andCmAttrGreaterThanOrEqualTo(String value) {
+        public Criteria andCmAttrGreaterThanOrEqualTo(Integer value) {
             addCriterion("cm_attr >=", value, "cmAttr");
             return (Criteria) this;
         }
 
-        public Criteria andCmAttrLessThan(String value) {
+        public Criteria andCmAttrLessThan(Integer value) {
             addCriterion("cm_attr <", value, "cmAttr");
             return (Criteria) this;
         }
 
-        public Criteria andCmAttrLessThanOrEqualTo(String value) {
+        public Criteria andCmAttrLessThanOrEqualTo(Integer value) {
             addCriterion("cm_attr <=", value, "cmAttr");
             return (Criteria) this;
         }
 
-        public Criteria andCmAttrLike(String value) {
-            addCriterion("cm_attr like", value, "cmAttr");
-            return (Criteria) this;
-        }
-
-        public Criteria andCmAttrNotLike(String value) {
-            addCriterion("cm_attr not like", value, "cmAttr");
-            return (Criteria) this;
-        }
-
-        public Criteria andCmAttrIn(List<String> values) {
+        public Criteria andCmAttrIn(List<Integer> values) {
             addCriterion("cm_attr in", values, "cmAttr");
             return (Criteria) this;
         }
 
-        public Criteria andCmAttrNotIn(List<String> values) {
+        public Criteria andCmAttrNotIn(List<Integer> values) {
             addCriterion("cm_attr not in", values, "cmAttr");
             return (Criteria) this;
         }
 
-        public Criteria andCmAttrBetween(String value1, String value2) {
+        public Criteria andCmAttrBetween(Integer value1, Integer value2) {
             addCriterion("cm_attr between", value1, value2, "cmAttr");
             return (Criteria) this;
         }
 
-        public Criteria andCmAttrNotBetween(String value1, String value2) {
+        public Criteria andCmAttrNotBetween(Integer value1, Integer value2) {
             addCriterion("cm_attr not between", value1, value2, "cmAttr");
             return (Criteria) this;
         }
@@ -701,6 +681,76 @@ public class CommunityExample {
 
         public Criteria andCmHeatNotBetween(Integer value1, Integer value2) {
             addCriterion("cm_heat not between", value1, value2, "cmHeat");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmAnnouncementIsNull() {
+            addCriterion("cm_announcement is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmAnnouncementIsNotNull() {
+            addCriterion("cm_announcement is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmAnnouncementEqualTo(String value) {
+            addCriterion("cm_announcement =", value, "cmAnnouncement");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmAnnouncementNotEqualTo(String value) {
+            addCriterion("cm_announcement <>", value, "cmAnnouncement");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmAnnouncementGreaterThan(String value) {
+            addCriterion("cm_announcement >", value, "cmAnnouncement");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmAnnouncementGreaterThanOrEqualTo(String value) {
+            addCriterion("cm_announcement >=", value, "cmAnnouncement");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmAnnouncementLessThan(String value) {
+            addCriterion("cm_announcement <", value, "cmAnnouncement");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmAnnouncementLessThanOrEqualTo(String value) {
+            addCriterion("cm_announcement <=", value, "cmAnnouncement");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmAnnouncementLike(String value) {
+            addCriterion("cm_announcement like", value, "cmAnnouncement");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmAnnouncementNotLike(String value) {
+            addCriterion("cm_announcement not like", value, "cmAnnouncement");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmAnnouncementIn(List<String> values) {
+            addCriterion("cm_announcement in", values, "cmAnnouncement");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmAnnouncementNotIn(List<String> values) {
+            addCriterion("cm_announcement not in", values, "cmAnnouncement");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmAnnouncementBetween(String value1, String value2) {
+            addCriterion("cm_announcement between", value1, value2, "cmAnnouncement");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmAnnouncementNotBetween(String value1, String value2) {
+            addCriterion("cm_announcement not between", value1, value2, "cmAnnouncement");
             return (Criteria) this;
         }
     }

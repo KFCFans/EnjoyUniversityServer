@@ -7,10 +7,11 @@
     <result column="cm_detail" property="cmDetail" jdbcType="VARCHAR" />
     <result column="cm_name" property="cmName" jdbcType="VARCHAR" />
     <result column="cm_background" property="cmBackground" jdbcType="VARCHAR" />
-    <result column="cm_type" property="cmType" jdbcType="VARCHAR" />
-    <result column="cm_attr" property="cmAttr" jdbcType="VARCHAR" />
+    <result column="cm_type" property="cmType" jdbcType="INTEGER" />
+    <result column="cm_attr" property="cmAttr" jdbcType="INTEGER" />
     <result column="cm_recruit" property="cmRecruit" jdbcType="INTEGER" />
     <result column="cm_heat" property="cmHeat" jdbcType="INTEGER" />
+    <result column="cm_announcement" property="cmAnnouncement" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    cmid, cm_logo, cm_detail, cm_name, cm_background, cm_type, cm_attr, cm_recruit, cm_heat
+    cmid, cm_logo, cm_detail, cm_name, cm_background, cm_type, cm_attr, cm_recruit, cm_heat, 
+    cm_announcement
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eu.pojo.CommunityExample" >
     select
@@ -106,12 +108,12 @@
   <insert id="insert" parameterType="com.eu.pojo.Community" >
     insert into community (cmid, cm_logo, cm_detail, 
       cm_name, cm_background, cm_type, 
-      cm_attr, cm_recruit, cm_heat
-      )
+      cm_attr, cm_recruit, cm_heat, 
+      cm_announcement)
     values (#{cmid,jdbcType=INTEGER}, #{cmLogo,jdbcType=VARCHAR}, #{cmDetail,jdbcType=VARCHAR}, 
-      #{cmName,jdbcType=VARCHAR}, #{cmBackground,jdbcType=VARCHAR}, #{cmType,jdbcType=VARCHAR}, 
-      #{cmAttr,jdbcType=VARCHAR}, #{cmRecruit,jdbcType=INTEGER}, #{cmHeat,jdbcType=INTEGER}
-      )
+      #{cmName,jdbcType=VARCHAR}, #{cmBackground,jdbcType=VARCHAR}, #{cmType,jdbcType=INTEGER}, 
+      #{cmAttr,jdbcType=INTEGER}, #{cmRecruit,jdbcType=INTEGER}, #{cmHeat,jdbcType=INTEGER}, 
+      #{cmAnnouncement,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.eu.pojo.Community" >
     insert into community
@@ -143,6 +145,9 @@
       <if test="cmHeat != null" >
         cm_heat,
       </if>
+      <if test="cmAnnouncement != null" >
+        cm_announcement,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="cmid != null" >
@@ -161,16 +166,19 @@
         #{cmBackground,jdbcType=VARCHAR},
       </if>
       <if test="cmType != null" >
-        #{cmType,jdbcType=VARCHAR},
+        #{cmType,jdbcType=INTEGER},
       </if>
       <if test="cmAttr != null" >
-        #{cmAttr,jdbcType=VARCHAR},
+        #{cmAttr,jdbcType=INTEGER},
       </if>
       <if test="cmRecruit != null" >
         #{cmRecruit,jdbcType=INTEGER},
       </if>
       <if test="cmHeat != null" >
         #{cmHeat,jdbcType=INTEGER},
+      </if>
+      <if test="cmAnnouncement != null" >
+        #{cmAnnouncement,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -199,16 +207,19 @@
         cm_background = #{record.cmBackground,jdbcType=VARCHAR},
       </if>
       <if test="record.cmType != null" >
-        cm_type = #{record.cmType,jdbcType=VARCHAR},
+        cm_type = #{record.cmType,jdbcType=INTEGER},
       </if>
       <if test="record.cmAttr != null" >
-        cm_attr = #{record.cmAttr,jdbcType=VARCHAR},
+        cm_attr = #{record.cmAttr,jdbcType=INTEGER},
       </if>
       <if test="record.cmRecruit != null" >
         cm_recruit = #{record.cmRecruit,jdbcType=INTEGER},
       </if>
       <if test="record.cmHeat != null" >
         cm_heat = #{record.cmHeat,jdbcType=INTEGER},
+      </if>
+      <if test="record.cmAnnouncement != null" >
+        cm_announcement = #{record.cmAnnouncement,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -222,10 +233,11 @@
       cm_detail = #{record.cmDetail,jdbcType=VARCHAR},
       cm_name = #{record.cmName,jdbcType=VARCHAR},
       cm_background = #{record.cmBackground,jdbcType=VARCHAR},
-      cm_type = #{record.cmType,jdbcType=VARCHAR},
-      cm_attr = #{record.cmAttr,jdbcType=VARCHAR},
+      cm_type = #{record.cmType,jdbcType=INTEGER},
+      cm_attr = #{record.cmAttr,jdbcType=INTEGER},
       cm_recruit = #{record.cmRecruit,jdbcType=INTEGER},
-      cm_heat = #{record.cmHeat,jdbcType=INTEGER}
+      cm_heat = #{record.cmHeat,jdbcType=INTEGER},
+      cm_announcement = #{record.cmAnnouncement,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -246,16 +258,19 @@
         cm_background = #{cmBackground,jdbcType=VARCHAR},
       </if>
       <if test="cmType != null" >
-        cm_type = #{cmType,jdbcType=VARCHAR},
+        cm_type = #{cmType,jdbcType=INTEGER},
       </if>
       <if test="cmAttr != null" >
-        cm_attr = #{cmAttr,jdbcType=VARCHAR},
+        cm_attr = #{cmAttr,jdbcType=INTEGER},
       </if>
       <if test="cmRecruit != null" >
         cm_recruit = #{cmRecruit,jdbcType=INTEGER},
       </if>
       <if test="cmHeat != null" >
         cm_heat = #{cmHeat,jdbcType=INTEGER},
+      </if>
+      <if test="cmAnnouncement != null" >
+        cm_announcement = #{cmAnnouncement,jdbcType=VARCHAR},
       </if>
     </set>
     where cmid = #{cmid,jdbcType=INTEGER}
@@ -266,10 +281,11 @@
       cm_detail = #{cmDetail,jdbcType=VARCHAR},
       cm_name = #{cmName,jdbcType=VARCHAR},
       cm_background = #{cmBackground,jdbcType=VARCHAR},
-      cm_type = #{cmType,jdbcType=VARCHAR},
-      cm_attr = #{cmAttr,jdbcType=VARCHAR},
+      cm_type = #{cmType,jdbcType=INTEGER},
+      cm_attr = #{cmAttr,jdbcType=INTEGER},
       cm_recruit = #{cmRecruit,jdbcType=INTEGER},
-      cm_heat = #{cmHeat,jdbcType=INTEGER}
+      cm_heat = #{cmHeat,jdbcType=INTEGER},
+      cm_announcement = #{cmAnnouncement,jdbcType=VARCHAR}
     where cmid = #{cmid,jdbcType=INTEGER}
   </update>
 </mapper>
