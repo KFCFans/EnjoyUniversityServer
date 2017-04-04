@@ -21,6 +21,10 @@ public class Community {
 
     private String cmAnnouncement;
 
+    private String cmSchool;
+
+    private Long cmBoss;
+
     public Integer getCmid() {
         return cmid;
     }
@@ -99,5 +103,21 @@ public class Community {
 
     public void setCmAnnouncement(String cmAnnouncement) {
         this.cmAnnouncement = cmAnnouncement == null ? null : cmAnnouncement.trim();
+    }
+
+    public String getCmSchool() {
+        return cmSchool;
+    }
+
+    public void setCmSchool(String cmSchool) {
+        this.cmSchool = cmSchool == null ? null : cmSchool.trim();
+    }
+
+    public Long getCmBoss() {
+        return cmBoss;
+    }
+
+    public void setCmBoss(Long cmBoss) {
+        this.cmBoss = cmBoss;
     }
 }

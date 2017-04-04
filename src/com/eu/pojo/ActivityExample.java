@@ -2,7 +2,6 @@ package com.eu.pojo;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class ActivityExample {
@@ -104,32 +103,6 @@ public class ActivityExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value.getTime()), property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
-            if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
-            }
-            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
-            Iterator<Date> iter = values.iterator();
-            while (iter.hasNext()) {
-                dateList.add(new java.sql.Date(iter.next().getTime()));
-            }
-            addCriterion(condition, dateList, property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andAvidIsNull() {
@@ -273,52 +246,52 @@ public class ActivityExample {
         }
 
         public Criteria andAvStarttimeEqualTo(Date value) {
-            addCriterionForJDBCDate("av_starttime =", value, "avStarttime");
+            addCriterion("av_starttime =", value, "avStarttime");
             return (Criteria) this;
         }
 
         public Criteria andAvStarttimeNotEqualTo(Date value) {
-            addCriterionForJDBCDate("av_starttime <>", value, "avStarttime");
+            addCriterion("av_starttime <>", value, "avStarttime");
             return (Criteria) this;
         }
 
         public Criteria andAvStarttimeGreaterThan(Date value) {
-            addCriterionForJDBCDate("av_starttime >", value, "avStarttime");
+            addCriterion("av_starttime >", value, "avStarttime");
             return (Criteria) this;
         }
 
         public Criteria andAvStarttimeGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("av_starttime >=", value, "avStarttime");
+            addCriterion("av_starttime >=", value, "avStarttime");
             return (Criteria) this;
         }
 
         public Criteria andAvStarttimeLessThan(Date value) {
-            addCriterionForJDBCDate("av_starttime <", value, "avStarttime");
+            addCriterion("av_starttime <", value, "avStarttime");
             return (Criteria) this;
         }
 
         public Criteria andAvStarttimeLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("av_starttime <=", value, "avStarttime");
+            addCriterion("av_starttime <=", value, "avStarttime");
             return (Criteria) this;
         }
 
         public Criteria andAvStarttimeIn(List<Date> values) {
-            addCriterionForJDBCDate("av_starttime in", values, "avStarttime");
+            addCriterion("av_starttime in", values, "avStarttime");
             return (Criteria) this;
         }
 
         public Criteria andAvStarttimeNotIn(List<Date> values) {
-            addCriterionForJDBCDate("av_starttime not in", values, "avStarttime");
+            addCriterion("av_starttime not in", values, "avStarttime");
             return (Criteria) this;
         }
 
         public Criteria andAvStarttimeBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("av_starttime between", value1, value2, "avStarttime");
+            addCriterion("av_starttime between", value1, value2, "avStarttime");
             return (Criteria) this;
         }
 
         public Criteria andAvStarttimeNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("av_starttime not between", value1, value2, "avStarttime");
+            addCriterion("av_starttime not between", value1, value2, "avStarttime");
             return (Criteria) this;
         }
 
@@ -333,52 +306,52 @@ public class ActivityExample {
         }
 
         public Criteria andAvEndtimeEqualTo(Date value) {
-            addCriterionForJDBCDate("av_endtime =", value, "avEndtime");
+            addCriterion("av_endtime =", value, "avEndtime");
             return (Criteria) this;
         }
 
         public Criteria andAvEndtimeNotEqualTo(Date value) {
-            addCriterionForJDBCDate("av_endtime <>", value, "avEndtime");
+            addCriterion("av_endtime <>", value, "avEndtime");
             return (Criteria) this;
         }
 
         public Criteria andAvEndtimeGreaterThan(Date value) {
-            addCriterionForJDBCDate("av_endtime >", value, "avEndtime");
+            addCriterion("av_endtime >", value, "avEndtime");
             return (Criteria) this;
         }
 
         public Criteria andAvEndtimeGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("av_endtime >=", value, "avEndtime");
+            addCriterion("av_endtime >=", value, "avEndtime");
             return (Criteria) this;
         }
 
         public Criteria andAvEndtimeLessThan(Date value) {
-            addCriterionForJDBCDate("av_endtime <", value, "avEndtime");
+            addCriterion("av_endtime <", value, "avEndtime");
             return (Criteria) this;
         }
 
         public Criteria andAvEndtimeLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("av_endtime <=", value, "avEndtime");
+            addCriterion("av_endtime <=", value, "avEndtime");
             return (Criteria) this;
         }
 
         public Criteria andAvEndtimeIn(List<Date> values) {
-            addCriterionForJDBCDate("av_endtime in", values, "avEndtime");
+            addCriterion("av_endtime in", values, "avEndtime");
             return (Criteria) this;
         }
 
         public Criteria andAvEndtimeNotIn(List<Date> values) {
-            addCriterionForJDBCDate("av_endtime not in", values, "avEndtime");
+            addCriterion("av_endtime not in", values, "avEndtime");
             return (Criteria) this;
         }
 
         public Criteria andAvEndtimeBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("av_endtime between", value1, value2, "avEndtime");
+            addCriterion("av_endtime between", value1, value2, "avEndtime");
             return (Criteria) this;
         }
 
         public Criteria andAvEndtimeNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("av_endtime not between", value1, value2, "avEndtime");
+            addCriterion("av_endtime not between", value1, value2, "avEndtime");
             return (Criteria) this;
         }
 
@@ -762,76 +735,6 @@ public class ActivityExample {
             return (Criteria) this;
         }
 
-        public Criteria andAvBackgroundIsNull() {
-            addCriterion("av_background is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAvBackgroundIsNotNull() {
-            addCriterion("av_background is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAvBackgroundEqualTo(String value) {
-            addCriterion("av_background =", value, "avBackground");
-            return (Criteria) this;
-        }
-
-        public Criteria andAvBackgroundNotEqualTo(String value) {
-            addCriterion("av_background <>", value, "avBackground");
-            return (Criteria) this;
-        }
-
-        public Criteria andAvBackgroundGreaterThan(String value) {
-            addCriterion("av_background >", value, "avBackground");
-            return (Criteria) this;
-        }
-
-        public Criteria andAvBackgroundGreaterThanOrEqualTo(String value) {
-            addCriterion("av_background >=", value, "avBackground");
-            return (Criteria) this;
-        }
-
-        public Criteria andAvBackgroundLessThan(String value) {
-            addCriterion("av_background <", value, "avBackground");
-            return (Criteria) this;
-        }
-
-        public Criteria andAvBackgroundLessThanOrEqualTo(String value) {
-            addCriterion("av_background <=", value, "avBackground");
-            return (Criteria) this;
-        }
-
-        public Criteria andAvBackgroundLike(String value) {
-            addCriterion("av_background like", value, "avBackground");
-            return (Criteria) this;
-        }
-
-        public Criteria andAvBackgroundNotLike(String value) {
-            addCriterion("av_background not like", value, "avBackground");
-            return (Criteria) this;
-        }
-
-        public Criteria andAvBackgroundIn(List<String> values) {
-            addCriterion("av_background in", values, "avBackground");
-            return (Criteria) this;
-        }
-
-        public Criteria andAvBackgroundNotIn(List<String> values) {
-            addCriterion("av_background not in", values, "avBackground");
-            return (Criteria) this;
-        }
-
-        public Criteria andAvBackgroundBetween(String value1, String value2) {
-            addCriterion("av_background between", value1, value2, "avBackground");
-            return (Criteria) this;
-        }
-
-        public Criteria andAvBackgroundNotBetween(String value1, String value2) {
-            addCriterion("av_background not between", value1, value2, "avBackground");
-            return (Criteria) this;
-        }
-
         public Criteria andAvRegisterIsNull() {
             addCriterion("av_register is null");
             return (Criteria) this;
@@ -903,52 +806,52 @@ public class ActivityExample {
         }
 
         public Criteria andAvEnrolldeadlineEqualTo(Date value) {
-            addCriterionForJDBCDate("av_enrolldeadline =", value, "avEnrolldeadline");
+            addCriterion("av_enrolldeadline =", value, "avEnrolldeadline");
             return (Criteria) this;
         }
 
         public Criteria andAvEnrolldeadlineNotEqualTo(Date value) {
-            addCriterionForJDBCDate("av_enrolldeadline <>", value, "avEnrolldeadline");
+            addCriterion("av_enrolldeadline <>", value, "avEnrolldeadline");
             return (Criteria) this;
         }
 
         public Criteria andAvEnrolldeadlineGreaterThan(Date value) {
-            addCriterionForJDBCDate("av_enrolldeadline >", value, "avEnrolldeadline");
+            addCriterion("av_enrolldeadline >", value, "avEnrolldeadline");
             return (Criteria) this;
         }
 
         public Criteria andAvEnrolldeadlineGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("av_enrolldeadline >=", value, "avEnrolldeadline");
+            addCriterion("av_enrolldeadline >=", value, "avEnrolldeadline");
             return (Criteria) this;
         }
 
         public Criteria andAvEnrolldeadlineLessThan(Date value) {
-            addCriterionForJDBCDate("av_enrolldeadline <", value, "avEnrolldeadline");
+            addCriterion("av_enrolldeadline <", value, "avEnrolldeadline");
             return (Criteria) this;
         }
 
         public Criteria andAvEnrolldeadlineLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("av_enrolldeadline <=", value, "avEnrolldeadline");
+            addCriterion("av_enrolldeadline <=", value, "avEnrolldeadline");
             return (Criteria) this;
         }
 
         public Criteria andAvEnrolldeadlineIn(List<Date> values) {
-            addCriterionForJDBCDate("av_enrolldeadline in", values, "avEnrolldeadline");
+            addCriterion("av_enrolldeadline in", values, "avEnrolldeadline");
             return (Criteria) this;
         }
 
         public Criteria andAvEnrolldeadlineNotIn(List<Date> values) {
-            addCriterionForJDBCDate("av_enrolldeadline not in", values, "avEnrolldeadline");
+            addCriterion("av_enrolldeadline not in", values, "avEnrolldeadline");
             return (Criteria) this;
         }
 
         public Criteria andAvEnrolldeadlineBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("av_enrolldeadline between", value1, value2, "avEnrolldeadline");
+            addCriterion("av_enrolldeadline between", value1, value2, "avEnrolldeadline");
             return (Criteria) this;
         }
 
         public Criteria andAvEnrolldeadlineNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("av_enrolldeadline not between", value1, value2, "avEnrolldeadline");
+            addCriterion("av_enrolldeadline not between", value1, value2, "avEnrolldeadline");
             return (Criteria) this;
         }
 

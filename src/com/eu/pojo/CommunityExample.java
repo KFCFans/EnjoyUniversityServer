@@ -753,6 +753,136 @@ public class CommunityExample {
             addCriterion("cm_announcement not between", value1, value2, "cmAnnouncement");
             return (Criteria) this;
         }
+
+        public Criteria andCmSchoolIsNull() {
+            addCriterion("cm_school is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmSchoolIsNotNull() {
+            addCriterion("cm_school is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmSchoolEqualTo(String value) {
+            addCriterion("cm_school =", value, "cmSchool");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmSchoolNotEqualTo(String value) {
+            addCriterion("cm_school <>", value, "cmSchool");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmSchoolGreaterThan(String value) {
+            addCriterion("cm_school >", value, "cmSchool");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmSchoolGreaterThanOrEqualTo(String value) {
+            addCriterion("cm_school >=", value, "cmSchool");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmSchoolLessThan(String value) {
+            addCriterion("cm_school <", value, "cmSchool");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmSchoolLessThanOrEqualTo(String value) {
+            addCriterion("cm_school <=", value, "cmSchool");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmSchoolLike(String value) {
+            addCriterion("cm_school like", value, "cmSchool");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmSchoolNotLike(String value) {
+            addCriterion("cm_school not like", value, "cmSchool");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmSchoolIn(List<String> values) {
+            addCriterion("cm_school in", values, "cmSchool");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmSchoolNotIn(List<String> values) {
+            addCriterion("cm_school not in", values, "cmSchool");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmSchoolBetween(String value1, String value2) {
+            addCriterion("cm_school between", value1, value2, "cmSchool");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmSchoolNotBetween(String value1, String value2) {
+            addCriterion("cm_school not between", value1, value2, "cmSchool");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBossIsNull() {
+            addCriterion("cm_boss is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBossIsNotNull() {
+            addCriterion("cm_boss is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBossEqualTo(Long value) {
+            addCriterion("cm_boss =", value, "cmBoss");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBossNotEqualTo(Long value) {
+            addCriterion("cm_boss <>", value, "cmBoss");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBossGreaterThan(Long value) {
+            addCriterion("cm_boss >", value, "cmBoss");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBossGreaterThanOrEqualTo(Long value) {
+            addCriterion("cm_boss >=", value, "cmBoss");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBossLessThan(Long value) {
+            addCriterion("cm_boss <", value, "cmBoss");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBossLessThanOrEqualTo(Long value) {
+            addCriterion("cm_boss <=", value, "cmBoss");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBossIn(List<Long> values) {
+            addCriterion("cm_boss in", values, "cmBoss");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBossNotIn(List<Long> values) {
+            addCriterion("cm_boss not in", values, "cmBoss");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBossBetween(Long value1, Long value2) {
+            addCriterion("cm_boss between", value1, value2, "cmBoss");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmBossNotBetween(Long value1, Long value2) {
+            addCriterion("cm_boss not between", value1, value2, "cmBoss");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

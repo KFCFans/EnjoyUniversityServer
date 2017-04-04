@@ -12,6 +12,8 @@
     <result column="cm_recruit" property="cmRecruit" jdbcType="INTEGER" />
     <result column="cm_heat" property="cmHeat" jdbcType="INTEGER" />
     <result column="cm_announcement" property="cmAnnouncement" jdbcType="VARCHAR" />
+    <result column="cm_school" property="cmSchool" jdbcType="VARCHAR" />
+    <result column="cm_boss" property="cmBoss" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -73,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List" >
     cmid, cm_logo, cm_detail, cm_name, cm_background, cm_type, cm_attr, cm_recruit, cm_heat, 
-    cm_announcement
+    cm_announcement, cm_school, cm_boss
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eu.pojo.CommunityExample" >
     select
@@ -109,11 +111,13 @@
     insert into community (cmid, cm_logo, cm_detail, 
       cm_name, cm_background, cm_type, 
       cm_attr, cm_recruit, cm_heat, 
-      cm_announcement)
+      cm_announcement, cm_school, cm_boss
+      )
     values (#{cmid,jdbcType=INTEGER}, #{cmLogo,jdbcType=VARCHAR}, #{cmDetail,jdbcType=VARCHAR}, 
       #{cmName,jdbcType=VARCHAR}, #{cmBackground,jdbcType=VARCHAR}, #{cmType,jdbcType=INTEGER}, 
       #{cmAttr,jdbcType=INTEGER}, #{cmRecruit,jdbcType=INTEGER}, #{cmHeat,jdbcType=INTEGER}, 
-      #{cmAnnouncement,jdbcType=VARCHAR})
+      #{cmAnnouncement,jdbcType=VARCHAR}, #{cmSchool,jdbcType=VARCHAR}, #{cmBoss,jdbcType=BIGINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.eu.pojo.Community" >
     insert into community
@@ -148,6 +152,12 @@
       <if test="cmAnnouncement != null" >
         cm_announcement,
       </if>
+      <if test="cmSchool != null" >
+        cm_school,
+      </if>
+      <if test="cmBoss != null" >
+        cm_boss,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="cmid != null" >
@@ -179,6 +189,12 @@
       </if>
       <if test="cmAnnouncement != null" >
         #{cmAnnouncement,jdbcType=VARCHAR},
+      </if>
+      <if test="cmSchool != null" >
+        #{cmSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="cmBoss != null" >
+        #{cmBoss,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -221,6 +237,12 @@
       <if test="record.cmAnnouncement != null" >
         cm_announcement = #{record.cmAnnouncement,jdbcType=VARCHAR},
       </if>
+      <if test="record.cmSchool != null" >
+        cm_school = #{record.cmSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cmBoss != null" >
+        cm_boss = #{record.cmBoss,jdbcType=BIGINT},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -237,7 +259,9 @@
       cm_attr = #{record.cmAttr,jdbcType=INTEGER},
       cm_recruit = #{record.cmRecruit,jdbcType=INTEGER},
       cm_heat = #{record.cmHeat,jdbcType=INTEGER},
-      cm_announcement = #{record.cmAnnouncement,jdbcType=VARCHAR}
+      cm_announcement = #{record.cmAnnouncement,jdbcType=VARCHAR},
+      cm_school = #{record.cmSchool,jdbcType=VARCHAR},
+      cm_boss = #{record.cmBoss,jdbcType=BIGINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -272,6 +296,12 @@
       <if test="cmAnnouncement != null" >
         cm_announcement = #{cmAnnouncement,jdbcType=VARCHAR},
       </if>
+      <if test="cmSchool != null" >
+        cm_school = #{cmSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="cmBoss != null" >
+        cm_boss = #{cmBoss,jdbcType=BIGINT},
+      </if>
     </set>
     where cmid = #{cmid,jdbcType=INTEGER}
   </update>
@@ -285,7 +315,9 @@
       cm_attr = #{cmAttr,jdbcType=INTEGER},
       cm_recruit = #{cmRecruit,jdbcType=INTEGER},
       cm_heat = #{cmHeat,jdbcType=INTEGER},
-      cm_announcement = #{cmAnnouncement,jdbcType=VARCHAR}
+      cm_announcement = #{cmAnnouncement,jdbcType=VARCHAR},
+      cm_school = #{cmSchool,jdbcType=VARCHAR},
+      cm_boss = #{cmBoss,jdbcType=BIGINT}
     where cmid = #{cmid,jdbcType=INTEGER}
   </update>
 </mapper>

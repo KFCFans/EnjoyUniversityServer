@@ -23,8 +23,6 @@ public class Activity {
 
     private Integer avState;
 
-    private String avBackground;
-
     private Integer avRegister;
 
     private Date avEnrolldeadline;
@@ -109,14 +107,6 @@ public class Activity {
 
     public void setAvState(Integer avState) {
         this.avState = avState;
-    }
-
-    public String getAvBackground() {
-        return avBackground;
-    }
-
-    public void setAvBackground(String avBackground) {
-        this.avBackground = avBackground == null ? null : avBackground.trim();
     }
 
     public Integer getAvRegister() {

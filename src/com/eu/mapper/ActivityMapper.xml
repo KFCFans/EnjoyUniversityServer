@@ -4,17 +4,16 @@
   <resultMap id="BaseResultMap" type="com.eu.pojo.Activity" >
     <id column="avid" property="avid" jdbcType="INTEGER" />
     <result column="av_title" property="avTitle" jdbcType="VARCHAR" />
-    <result column="av_starttime" property="avStarttime" jdbcType="DATE" />
-    <result column="av_endtime" property="avEndtime" jdbcType="DATE" />
+    <result column="av_starttime" property="avStarttime" jdbcType="TIMESTAMP" />
+    <result column="av_endtime" property="avEndtime" jdbcType="TIMESTAMP" />
     <result column="av_price" property="avPrice" jdbcType="REAL" />
     <result column="av_detail" property="avDetail" jdbcType="VARCHAR" />
     <result column="av_expectnum" property="avExpectnum" jdbcType="INTEGER" />
     <result column="uid" property="uid" jdbcType="BIGINT" />
     <result column="av_logo" property="avLogo" jdbcType="VARCHAR" />
     <result column="av_state" property="avState" jdbcType="INTEGER" />
-    <result column="av_background" property="avBackground" jdbcType="VARCHAR" />
     <result column="av_register" property="avRegister" jdbcType="INTEGER" />
-    <result column="av_enrolldeadline" property="avEnrolldeadline" jdbcType="DATE" />
+    <result column="av_enrolldeadline" property="avEnrolldeadline" jdbcType="TIMESTAMP" />
     <result column="av_place" property="avPlace" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -77,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List" >
     avid, av_title, av_starttime, av_endtime, av_price, av_detail, av_expectnum, uid, 
-    av_logo, av_state, av_background, av_register, av_enrolldeadline, av_place
+    av_logo, av_state, av_register, av_enrolldeadline, av_place
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eu.pojo.ActivityExample" >
     select
@@ -113,13 +112,13 @@
     insert into activity (avid, av_title, av_starttime, 
       av_endtime, av_price, av_detail, 
       av_expectnum, uid, av_logo, 
-      av_state, av_background, av_register, 
-      av_enrolldeadline, av_place)
-    values (#{avid,jdbcType=INTEGER}, #{avTitle,jdbcType=VARCHAR}, #{avStarttime,jdbcType=DATE}, 
-      #{avEndtime,jdbcType=DATE}, #{avPrice,jdbcType=REAL}, #{avDetail,jdbcType=VARCHAR}, 
+      av_state, av_register, av_enrolldeadline, 
+      av_place)
+    values (#{avid,jdbcType=INTEGER}, #{avTitle,jdbcType=VARCHAR}, #{avStarttime,jdbcType=TIMESTAMP}, 
+      #{avEndtime,jdbcType=TIMESTAMP}, #{avPrice,jdbcType=REAL}, #{avDetail,jdbcType=VARCHAR}, 
       #{avExpectnum,jdbcType=INTEGER}, #{uid,jdbcType=BIGINT}, #{avLogo,jdbcType=VARCHAR}, 
-      #{avState,jdbcType=INTEGER}, #{avBackground,jdbcType=VARCHAR}, #{avRegister,jdbcType=INTEGER}, 
-      #{avEnrolldeadline,jdbcType=DATE}, #{avPlace,jdbcType=VARCHAR})
+      #{avState,jdbcType=INTEGER}, #{avRegister,jdbcType=INTEGER}, #{avEnrolldeadline,jdbcType=TIMESTAMP}, 
+      #{avPlace,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.eu.pojo.Activity" >
     insert into activity
@@ -154,9 +153,6 @@
       <if test="avState != null" >
         av_state,
       </if>
-      <if test="avBackground != null" >
-        av_background,
-      </if>
       <if test="avRegister != null" >
         av_register,
       </if>
@@ -175,10 +171,10 @@
         #{avTitle,jdbcType=VARCHAR},
       </if>
       <if test="avStarttime != null" >
-        #{avStarttime,jdbcType=DATE},
+        #{avStarttime,jdbcType=TIMESTAMP},
       </if>
       <if test="avEndtime != null" >
-        #{avEndtime,jdbcType=DATE},
+        #{avEndtime,jdbcType=TIMESTAMP},
       </if>
       <if test="avPrice != null" >
         #{avPrice,jdbcType=REAL},
@@ -198,14 +194,11 @@
       <if test="avState != null" >
         #{avState,jdbcType=INTEGER},
       </if>
-      <if test="avBackground != null" >
-        #{avBackground,jdbcType=VARCHAR},
-      </if>
       <if test="avRegister != null" >
         #{avRegister,jdbcType=INTEGER},
       </if>
       <if test="avEnrolldeadline != null" >
-        #{avEnrolldeadline,jdbcType=DATE},
+        #{avEnrolldeadline,jdbcType=TIMESTAMP},
       </if>
       <if test="avPlace != null" >
         #{avPlace,jdbcType=VARCHAR},
@@ -228,10 +221,10 @@
         av_title = #{record.avTitle,jdbcType=VARCHAR},
       </if>
       <if test="record.avStarttime != null" >
-        av_starttime = #{record.avStarttime,jdbcType=DATE},
+        av_starttime = #{record.avStarttime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.avEndtime != null" >
-        av_endtime = #{record.avEndtime,jdbcType=DATE},
+        av_endtime = #{record.avEndtime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.avPrice != null" >
         av_price = #{record.avPrice,jdbcType=REAL},
@@ -251,14 +244,11 @@
       <if test="record.avState != null" >
         av_state = #{record.avState,jdbcType=INTEGER},
       </if>
-      <if test="record.avBackground != null" >
-        av_background = #{record.avBackground,jdbcType=VARCHAR},
-      </if>
       <if test="record.avRegister != null" >
         av_register = #{record.avRegister,jdbcType=INTEGER},
       </if>
       <if test="record.avEnrolldeadline != null" >
-        av_enrolldeadline = #{record.avEnrolldeadline,jdbcType=DATE},
+        av_enrolldeadline = #{record.avEnrolldeadline,jdbcType=TIMESTAMP},
       </if>
       <if test="record.avPlace != null" >
         av_place = #{record.avPlace,jdbcType=VARCHAR},
@@ -272,17 +262,16 @@
     update activity
     set avid = #{record.avid,jdbcType=INTEGER},
       av_title = #{record.avTitle,jdbcType=VARCHAR},
-      av_starttime = #{record.avStarttime,jdbcType=DATE},
-      av_endtime = #{record.avEndtime,jdbcType=DATE},
+      av_starttime = #{record.avStarttime,jdbcType=TIMESTAMP},
+      av_endtime = #{record.avEndtime,jdbcType=TIMESTAMP},
       av_price = #{record.avPrice,jdbcType=REAL},
       av_detail = #{record.avDetail,jdbcType=VARCHAR},
       av_expectnum = #{record.avExpectnum,jdbcType=INTEGER},
       uid = #{record.uid,jdbcType=BIGINT},
       av_logo = #{record.avLogo,jdbcType=VARCHAR},
       av_state = #{record.avState,jdbcType=INTEGER},
-      av_background = #{record.avBackground,jdbcType=VARCHAR},
       av_register = #{record.avRegister,jdbcType=INTEGER},
-      av_enrolldeadline = #{record.avEnrolldeadline,jdbcType=DATE},
+      av_enrolldeadline = #{record.avEnrolldeadline,jdbcType=TIMESTAMP},
       av_place = #{record.avPlace,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -295,10 +284,10 @@
         av_title = #{avTitle,jdbcType=VARCHAR},
       </if>
       <if test="avStarttime != null" >
-        av_starttime = #{avStarttime,jdbcType=DATE},
+        av_starttime = #{avStarttime,jdbcType=TIMESTAMP},
       </if>
       <if test="avEndtime != null" >
-        av_endtime = #{avEndtime,jdbcType=DATE},
+        av_endtime = #{avEndtime,jdbcType=TIMESTAMP},
       </if>
       <if test="avPrice != null" >
         av_price = #{avPrice,jdbcType=REAL},
@@ -318,14 +307,11 @@
       <if test="avState != null" >
         av_state = #{avState,jdbcType=INTEGER},
       </if>
-      <if test="avBackground != null" >
-        av_background = #{avBackground,jdbcType=VARCHAR},
-      </if>
       <if test="avRegister != null" >
         av_register = #{avRegister,jdbcType=INTEGER},
       </if>
       <if test="avEnrolldeadline != null" >
-        av_enrolldeadline = #{avEnrolldeadline,jdbcType=DATE},
+        av_enrolldeadline = #{avEnrolldeadline,jdbcType=TIMESTAMP},
       </if>
       <if test="avPlace != null" >
         av_place = #{avPlace,jdbcType=VARCHAR},
@@ -336,17 +322,16 @@
   <update id="updateByPrimaryKey" parameterType="com.eu.pojo.Activity" >
     update activity
     set av_title = #{avTitle,jdbcType=VARCHAR},
-      av_starttime = #{avStarttime,jdbcType=DATE},
-      av_endtime = #{avEndtime,jdbcType=DATE},
+      av_starttime = #{avStarttime,jdbcType=TIMESTAMP},
+      av_endtime = #{avEndtime,jdbcType=TIMESTAMP},
       av_price = #{avPrice,jdbcType=REAL},
       av_detail = #{avDetail,jdbcType=VARCHAR},
       av_expectnum = #{avExpectnum,jdbcType=INTEGER},
       uid = #{uid,jdbcType=BIGINT},
       av_logo = #{avLogo,jdbcType=VARCHAR},
       av_state = #{avState,jdbcType=INTEGER},
-      av_background = #{avBackground,jdbcType=VARCHAR},
       av_register = #{avRegister,jdbcType=INTEGER},
-      av_enrolldeadline = #{avEnrolldeadline,jdbcType=DATE},
+      av_enrolldeadline = #{avEnrolldeadline,jdbcType=TIMESTAMP},
       av_place = #{avPlace,jdbcType=VARCHAR}
     where avid = #{avid,jdbcType=INTEGER}
   </update>
