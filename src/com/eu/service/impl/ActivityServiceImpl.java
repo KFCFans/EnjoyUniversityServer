@@ -189,6 +189,10 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public RequestResult createActivity(Activity activity) {
 
+        if (activity.getAvState() == null){
+            activity.setAvState(0);
+        }
+
         try {
             activityMapper.insert(activity);
         }catch (Exception e){

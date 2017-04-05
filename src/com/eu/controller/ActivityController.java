@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -78,7 +79,10 @@ public class ActivityController {
     //FIXME: - 由于浏览器无法传入 Date 数据，无法测试
     @RequestMapping("/createav")
     @ResponseBody
-    public RequestResult createActivity(Activity activity){
+    public RequestResult createActivity(Activity activity,String avendtime,String avstarttime,String avenrolldeadline){
+        activity.setAvEndtime(new Date((Long.parseLong(avendtime))));
+        activity.setAvEnrolldeadline(new Date(Long.parseLong(avenrolldeadline)));
+        activity.setAvStarttime(new Date(Long.parseLong(avstarttime)));
         return activityService.createActivity(activity);
     }
 
