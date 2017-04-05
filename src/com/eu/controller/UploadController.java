@@ -42,7 +42,7 @@ public class UploadController {
 
         }
 
-        return new RequestResult(200,"OK",null);
+        return new RequestResult(200,"OK",filename);
 
     }
 
