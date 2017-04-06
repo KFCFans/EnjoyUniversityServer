@@ -18,7 +18,7 @@ import java.util.Date;
 public class UploadController {
 
     @RequestMapping("/activity")
-    public RequestResult uploadActivityLogo(CommonsMultipartFile file){
+    public RequestResult uploadActivityLogo(@RequestParam("file") CommonsMultipartFile file){
 
         //文件名
         String filename = Long.toString(System.currentTimeMillis()) + ".png";
