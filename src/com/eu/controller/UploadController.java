@@ -18,10 +18,11 @@ import java.util.Date;
 public class UploadController {
 
     @RequestMapping("/activity")
+    @ResponseBody
     public RequestResult uploadActivityLogo(@RequestParam("file") CommonsMultipartFile file){
 
         //文件名
-        String filename = Long.toString(System.currentTimeMillis()) + ".png";
+        String filename = Long.toString(System.currentTimeMillis()) + ".jpg";
         String path = "D:\\picture\\activity";
         System.out.println(filename);
 
