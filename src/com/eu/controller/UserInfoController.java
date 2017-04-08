@@ -1,6 +1,7 @@
 package com.eu.controller;
 
 import com.eu.pojo.RequestResult;
+import com.eu.pojo.UserListResult;
 import com.eu.pojo.Userinfo;
 import com.eu.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class UserInfoController {
 
     @RequestMapping("/userlist")
     @ResponseBody
-    public List<Userinfo> getParticipatorList(String uidlist){
+    public UserListResult getParticipatorList(String uidlist){
 
         String[] uids = uidlist.split(",");
         List<Long> list = new ArrayList<>();
@@ -67,7 +68,7 @@ public class UserInfoController {
 
     @RequestMapping("/search")
     @ResponseBody
-    public List<Userinfo> searchUser(String keyword,Integer page,Integer rows){
+    public UserListResult searchUser(String keyword,Integer page,Integer rows){
         return userInfoService.searchUser(keyword, page, rows);
     }
 

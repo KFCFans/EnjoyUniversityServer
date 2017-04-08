@@ -41,9 +41,15 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public List<Userinfo> getParticipatorList(List<Long> uidlist) {
+    public UserListResult getParticipatorList(List<Long> uidlist) {
 
-        return userinfoMapper.selectByPrimaryKeyList(uidlist);
+        List<Userinfo> list;
+        try {
+            list = userinfoMapper.selectByPrimaryKeyList(uidlist);
+        }catch (Exception e){
+            return new UserListResult(500,e.getMessage(),null);
+        }
+        return new UserListResult(200,"OK",list);
     }
 
     @Override
@@ -87,7 +93,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public List<Userinfo> searchUser(String keyword,Integer page,Integer rows) {
+    public UserListResult searchUser(String keyword,Integer page,Integer rows) {
 
         // Java 没有默认值，说多了都是泪啊
         if (page == null){
@@ -110,10 +116,10 @@ public class UserInfoServiceImpl implements UserInfoService {
             PageHelper.startPage(page,rows);
             userinfoList = userinfoMapper.selectByExample(example);
         }catch (Exception e){
-            return null;
+            return new UserListResult(500,e.getMessage(),null);
         }
 
-        return userinfoList;
+        return new UserListResult(200,"OK",userinfoList);
     }
 
     @Override

@@ -50,7 +50,7 @@ public interface ActivityService {
     public RequestResult participateRegister(String uid,int avid);
 
     // 搜索活动
-    public List<Activity> searchActivities(String keywor,Integer page,Integer rows);
+    public ActivityListResult searchActivities(String keywor,Integer page,Integer rows);
 
     // 结束活动
     public RequestResult closeFinishedActivity(int avid);

@@ -357,7 +357,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Activity> searchActivities(String keyword,Integer page,Integer rows) {
+    public ActivityListResult searchActivities(String keyword,Integer page,Integer rows) {
 
         // Java 没有默认值，说多了都是泪啊
         if (page == null){
@@ -378,10 +378,10 @@ public class ActivityServiceImpl implements ActivityService {
             PageHelper.startPage(page,rows);
             list = activityMapper.selectByExample(example);
         }catch (Exception e){
-            return null;
+            return new ActivityListResult(500,e.getMessage(),null);
         }
 
-        return list;
+        return new ActivityListResult(200,"OK",list);
     }
 
     /**

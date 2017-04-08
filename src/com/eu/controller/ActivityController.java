@@ -125,7 +125,7 @@ public class ActivityController {
 
     @RequestMapping("/search")
     @ResponseBody
-    public List<Activity> searchActivities(String keyword, Integer page, Integer rows){
+    public ActivityListResult searchActivities(String keyword, Integer page, Integer rows){
 
 
         return activityService.searchActivities(keyword,page,rows);
