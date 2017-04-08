@@ -1,6 +1,8 @@
 package com.eu.service;
 
 import com.eu.pojo.Community;
+import com.eu.pojo.CommunityListResult;
+import com.eu.pojo.PhoneListResult;
 import com.eu.pojo.RequestResult;
 
 import java.util.List;
@@ -11,13 +13,13 @@ import java.util.List;
 public interface CommunityService {
 
     //FIXME: 只有正在招新的社团才能显示在推荐列表中
-    public List<Community> getCommonCommunities(Integer page,Integer rows);
+    public CommunityListResult getCommonCommunities(Integer page, Integer rows);
 
-    public List<Community> getMyCommunities(String uid);
+    public CommunityListResult getMyCommunities(String uid);
 
-    public List<Community> getMyCollectedCommunities(String uid);
+    public CommunityListResult getMyCollectedCommunities(String uid);
 
-    public List<Long> getMemberPhoneList(int cmid);
+    public PhoneListResult getMemberPhoneList(int cmid);
 
     public RequestResult participateCommunity(String uid, int cmid,String reason);
 
@@ -41,6 +43,6 @@ public interface CommunityService {
     public RequestResult disCollectCommunity(String uid,int cmid);
 
     // 搜索社团
-    public List<Community> searchCommunity(String keyword,Integer page,Integer rows);
+    public CommunityListResult searchCommunity(String keyword,Integer page,Integer rows);
 
 }

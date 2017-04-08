@@ -1,6 +1,8 @@
 package com.eu.controller;
 
 import com.eu.pojo.Community;
+import com.eu.pojo.CommunityListResult;
+import com.eu.pojo.PhoneListResult;
 import com.eu.pojo.RequestResult;
 import com.eu.service.CommunityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,25 +24,25 @@ public class CommunityController {
 
     @RequestMapping("/commoncm")
     @ResponseBody
-    public List<Community> getCommomCommunities(Integer page,Integer rows){
+    public CommunityListResult getCommomCommunities(Integer page, Integer rows){
         return communityService.getCommonCommunities(page, rows);
     }
 
     @RequestMapping("/joinedcm")
     @ResponseBody
-    public List<Community> getMyCommunitys(String uid){
+    public CommunityListResult getMyCommunitys(String uid){
         return communityService.getMyCommunities(uid);
     }
 
     @RequestMapping("/collectedcm")
     @ResponseBody
-    public List<Community> getMyJoinedCommunities(String uid){
+    public CommunityListResult getMyJoinedCommunities(String uid){
         return communityService.getMyCollectedCommunities(uid);
     }
 
     @RequestMapping("/phonelist")
     @ResponseBody
-    public List<Long> getMemberPhoneList(int cmid){
+    public PhoneListResult getMemberPhoneList(int cmid){
         return communityService.getMemberPhoneList(cmid);
     }
 
@@ -94,7 +96,7 @@ public class CommunityController {
 
     @RequestMapping("/search")
     @ResponseBody
-    public List<Community> searchCommunity(String keyword,Integer page,Integer rows){
+    public CommunityListResult searchCommunity(String keyword,Integer page,Integer rows){
         return communityService.searchCommunity(keyword,page,rows);
     }
 }

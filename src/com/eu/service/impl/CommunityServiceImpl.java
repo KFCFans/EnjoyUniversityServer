@@ -28,7 +28,7 @@ public class CommunityServiceImpl implements CommunityService {
     private CommunitycollectionMapper communitycollectionMapper;
 
     @Override
-    public List<Community> getCommonCommunities(Integer page,Integer rows) {
+    public CommunityListResult getCommonCommunities(Integer page,Integer rows) {
 
         // Java 没有默认值，说多了都是泪啊
         if (page == null){
@@ -45,50 +45,73 @@ public class CommunityServiceImpl implements CommunityService {
         example.setOrderByClause("cm_heat desc");
 
         PageHelper.startPage(page, rows);
-        return communityMapper.selectByExample(example);
+        try {
+            return new CommunityListResult(200,"OK",communityMapper.selectByExample(example));
+        }catch (Exception e){
+            return new CommunityListResult(500,e.getMessage(),null);
+        }
+
     }
 
     @Override
-    public List<Community> getMyCommunities(String uid) {
+    public CommunityListResult getMyCommunities(String uid) {
 
         CommunityauthorityExample example = new CommunityauthorityExample();
         CommunityauthorityExample.Criteria  criteria= example.createCriteria();
         criteria.andUidEqualTo(Long.parseLong(uid));
-        List<Communityauthority> communityauthorityList = communityauthorityMapper.selectByExample(example);
-        List<Integer> cmidList = new ArrayList<>();
-        for (Communityauthority communityauthority:communityauthorityList){
-            cmidList.add(communityauthority.getCmid());
+        List<Community> list;
+        try {
+            List<Communityauthority> communityauthorityList = communityauthorityMapper.selectByExample(example);
+            List<Integer> cmidList = new ArrayList<>();
+            for (Communityauthority communityauthority:communityauthorityList){
+                cmidList.add(communityauthority.getCmid());
+            }
+            list = selectCommunities(cmidList);
+        }catch (Exception e){
+            return new CommunityListResult(500,e.getMessage(),null);
         }
+        return new CommunityListResult(200,"OK",list);
 
-        return selectCommunities(cmidList);
     }
 
     @Override
-    public List<Community> getMyCollectedCommunities(String uid) {
+    public CommunityListResult getMyCollectedCommunities(String uid) {
 
         CommunitycollectionExample example = new CommunitycollectionExample();
         CommunitycollectionExample.Criteria criteria =example.createCriteria();
         criteria.andUidEqualTo(Long.parseLong(uid));
-        List<CommunitycollectionKey> communitycollectionKeys = communitycollectionMapper.selectByExample(example);
-        List<Integer> cmidList = new ArrayList<>();
-        for (CommunitycollectionKey communitycollectionKey:communitycollectionKeys){
-            cmidList.add(communitycollectionKey.getCmid());
+        List<Community> communityList;
+        try {
+            List<CommunitycollectionKey> communitycollectionKeys = communitycollectionMapper.selectByExample(example);
+            List<Integer> cmidList = new ArrayList<>();
+            for (CommunitycollectionKey communitycollectionKey:communitycollectionKeys){
+                cmidList.add(communitycollectionKey.getCmid());
+            }
+            communityList = selectCommunities(cmidList);
+        }catch (Exception e){
+            return new CommunityListResult(500,e.getMessage(),null);
         }
-        return selectCommunities(cmidList);
+
+        return new CommunityListResult(200,"OK",communityList);
     }
 
     @Override
-    public List<Long> getMemberPhoneList(int cmid) {
+    public PhoneListResult getMemberPhoneList(int cmid) {
 
         CommunityauthorityExample example = new CommunityauthorityExample();
         CommunityauthorityExample.Criteria criteria = example.createCriteria();
-        criteria.andCmidEqualTo(cmid);
-        List<Communityauthority> communityauthorityList = communityauthorityMapper.selectByExample(example);
         List<Long> phonelist = new ArrayList<>();
-        for (Communityauthority communityauthority:communityauthorityList){
-            phonelist.add(communityauthority.getUid());
+        criteria.andCmidEqualTo(cmid);
+        try {
+            List<Communityauthority> communityauthorityList = communityauthorityMapper.selectByExample(example);
+            for (Communityauthority communityauthority:communityauthorityList){
+                phonelist.add(communityauthority.getUid());
+            }
+        }catch (Exception e){
+            return new PhoneListResult(500,e.getMessage(),null);
         }
-        return phonelist;
+
+        return new PhoneListResult(200,"OK",phonelist);
     }
 
     @Override
@@ -225,7 +248,7 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
-    public List<Community> searchCommunity(String keyword,Integer page,Integer rows) {
+    public CommunityListResult searchCommunity(String keyword,Integer page,Integer rows) {
 
         // Java 没有默认值，说多了都是泪啊
         if (page == null){
@@ -248,17 +271,20 @@ public class CommunityServiceImpl implements CommunityService {
             PageHelper.startPage(page,rows);
             list = communityMapper.selectByExample(example);
         }catch (Exception e){
-            return null;
+            return new CommunityListResult(500,e.getMessage(),null);
         }
-        return list;
+        return new CommunityListResult(200,"OK",list);
     }
 
 
     /// 查询一组 id 对应的社团
-    private List<Community> selectCommunities(List<Integer> cmidlist){
+    private List<Community> selectCommunities(List<Integer> cmidlist) throws Exception{
         CommunityExample example = new CommunityExample();
         CommunityExample.Criteria criteria = example.createCriteria();
         criteria.andCmidIn(cmidlist);
+
         return communityMapper.selectByExample(example);
+
+
     }
 }

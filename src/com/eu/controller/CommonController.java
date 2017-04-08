@@ -1,6 +1,8 @@
 package com.eu.controller;
 
 import com.eu.pojo.Bug;
+import com.eu.pojo.BugListResult;
+import com.eu.pojo.PhoneListResult;
 import com.eu.pojo.RequestResult;
 import com.eu.service.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,7 @@ public class CommonController {
 
     @RequestMapping("/buginfo")
     @ResponseBody
-    public List<Bug> getBugs(){
+    public BugListResult getBugs(){
         return commonService.getBugOrProblem();
     }
 

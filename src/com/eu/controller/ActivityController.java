@@ -2,6 +2,7 @@ package com.eu.controller;
 
 import com.eu.pojo.Activity;
 import com.eu.pojo.ActivityListResult;
+import com.eu.pojo.PhoneListResult;
 import com.eu.pojo.RequestResult;
 import com.eu.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ public class ActivityController {
 
     @RequestMapping("/phonelist")
     @ResponseBody
-    public List<Long> getParticipatorPhoneList(int avid){
+    public PhoneListResult getParticipatorPhoneList(int avid){
         return activityService.getParticipatorPhoneList(avid);
     }
 

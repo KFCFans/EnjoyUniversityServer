@@ -2,6 +2,7 @@ package com.eu.service.impl;
 
 import com.eu.mapper.ViewpagerMapper;
 import com.eu.pojo.RequestResult;
+import com.eu.pojo.ViewPagerListResult;
 import com.eu.pojo.Viewpager;
 import com.eu.service.ViewPagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,13 @@ public class ViewPagerServiceImpl implements ViewPagerService {
     public ViewpagerMapper viewpagerMapper;
 
     @Override
-    public List<Viewpager> getViewPagers() {
+    public ViewPagerListResult getViewPagers() {
 
-        return viewpagerMapper.selectViewPagers();
+        try {
+            return new ViewPagerListResult(200,"OK",viewpagerMapper.selectViewPagers());
+        }catch (Exception e) {
+            return new ViewPagerListResult(500, e.getMessage(), null);
+        }
     }
 
     /**

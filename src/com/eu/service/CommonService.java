@@ -1,6 +1,7 @@
 package com.eu.service;
 
 import com.eu.pojo.Bug;
+import com.eu.pojo.BugListResult;
 import com.eu.pojo.RequestResult;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface CommonService {
     public RequestResult reportBugOrProblem(String uid,String bug);
 
     // 开发者查看反馈接口
-    public List<Bug> getBugOrProblem();
+    public BugListResult getBugOrProblem();
 
 
 }

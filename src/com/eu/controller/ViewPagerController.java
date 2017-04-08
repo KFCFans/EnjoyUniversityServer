@@ -1,5 +1,6 @@
 package com.eu.controller;
 
+import com.eu.pojo.ViewPagerListResult;
 import com.eu.pojo.Viewpager;
 import com.eu.service.ViewPagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class ViewPagerController {
 
     @RequestMapping("/show")
     @ResponseBody
-    public List<Viewpager> getViewPagers(){
+    public ViewPagerListResult getViewPagers(){
 
         return viewPagerService.getViewPagers();
     }

@@ -137,18 +137,23 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Long> getParticipatorPhoneList(int avid) {
+    public PhoneListResult getParticipatorPhoneList(int avid) {
 
         ParticipateactivityExample participateactivityExample = new ParticipateactivityExample();
         ParticipateactivityExample.Criteria criteria = participateactivityExample.createCriteria();
         criteria.andAvidEqualTo(avid);
-        List<Participateactivity> list = participateactivityMapper.selectByExample(participateactivityExample);
         List<Long> phonelist = new ArrayList<>();
-        for(Participateactivity participateactivity:list){
-            phonelist.add(participateactivity.getUid());
+        try {
+            List<Participateactivity> list = participateactivityMapper.selectByExample(participateactivityExample);
+            for(Participateactivity participateactivity:list){
+                phonelist.add(participateactivity.getUid());
+            }
+        }catch (Exception e){
+            return new PhoneListResult(500,e.getMessage(),null);
         }
 
-        return phonelist;
+
+        return new PhoneListResult(200,"OK",phonelist);
     }
 
     @Override

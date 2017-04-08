@@ -3,6 +3,7 @@ package com.eu.service.impl;
 import com.eu.mapper.BugMapper;
 import com.eu.pojo.Bug;
 import com.eu.pojo.BugExample;
+import com.eu.pojo.BugListResult;
 import com.eu.pojo.RequestResult;
 import com.eu.service.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +36,15 @@ public class CommonServiceImpl implements CommonService {
     }
 
     @Override
-    public List<Bug> getBugOrProblem() {
+    public BugListResult getBugOrProblem() {
 
         BugExample example = new BugExample();
 
-        return bugMapper.selectByExample(example);
+        try {
+
+            return new BugListResult(200,"OK",bugMapper.selectByExample(example));
+        }catch (Exception e){
+            return new BugListResult(500,e.getMessage(),null);
+        }
     }
 }

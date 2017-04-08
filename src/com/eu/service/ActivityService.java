@@ -25,7 +25,7 @@ public interface ActivityService {
 
     public ActivityListResult getMyCollectedActivities(String  uid);
 
-    public List<Long> getParticipatorPhoneList(int avid);
+    public PhoneListResult getParticipatorPhoneList(int avid);
 
     public RequestResult deleteActivity(int avid,String uid);
 
