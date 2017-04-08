@@ -131,7 +131,7 @@ public class UserSecurityServiceImpl implements UserSecurityService {
 
 
     @Override
-    public Userinfo login(String username, String password) {
+    public RequestResult login(String username, String password) {
 
         Userinfo userinfo;
         String md5pwd = DigestUtils.md5DigestAsHex(password.getBytes());
@@ -139,15 +139,15 @@ public class UserSecurityServiceImpl implements UserSecurityService {
         try {
             userinfo = userinfoMapper.selectByPrimaryKey(Long.parseLong(username));
         }catch (Exception e){
-            return new Userinfo();
+            return new RequestResult(500,"faild",e.getMessage());
         }
 
 
         if (!userinfo.getPassword().equals(md5pwd)){
 
-            return new Userinfo();
+            return new RequestResult(400,"faild","用户名或密码错误");
         }
-        return userinfo;
+        return new RequestResult(200,"OK",userinfo.getAccesstoken());
     }
 
     @Override

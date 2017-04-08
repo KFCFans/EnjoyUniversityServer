@@ -1,6 +1,7 @@
 package com.eu.controller;
 
 import com.eu.pojo.Activity;
+import com.eu.pojo.ActivityListResult;
 import com.eu.pojo.RequestResult;
 import com.eu.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,25 +25,25 @@ public class ActivityController {
 
     @RequestMapping("/commonav")
     @ResponseBody
-    public List<Activity> getCommomActivities(String mintime,String maxtime,Integer count){
+    public ActivityListResult getCommomActivities(String mintime, String maxtime, Integer count){
         return activityService.getCommonActivities(mintime, maxtime, count);
     }
 
     @RequestMapping("/createdav")
     @ResponseBody
-    public List<Activity> getMyCreatedActivities(String uid){
+    public ActivityListResult getMyCreatedActivities(String uid){
         return activityService.getMyCreatedActivities(uid);
     }
 
     @RequestMapping("/joinedav")
     @ResponseBody
-    public List<Activity> getMyJoinedActivities(String uid){
+    public ActivityListResult getMyJoinedActivities(String uid){
         return activityService.getMyJoinedActivities(uid);
     }
 
     @RequestMapping("/collectedav")
     @ResponseBody
-    public List<Activity> getMyCollectedActivies(String uid){
+    public ActivityListResult getMyCollectedActivies(String uid){
         return activityService.getMyCollectedActivities(uid);
     }
 

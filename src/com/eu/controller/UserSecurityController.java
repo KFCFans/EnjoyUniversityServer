@@ -37,7 +37,7 @@ public class UserSecurityController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public Userinfo login(String uid,String password){
+    public RequestResult login(String uid,String password){
 
         return userSecurityService.login(uid, password);
     }

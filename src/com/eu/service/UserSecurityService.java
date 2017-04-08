@@ -19,7 +19,7 @@ public interface UserSecurityService {
 
     public RequestResult updatePasswordByOldPassword(String uid, String oldpwd, String newpwd);
 
-    public Userinfo login(String username,String password);
+    public RequestResult login(String username,String password);
 
     public Boolean checkAccessToken(String accesstoken);
 

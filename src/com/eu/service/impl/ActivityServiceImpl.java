@@ -32,7 +32,7 @@ public class ActivityServiceImpl implements ActivityService {
 
 
     @Override
-    public List<Activity> getCommonActivities(String mintime, String maxtime, Integer count) {
+    public ActivityListResult getCommonActivities(String mintime, String maxtime, Integer count) {
 
         // count 默认 10 条
         if (count == null||count == 0){
@@ -45,67 +45,95 @@ public class ActivityServiceImpl implements ActivityService {
         criteria.andAvStarttimeGreaterThan(new Date());
         example.setOrderByClause("av_starttime asc LIMIT "+count.toString());
 
-        // 若都没有参数，则是第一次加载数据，获取最新的数据
-        if ((mintime ==null || mintime.isEmpty())&&(maxtime ==null || maxtime.isEmpty())){
+        try{
+            // 若都没有参数，则是第一次加载数据，获取最新的数据
+            if ((mintime ==null || mintime.isEmpty())&&(maxtime ==null || maxtime.isEmpty())){
 
-            return activityMapper.selectByExample(example);
+                return new ActivityListResult(200,"OK",activityMapper.selectByExample(example));
 
+            }
+            // 只有最小时间，表示下拉刷新，获取比 mintime 时间小的活动
+            else if ((mintime !=null && !mintime.isEmpty())&&(maxtime ==null || maxtime.isEmpty())){
+
+                criteria.andAvStarttimeLessThan(new Date(Long.parseLong(mintime)));
+
+                return new ActivityListResult(200,"OK",activityMapper.selectByExample(example));
+
+            }
+            // 只有最大时间，表示上拉加载更多，获取比 maxtime 时间大的活动
+            else if ((mintime ==null || mintime.isEmpty())&&(maxtime !=null && !maxtime.isEmpty())){
+
+
+                // 时间越大，越安全
+                criteria.andAvStarttimeGreaterThan(new Date(Long.parseLong(maxtime)));
+                return new ActivityListResult(200,"OK",activityMapper.selectByExample(example));
+            }
+        }catch (Exception e){
+            return new ActivityListResult(500,e.getMessage(),null);
         }
-        // 只有最小时间，表示下拉刷新，获取比 mintime 时间小的活动
-        else if ((mintime !=null && !mintime.isEmpty())&&(maxtime ==null || maxtime.isEmpty())){
-
-            criteria.andAvStarttimeLessThan(new Date(Long.parseLong(mintime)));
-            return activityMapper.selectByExample(example);
-
-        }
-        // 只有最大时间，表示上拉加载更多，获取比 maxtime 时间大的活动
-        else if ((mintime ==null || mintime.isEmpty())&&(maxtime !=null && !maxtime.isEmpty())){
 
 
-            // 时间越大，越安全
-            criteria.andAvStarttimeGreaterThan(new Date(Long.parseLong(maxtime)));
-            return activityMapper.selectByExample(example);
-        }
-
-        return null;
+        return new ActivityListResult(400,"无效的请求",null);
     }
 
     @Override
-    public List<Activity> getMyCreatedActivities(String uid) {
+    public ActivityListResult getMyCreatedActivities(String uid) {
 
         ActivityExample example = new ActivityExample();
         ActivityExample.Criteria criteria = example.createCriteria();
         criteria.andUidEqualTo(Long.parseLong(uid));
 
-        return activityMapper.selectByExample(example);
+        List<Activity> list;
+        try {
+            list = activityMapper.selectByExample(example);
+        }catch (Exception e){
+            return new ActivityListResult(500,e.getMessage(),null);
+        }
+        return new ActivityListResult(200,"OK",list);
     }
 
     @Override
-    public List<Activity> getMyJoinedActivities(String uid) {
+    public ActivityListResult getMyJoinedActivities(String uid) {
+
+        List<Activity> activityList;
+
         ParticipateactivityExample example = new ParticipateactivityExample();
         ParticipateactivityExample.Criteria criteria = example.createCriteria();
         criteria.andUidEqualTo(Long.parseLong(uid));
-        List<Participateactivity> list= participateactivityMapper.selectByExample(example);
-        List<Integer> avidlist = new ArrayList<>();
-        for (Participateactivity pav:list){
-            avidlist.add(pav.getAvid());
+        try {
+            List<Participateactivity> list= participateactivityMapper.selectByExample(example);
+            List<Integer> avidlist = new ArrayList<>();
+            for (Participateactivity pav:list){
+                avidlist.add(pav.getAvid());
+            }
+            activityList = selectActivities(avidlist);
+        }catch (Exception e){
+            return new ActivityListResult(500,e.getMessage(),null);
         }
-        return selectActivities(avidlist);
+
+        return new ActivityListResult(200,"OK",activityList);
     }
 
     @Override
-    public List<Activity> getMyCollectedActivities(String uid) {
+    public ActivityListResult getMyCollectedActivities(String uid) {
 
         ActivitycollectionExample activitycollectionExample = new ActivitycollectionExample();
         ActivitycollectionExample.Criteria criteria = activitycollectionExample.createCriteria();
         criteria.andUidEqualTo(Long.parseLong(uid));
-        List<ActivitycollectionKey> activitycollectionKeys = activitycollectionMapper.selectByExample(activitycollectionExample);
-        List<Integer> avidlist = new ArrayList<>();
-        for (ActivitycollectionKey activitycollectionKey:activitycollectionKeys){
-            avidlist.add(activitycollectionKey.getAvid());
-        }
+        List<Activity> activityList;
+        try {
+            List<ActivitycollectionKey> activitycollectionKeys = activitycollectionMapper.selectByExample(activitycollectionExample);
+            List<Integer> avidlist = new ArrayList<>();
+            for (ActivitycollectionKey activitycollectionKey:activitycollectionKeys){
+                avidlist.add(activitycollectionKey.getAvid());
+            }
 
-        return selectActivities(avidlist);
+            activityList = selectActivities(avidlist);
+        }catch (Exception e){
+            return new ActivityListResult(500,e.getMessage(),null);
+        }
+        return new ActivityListResult(200,"OK",activityList);
+
     }
 
     @Override
@@ -403,7 +431,7 @@ public class ActivityServiceImpl implements ActivityService {
 
 
     /// 查询一组 id 对应的活动
-    private List<Activity> selectActivities(List<Integer> avidlist){
+    private List<Activity> selectActivities(List<Integer> avidlist) throws Exception{
         ActivityExample example = new ActivityExample();
         ActivityExample.Criteria criteria = example.createCriteria();
         criteria.andAvidIn(avidlist);

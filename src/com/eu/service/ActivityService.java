@@ -1,9 +1,6 @@
 package com.eu.service;
 
-import com.eu.pojo.Activity;
-import com.eu.pojo.Community;
-import com.eu.pojo.RequestResult;
-import com.eu.pojo.Userinfo;
+import com.eu.pojo.*;
 
 import java.util.List;
 
@@ -20,13 +17,13 @@ public interface ActivityService {
      * @param count 返回的数据条数，默认10条
      * @return 活动列表数组，Json 格式返回
      */
-    public List<Activity> getCommonActivities(String mintime,String maxtime,Integer count);
+    public ActivityListResult getCommonActivities(String mintime, String maxtime, Integer count);
 
-    public List<Activity> getMyCreatedActivities(String uid);
+    public ActivityListResult getMyCreatedActivities(String uid);
 
-    public List<Activity> getMyJoinedActivities(String uid);
+    public ActivityListResult getMyJoinedActivities(String uid);
 
-    public List<Activity> getMyCollectedActivities(String  uid);
+    public ActivityListResult getMyCollectedActivities(String  uid);
 
     public List<Long> getParticipatorPhoneList(int avid);
 
