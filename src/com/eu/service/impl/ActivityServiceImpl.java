@@ -160,7 +160,7 @@ public class ActivityServiceImpl implements ActivityService {
     public RequestResult deleteActivity(int avid,String uid) {
 
         if (!activityMapper.selectByPrimaryKey(avid).getUid().toString().equals(uid)){
-            return new RequestResult(400,"faild","没有权限删除活动");
+            return new RequestResult(401,"faild","没有权限删除活动");
         }
 
         try {
@@ -176,7 +176,7 @@ public class ActivityServiceImpl implements ActivityService {
     public RequestResult changeActivity(Activity activity,String uid) {
 
         if (!activityMapper.selectByPrimaryKey(activity.getAvid()).getUid().toString().equals(uid)){
-            return new RequestResult(400,"faild","没有权限修改活动");
+            return new RequestResult(401,"faild","没有权限修改活动");
         }
 
         try {
@@ -284,7 +284,7 @@ public class ActivityServiceImpl implements ActivityService {
     public RequestResult startRegister(String uid, int avid) {
 
         if (!activityMapper.selectByPrimaryKey(avid).getUid().toString().equals(uid)){
-            return new RequestResult(400,"faild","没有权限发起签到");
+            return new RequestResult(401,"faild","没有权限发起签到");
         }
         //随机生成签到码
         Integer randomcode = 1000+(int)(Math.random()*9000);

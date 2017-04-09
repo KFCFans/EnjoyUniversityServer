@@ -123,7 +123,7 @@ public class UserSecurityServiceImpl implements UserSecurityService {
 
         Userinfo userinfo = userinfoMapper.selectByPrimaryKey(Long.parseLong(uid));
         if (!userinfo.getPassword().equals(DigestUtils.md5DigestAsHex(oldpwd.getBytes()))){
-            return new RequestResult(400,"faild","密码错误");
+            return new RequestResult(401,"faild","密码错误");
         }
         //修改密码(直接调用通过手机验证后的方法)
         return updatePasswordByVerifyPhone(uid,newpwd);
@@ -145,7 +145,7 @@ public class UserSecurityServiceImpl implements UserSecurityService {
 
         if (!userinfo.getPassword().equals(md5pwd)){
 
-            return new RequestResult(400,"faild","用户名或密码错误");
+            return new RequestResult(401,"faild","用户名或密码错误");
         }
         return new RequestResult(200,"OK",userinfo.getAccesstoken());
     }
