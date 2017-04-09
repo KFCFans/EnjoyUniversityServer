@@ -1,6 +1,7 @@
 package com.eu.controller;
 
 import com.eu.pojo.RequestResult;
+import com.eu.pojo.UserInfoResult;
 import com.eu.pojo.UserListResult;
 import com.eu.pojo.Userinfo;
 import com.eu.service.UserInfoService;
@@ -25,13 +26,13 @@ public class UserInfoController {
 
     @RequestMapping("/userinfo")
     @ResponseBody
-    public Userinfo getUserInfoWithPermission(String uid,String accesstoken){
+    public UserInfoResult getUserInfoWithPermission(String uid, String accesstoken){
         return userInfoService.getUserInfoWithPermission(uid, accesstoken);
     }
 
     @RequestMapping("/introinfo")
     @ResponseBody
-    public Userinfo getUserInfoWithoutPerssion(String uid){
+    public UserInfoResult getUserInfoWithoutPerssion(String uid){
         return userInfoService.getUserInfoWithoutPermission(uid);
     }
 

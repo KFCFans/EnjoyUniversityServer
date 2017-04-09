@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface UserInfoService {
 
-    public Userinfo getUserInfoWithPermission(String uid,String accesstoken);
+    public UserInfoResult getUserInfoWithPermission(String uid,String accesstoken);
 
-    public Userinfo getUserInfoWithoutPermission(String uid);
+    public UserInfoResult getUserInfoWithoutPermission(String uid);
 
     public UserListResult getParticipatorList(List<Long> uidlist);
 

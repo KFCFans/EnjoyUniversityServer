@@ -19,25 +19,29 @@ public class UserInfoServiceImpl implements UserInfoService {
     private UserinfoMapper userinfoMapper;
 
     @Override
-    public Userinfo getUserInfoWithPermission(String uid, String accesstoken) {
+    public UserInfoResult getUserInfoWithPermission(String uid, String accesstoken) {
         Userinfo userinfo;
         try {
             userinfo = userinfoMapper.selectByPrimaryKey(Long.parseLong(uid));
         }catch (Exception e){
-            return new Userinfo();
+            return new UserInfoResult(500,e.getMessage(),null);
         }
         if (!userinfo.getAccesstoken().equals(accesstoken)){
-            return new Userinfo();
+            return new UserInfoResult(401,"faild",null);
         }
-        return userinfo;
+        return new UserInfoResult(200,"OK",userinfo);
     }
 
     @Override
-    public Userinfo getUserInfoWithoutPermission(String uid) {
+    public UserInfoResult getUserInfoWithoutPermission(String uid) {
 
-        Userinfo userinfo = userinfoMapper.selectByPrimaryKey(Long.parseLong(uid));
-        userinfo.hidePersonalSecret(true);
-        return userinfo;
+        try {
+            Userinfo userinfo = userinfoMapper.selectByPrimaryKey(Long.parseLong(uid));
+            userinfo.hidePersonalSecret(true);
+            return new UserInfoResult(200,"OK",userinfo);
+        }catch (Exception e){
+            return new UserInfoResult(500,e.getMessage(),null);
+        }
     }
 
     @Override
