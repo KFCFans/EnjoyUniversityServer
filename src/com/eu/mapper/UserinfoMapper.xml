@@ -9,7 +9,7 @@
     <result column="professionclass" property="professionclass" jdbcType="VARCHAR" />
     <result column="studentid" property="studentid" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="userdescription" property="userdescription" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="accesstoken" property="accesstoken" jdbcType="VARCHAR" />
     <result column="reputation" property="reputation" jdbcType="INTEGER" />
@@ -74,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    uid, avatar, nickname, gender, professionclass, studentid, name, description, password, 
-    accesstoken, reputation, verified
+    uid, avatar, nickname, gender, professionclass, studentid, name, userdescription,
+    password, accesstoken, reputation, verified
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eu.pojo.UserinfoExample" >
     select
@@ -92,7 +92,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from userinfo
     where uid = #{uid,jdbcType=BIGINT}
@@ -108,16 +108,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.eu.pojo.Userinfo" >
-    insert into userinfo (uid, avatar, nickname, 
-      gender, professionclass, studentid, 
-      name, description, password, 
-      accesstoken, reputation, verified
-      )
-    values (#{uid,jdbcType=BIGINT}, #{avatar,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=INTEGER}, #{professionclass,jdbcType=VARCHAR}, #{studentid,jdbcType=BIGINT}, 
-      #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{accesstoken,jdbcType=VARCHAR}, #{reputation,jdbcType=INTEGER}, #{verified,jdbcType=INTEGER}
-      )
+    insert into userinfo (uid, avatar, nickname,
+    gender, professionclass, studentid,
+    name, userdescription, password,
+    accesstoken, reputation, verified
+    )
+    values (#{uid,jdbcType=BIGINT}, #{avatar,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR},
+    #{gender,jdbcType=INTEGER}, #{professionclass,jdbcType=VARCHAR}, #{studentid,jdbcType=BIGINT},
+    #{name,jdbcType=VARCHAR}, #{userdescription,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+    #{accesstoken,jdbcType=VARCHAR}, #{reputation,jdbcType=INTEGER}, #{verified,jdbcType=INTEGER}
+    )
   </insert>
   <insert id="insertSelective" parameterType="com.eu.pojo.Userinfo" >
     insert into userinfo
@@ -143,8 +143,8 @@
       <if test="name != null" >
         name,
       </if>
-      <if test="description != null" >
-        description,
+      <if test="userdescription != null" >
+        userdescription,
       </if>
       <if test="password != null" >
         password,
@@ -181,8 +181,8 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
+      <if test="userdescription != null" >
+        #{userdescription,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
@@ -228,8 +228,8 @@
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.description != null" >
-        description = #{record.description,jdbcType=VARCHAR},
+      <if test="record.userdescription != null" >
+        userdescription = #{record.userdescription,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null" >
         password = #{record.password,jdbcType=VARCHAR},
@@ -251,17 +251,17 @@
   <update id="updateByExample" parameterType="map" >
     update userinfo
     set uid = #{record.uid,jdbcType=BIGINT},
-      avatar = #{record.avatar,jdbcType=VARCHAR},
-      nickname = #{record.nickname,jdbcType=VARCHAR},
-      gender = #{record.gender,jdbcType=INTEGER},
-      professionclass = #{record.professionclass,jdbcType=VARCHAR},
-      studentid = #{record.studentid,jdbcType=BIGINT},
-      name = #{record.name,jdbcType=VARCHAR},
-      description = #{record.description,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      accesstoken = #{record.accesstoken,jdbcType=VARCHAR},
-      reputation = #{record.reputation,jdbcType=INTEGER},
-      verified = #{record.verified,jdbcType=INTEGER}
+    avatar = #{record.avatar,jdbcType=VARCHAR},
+    nickname = #{record.nickname,jdbcType=VARCHAR},
+    gender = #{record.gender,jdbcType=INTEGER},
+    professionclass = #{record.professionclass,jdbcType=VARCHAR},
+    studentid = #{record.studentid,jdbcType=BIGINT},
+    name = #{record.name,jdbcType=VARCHAR},
+    userdescription = #{record.userdescription,jdbcType=VARCHAR},
+    password = #{record.password,jdbcType=VARCHAR},
+    accesstoken = #{record.accesstoken,jdbcType=VARCHAR},
+    reputation = #{record.reputation,jdbcType=INTEGER},
+    verified = #{record.verified,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -287,8 +287,8 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
+      <if test="userdescription != null" >
+        userdescription = #{userdescription,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
@@ -308,16 +308,16 @@
   <update id="updateByPrimaryKey" parameterType="com.eu.pojo.Userinfo" >
     update userinfo
     set avatar = #{avatar,jdbcType=VARCHAR},
-      nickname = #{nickname,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=INTEGER},
-      professionclass = #{professionclass,jdbcType=VARCHAR},
-      studentid = #{studentid,jdbcType=BIGINT},
-      name = #{name,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      accesstoken = #{accesstoken,jdbcType=VARCHAR},
-      reputation = #{reputation,jdbcType=INTEGER},
-      verified = #{verified,jdbcType=INTEGER}
+    nickname = #{nickname,jdbcType=VARCHAR},
+    gender = #{gender,jdbcType=INTEGER},
+    professionclass = #{professionclass,jdbcType=VARCHAR},
+    studentid = #{studentid,jdbcType=BIGINT},
+    name = #{name,jdbcType=VARCHAR},
+    userdescription = #{userdescription,jdbcType=VARCHAR},
+    password = #{password,jdbcType=VARCHAR},
+    accesstoken = #{accesstoken,jdbcType=VARCHAR},
+    reputation = #{reputation,jdbcType=INTEGER},
+    verified = #{verified,jdbcType=INTEGER}
     where uid = #{uid,jdbcType=BIGINT}
   </update>
 

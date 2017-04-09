@@ -15,7 +15,7 @@ public class Userinfo {
 
     private String name;
 
-    private String description;
+    private String userdescription;
 
     private String password;
 
@@ -81,12 +81,12 @@ public class Userinfo {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getDescription() {
-        return description;
+    public String getUserdescription() {
+        return userdescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
+    public void setUserdescription(String userdescription) {
+        this.userdescription = userdescription == null ? null : userdescription.trim();
     }
 
     public String getPassword() {
@@ -132,7 +132,7 @@ public class Userinfo {
                 ", professionclass='" + professionclass + '\'' +
                 ", studentid=" + studentid +
                 ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
+                ", description='" + userdescription + '\'' +
                 ", password='" + password + '\'' +
                 ", accesstoken='" + accesstoken + '\'' +
                 ", reputation=" + reputation +
