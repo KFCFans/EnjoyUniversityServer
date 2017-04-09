@@ -24,21 +24,10 @@ public class UploadController {
         //文件名
         String filename = Long.toString(System.currentTimeMillis()) + ".jpg";
         String path = "D:\\picture\\activity";
-        System.out.println(filename);
-
 
         try {
-            InputStream is = file.getInputStream();
-            OutputStream os = new FileOutputStream(new File(path,filename));
-            int len=0;
-            byte[] buffer = new byte[400];
-            while ((len=is.read(buffer))!=-1){
-                os.write(buffer,0,len);
-            }
-            os.close();
-            is.close();
+            uploadFile(filename,path,file);
         } catch (Exception e) {
-            e.printStackTrace();
             return new RequestResult(500,"faild",e.getMessage());
 
         }
@@ -47,4 +36,66 @@ public class UploadController {
 
     }
 
+    @RequestMapping("/user")
+    @ResponseBody
+    public RequestResult uploadUserLogo(@RequestParam("file") CommonsMultipartFile file){
+
+        //文件名
+        String filename = Long.toString(System.currentTimeMillis()) + ".jpg";
+        String path = "D:\\picture\\user";
+        try {
+            uploadFile(filename,path,file);
+        }catch (Exception e) {
+            return new RequestResult(500, e.getMessage(), null);
+        }
+        return new RequestResult(200,"OK",filename);
+
+    }
+
+    @RequestMapping("/community/logo")
+    @ResponseBody
+    public RequestResult uploadCommunityLogo(@RequestParam("file") CommonsMultipartFile file){
+
+        //文件名
+        String filename = Long.toString(System.currentTimeMillis()) + ".jpg";
+        String path = "D:\\picture\\community\\logo";
+        try {
+            uploadFile(filename,path,file);
+        }catch (Exception e) {
+            return new RequestResult(500, e.getMessage(), null);
+        }
+        return new RequestResult(200,"OK",filename);
+
+    }
+
+    @RequestMapping("/community/background")
+    @ResponseBody
+    public RequestResult uploadCommunityBackground(@RequestParam("file") CommonsMultipartFile file){
+
+        //文件名
+        String filename = Long.toString(System.currentTimeMillis()) + ".jpg";
+        String path = "D:\\picture\\community\\background";
+        try {
+            uploadFile(filename,path,file);
+        }catch (Exception e) {
+            return new RequestResult(500, e.getMessage(), null);
+        }
+        return new RequestResult(200,"OK",filename);
+
+    }
+
+    void uploadFile(String filename,String path,CommonsMultipartFile file) throws Exception{
+
+        InputStream is = file.getInputStream();
+        OutputStream os = new FileOutputStream(new File(path,filename));
+        int len=0;
+        byte[] buffer = new byte[400];
+        while ((len=is.read(buffer))!=-1){
+            os.write(buffer,0,len);
+        }
+        os.close();
+        is.close();
+    }
+
 }
+
