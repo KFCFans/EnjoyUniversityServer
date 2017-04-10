@@ -325,7 +325,7 @@
 
   <!--根据 uid 批量查询不包含隐私的个人信息-->
   <select id="selectByPrimaryKeyList" resultType="com.eu.pojo.Userinfo" parameterType="java.lang.Long">
-    SELECT uid,avatar,nickname,gender,professionclass,studentid,name,description,reputation,verified from userinfo where uid in
+    SELECT uid,avatar,nickname,gender,professionclass,studentid,name,userdescription,reputation,verified from userinfo where uid in
     <if test="list!=null">
       <foreach collection="list" open="(" close=")" item="uid" separator=",">
         #{uid}

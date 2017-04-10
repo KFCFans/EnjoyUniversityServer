@@ -1,9 +1,6 @@
 package com.eu.controller;
 
-import com.eu.pojo.Activity;
-import com.eu.pojo.ActivityListResult;
-import com.eu.pojo.PhoneListResult;
-import com.eu.pojo.RequestResult;
+import com.eu.pojo.*;
 import com.eu.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,6 +49,12 @@ public class ActivityController {
     @ResponseBody
     public PhoneListResult getParticipatorPhoneList(int avid){
         return activityService.getParticipatorPhoneList(avid);
+    }
+
+    @RequestMapping("/memberlist")
+    @ResponseBody
+    public UserListResult getParticipatorMemberList(int avid){
+        return activityService.getParticipatorMemberList(avid);
     }
 
     @RequestMapping("/deleteav")

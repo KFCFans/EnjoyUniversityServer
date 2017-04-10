@@ -5,6 +5,7 @@ import com.eu.mapper.CommunityauthorityMapper;
 import com.eu.mapper.CommunitycollectionMapper;
 import com.eu.pojo.*;
 import com.eu.service.CommunityService;
+import com.eu.service.UserInfoService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,9 @@ public class CommunityServiceImpl implements CommunityService {
 
     @Autowired
     private CommunitycollectionMapper communitycollectionMapper;
+
+    @Autowired
+    private UserInfoService userInfoService;
 
     @Override
     public CommunityListResult getCommonCommunities(Integer page,Integer rows) {
@@ -112,6 +116,20 @@ public class CommunityServiceImpl implements CommunityService {
         }
 
         return new PhoneListResult(200,"OK",phonelist);
+    }
+
+    @Override
+    public UserListResult getCommunityMemberList(int cmid) {
+
+        List<Userinfo> list;
+        try {
+
+            list = userInfoService.getParticipatorList(getMemberPhoneList(cmid).getData()).getData();
+
+        }catch (Exception e){
+            return new UserListResult(500,e.getMessage(),null);
+        }
+        return new UserListResult(200,"OK",list);
     }
 
     @Override

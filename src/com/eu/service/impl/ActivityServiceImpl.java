@@ -157,6 +157,25 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    public UserListResult getParticipatorMemberList(int avid) {
+        ParticipateactivityExample participateactivityExample = new ParticipateactivityExample();
+        ParticipateactivityExample.Criteria criteria = participateactivityExample.createCriteria();
+        criteria.andAvidEqualTo(avid);
+        List<Long> phonelist = new ArrayList<>();
+        List<Userinfo> userinfos = new ArrayList<>();
+        try {
+            List<Participateactivity> list = participateactivityMapper.selectByExample(participateactivityExample);
+            for(Participateactivity participateactivity:list){
+                phonelist.add(participateactivity.getUid());
+            }
+            userinfos = userInfoService.getParticipatorList(phonelist).getData();
+        }catch (Exception e){
+            return new UserListResult(500,e.getMessage(),null);
+        }
+        return new UserListResult(200,"OK",userinfos);
+    }
+
+    @Override
     public RequestResult deleteActivity(int avid,String uid) {
 
         if (!activityMapper.selectByPrimaryKey(avid).getUid().toString().equals(uid)){

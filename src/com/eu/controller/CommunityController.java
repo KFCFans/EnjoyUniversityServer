@@ -1,9 +1,6 @@
 package com.eu.controller;
 
-import com.eu.pojo.Community;
-import com.eu.pojo.CommunityListResult;
-import com.eu.pojo.PhoneListResult;
-import com.eu.pojo.RequestResult;
+import com.eu.pojo.*;
 import com.eu.service.CommunityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,6 +41,12 @@ public class CommunityController {
     @ResponseBody
     public PhoneListResult getMemberPhoneList(int cmid){
         return communityService.getMemberPhoneList(cmid);
+    }
+
+    @RequestMapping("/memberlist")
+    @ResponseBody
+    public UserListResult getCommunityMemberList(int cmid){
+        return communityService.getCommunityMemberList(cmid);
     }
 
     @RequestMapping("participatecm")

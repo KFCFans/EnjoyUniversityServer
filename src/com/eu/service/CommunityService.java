@@ -1,9 +1,6 @@
 package com.eu.service;
 
-import com.eu.pojo.Community;
-import com.eu.pojo.CommunityListResult;
-import com.eu.pojo.PhoneListResult;
-import com.eu.pojo.RequestResult;
+import com.eu.pojo.*;
 
 import java.util.List;
 
@@ -20,6 +17,8 @@ public interface CommunityService {
     public CommunityListResult getMyCollectedCommunities(String uid);
 
     public PhoneListResult getMemberPhoneList(int cmid);
+
+    public UserListResult getCommunityMemberList(int cmid);
 
     public RequestResult participateCommunity(String uid, int cmid,String reason);
 
