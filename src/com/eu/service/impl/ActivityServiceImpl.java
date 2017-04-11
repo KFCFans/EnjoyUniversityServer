@@ -166,6 +166,9 @@ public class ActivityServiceImpl implements ActivityService {
         try {
             List<Participateactivity> list = participateactivityMapper.selectByExample(participateactivityExample);
             for(Participateactivity participateactivity:list){
+                if (participateactivity.getVerifystate() == -1){
+                    continue;
+                }
                 phonelist.add(participateactivity.getUid());
             }
             userinfos = userInfoService.getParticipatorList(phonelist).getData();
