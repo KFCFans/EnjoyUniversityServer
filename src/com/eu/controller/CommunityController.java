@@ -102,4 +102,10 @@ public class CommunityController {
     public CommunityListResult searchCommunity(String keyword,Integer page,Integer rows){
         return communityService.searchCommunity(keyword,page,rows);
     }
+
+    @RequestMapping("/getcommunity")
+    @ResponseBody
+    public CommunityResult getCommunityByID(int cmid){
+        return communityService.getCommunityInfoByID(cmid);
+    }
 }

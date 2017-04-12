@@ -456,6 +456,16 @@ public class ActivityServiceImpl implements ActivityService {
         return new RequestResult(200,"OK",null);
     }
 
+    @Override
+    public ActivityResult getActivityInfoByAVID(int avid) {
+
+        try {
+            return new ActivityResult(200,"OK",activityMapper.selectByPrimaryKey(avid));
+        }catch (Exception e) {
+            return new ActivityResult(500, e.getMessage(), null);
+        }
+    }
+
 
     /// 查询一组 id 对应的活动
     private List<Activity> selectActivities(List<Integer> avidlist) throws Exception{

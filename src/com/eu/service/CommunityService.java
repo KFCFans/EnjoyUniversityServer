@@ -44,4 +44,7 @@ public interface CommunityService {
     // 搜索社团
     public CommunityListResult searchCommunity(String keyword,Integer page,Integer rows);
 
+    // 根据社团 ID 获取社团信息
+    public CommunityResult getCommunityInfoByID(int cmid);
+
 }

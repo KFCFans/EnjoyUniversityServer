@@ -141,6 +141,12 @@ public class ActivityController {
         return activityService.closeFinishedActivity(avid);
     }
 
+    @RequestMapping("/getactivity")
+    @ResponseBody
+    public ActivityResult getActivityByID(int avid){
+        return activityService.getActivityInfoByAVID(avid);
+    }
+
     /**
      * 此接口不由 App 执行，服务器定时执行此接口，关闭到期的活动
      * @return 由于服务器执行，没有返回值

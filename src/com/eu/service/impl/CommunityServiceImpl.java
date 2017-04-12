@@ -294,6 +294,17 @@ public class CommunityServiceImpl implements CommunityService {
         return new CommunityListResult(200,"OK",list);
     }
 
+    @Override
+    public CommunityResult getCommunityInfoByID(int cmid) {
+
+        try {
+            return new CommunityResult(200,"OK",communityMapper.selectByPrimaryKey(cmid));
+        }catch (Exception e){
+            return new CommunityResult(500,e.getMessage(),null);
+        }
+
+    }
+
 
     /// 查询一组 id 对应的社团
     private List<Community> selectCommunities(List<Integer> cmidlist) throws Exception{
