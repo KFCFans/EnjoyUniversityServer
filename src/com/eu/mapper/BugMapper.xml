@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.eu.pojo.Bug" >
     <id column="uid" property="uid" jdbcType="BIGINT" />
     <result column="problem" property="problem" jdbcType="VARCHAR" />
+    <result column="contactinfo" property="contactinfo" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -64,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    uid, problem
+    uid, problem, contactinfo
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eu.pojo.BugExample" >
     select
@@ -97,8 +98,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.eu.pojo.Bug" >
-    insert into bug (uid, problem)
-    values (#{uid,jdbcType=BIGINT}, #{problem,jdbcType=VARCHAR})
+    insert into bug (uid, problem, contactinfo
+      )
+    values (#{uid,jdbcType=BIGINT}, #{problem,jdbcType=VARCHAR}, #{contactinfo,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.eu.pojo.Bug" >
     insert into bug
@@ -109,6 +112,9 @@
       <if test="problem != null" >
         problem,
       </if>
+      <if test="contactinfo != null" >
+        contactinfo,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="uid != null" >
@@ -116,6 +122,9 @@
       </if>
       <if test="problem != null" >
         #{problem,jdbcType=VARCHAR},
+      </if>
+      <if test="contactinfo != null" >
+        #{contactinfo,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -134,6 +143,9 @@
       <if test="record.problem != null" >
         problem = #{record.problem,jdbcType=VARCHAR},
       </if>
+      <if test="record.contactinfo != null" >
+        contactinfo = #{record.contactinfo,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -142,7 +154,8 @@
   <update id="updateByExample" parameterType="map" >
     update bug
     set uid = #{record.uid,jdbcType=BIGINT},
-      problem = #{record.problem,jdbcType=VARCHAR}
+      problem = #{record.problem,jdbcType=VARCHAR},
+      contactinfo = #{record.contactinfo,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -153,12 +166,16 @@
       <if test="problem != null" >
         problem = #{problem,jdbcType=VARCHAR},
       </if>
+      <if test="contactinfo != null" >
+        contactinfo = #{contactinfo,jdbcType=VARCHAR},
+      </if>
     </set>
     where uid = #{uid,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.eu.pojo.Bug" >
     update bug
-    set problem = #{problem,jdbcType=VARCHAR}
+    set problem = #{problem,jdbcType=VARCHAR},
+      contactinfo = #{contactinfo,jdbcType=VARCHAR}
     where uid = #{uid,jdbcType=BIGINT}
   </update>
 </mapper>

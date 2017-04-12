@@ -22,11 +22,12 @@ public class CommonServiceImpl implements CommonService {
 
 
     @Override
-    public RequestResult reportBugOrProblem(String uid,String bug) {
+    public RequestResult reportBugOrProblem(String uid,String bug,String contactinfo) {
 
         Bug b = new Bug();
         b.setProblem(bug);
         b.setUid(Long.parseLong(uid));
+        b.setContactinfo(contactinfo);
         try {
             bugMapper.insert(b);
         }catch (Exception e){

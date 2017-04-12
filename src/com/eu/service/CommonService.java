@@ -12,7 +12,7 @@ import java.util.List;
 public interface CommonService {
 
     // 用户提交 BUG 接口
-    public RequestResult reportBugOrProblem(String uid,String bug);
+    public RequestResult reportBugOrProblem(String uid,String bug,String contactinfo);
 
     // 开发者查看反馈接口
     public BugListResult getBugOrProblem();

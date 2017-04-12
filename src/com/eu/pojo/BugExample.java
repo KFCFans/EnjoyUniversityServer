@@ -233,6 +233,76 @@ public class BugExample {
             addCriterion("problem not between", value1, value2, "problem");
             return (Criteria) this;
         }
+
+        public Criteria andContactinfoIsNull() {
+            addCriterion("contactinfo is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactinfoIsNotNull() {
+            addCriterion("contactinfo is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactinfoEqualTo(String value) {
+            addCriterion("contactinfo =", value, "contactinfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactinfoNotEqualTo(String value) {
+            addCriterion("contactinfo <>", value, "contactinfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactinfoGreaterThan(String value) {
+            addCriterion("contactinfo >", value, "contactinfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactinfoGreaterThanOrEqualTo(String value) {
+            addCriterion("contactinfo >=", value, "contactinfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactinfoLessThan(String value) {
+            addCriterion("contactinfo <", value, "contactinfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactinfoLessThanOrEqualTo(String value) {
+            addCriterion("contactinfo <=", value, "contactinfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactinfoLike(String value) {
+            addCriterion("contactinfo like", value, "contactinfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactinfoNotLike(String value) {
+            addCriterion("contactinfo not like", value, "contactinfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactinfoIn(List<String> values) {
+            addCriterion("contactinfo in", values, "contactinfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactinfoNotIn(List<String> values) {
+            addCriterion("contactinfo not in", values, "contactinfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactinfoBetween(String value1, String value2) {
+            addCriterion("contactinfo between", value1, value2, "contactinfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactinfoNotBetween(String value1, String value2) {
+            addCriterion("contactinfo not between", value1, value2, "contactinfo");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

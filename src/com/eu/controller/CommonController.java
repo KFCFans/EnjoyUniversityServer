@@ -25,9 +25,9 @@ public class CommonController {
 
     @RequestMapping("/bugreport")
     @ResponseBody
-    public RequestResult reportBug(String bug,String uid){
+    public RequestResult reportBug(String bug,String uid,String contactinfo){
 
-        return commonService.reportBugOrProblem(uid,bug);
+        return commonService.reportBugOrProblem(uid,bug,contactinfo);
     }
 
     @RequestMapping("/buginfo")
