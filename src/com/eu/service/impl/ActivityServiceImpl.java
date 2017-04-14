@@ -215,13 +215,20 @@ public class ActivityServiceImpl implements ActivityService {
         return new RequestResult(200,"OK",null);
     }
 
+    /**
+     * 参加活动接口
+     * @param uid 用户 ID
+     * @param avid 活动 ID
+     * @param verifystate 状态，需要签到的活动传0 无需签到的活动传2（活动结束时不会影响节操值）
+     * @return 200 500
+     */
     @Override
-    public RequestResult participateActivity(String uid, int avid) {
+    public RequestResult participateActivity(String uid, int avid,int verifystate) {
 
         Participateactivity participateactivity = new Participateactivity();
         participateactivity.setAvid(avid);
         participateactivity.setUid(Long.parseLong(uid));
-//        participateactivity.setVerifystate(0);
+        participateactivity.setVerifystate(verifystate);
         try {
             participateactivityMapper.insertSelective(participateactivity);
         }catch (Exception e){

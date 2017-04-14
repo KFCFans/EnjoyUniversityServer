@@ -39,7 +39,7 @@ public interface ActivityService {
 
     public RequestResult changeActivity(Activity activity,String uid);
 
-    public RequestResult participateActivity(String uid,int avid);
+    public RequestResult participateActivity(String uid,int avid,int verifystate);
 
     public RequestResult quitActivity(String uid,int avid);
 

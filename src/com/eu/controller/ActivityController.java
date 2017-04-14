@@ -71,8 +71,8 @@ public class ActivityController {
 
     @RequestMapping("/participateav")
     @ResponseBody
-    public RequestResult paticipateActivity(int avid,String uid){
-        return activityService.participateActivity(uid,avid);
+    public RequestResult paticipateActivity(int avid,String uid,int verifystate){
+        return activityService.participateActivity(uid,avid,verifystate);
     }
 
     @RequestMapping("/quitav")
