@@ -53,8 +53,8 @@ public class ActivityController {
 
     @RequestMapping("/memberinfolist")
     @ResponseBody
-    public UserListResult getParticipatorMemberList(int avid){
-        return activityService.getParticipatorMemberList(avid);
+    public UserListResult getParticipatorMemberList(int avid,int choice){
+        return activityService.getParticipatorMemberList(avid,choice);
     }
 
     @RequestMapping("/deleteav")
@@ -81,7 +81,6 @@ public class ActivityController {
         return activityService.quitActivity(uid, avid);
     }
 
-    //FIXME: - 由于浏览器无法传入 Date 数据，无法测试
     @RequestMapping("/createav")
     @ResponseBody
     public RequestResult createActivity(Activity activity,String avendtime,String avstarttime,String avenrolldeadline){

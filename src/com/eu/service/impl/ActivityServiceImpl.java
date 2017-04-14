@@ -152,7 +152,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public UserListResult getParticipatorMemberList(int avid) {
+    public UserListResult getParticipatorMemberList(int avid,int choice) {
         ParticipateactivityExample participateactivityExample = new ParticipateactivityExample();
         ParticipateactivityExample.Criteria criteria = participateactivityExample.createCriteria();
         criteria.andAvidEqualTo(avid);
@@ -163,6 +163,15 @@ public class ActivityServiceImpl implements ActivityService {
             for(Participateactivity participateactivity:list){
                 if (participateactivity.getVerifystate() == -1){
                     continue;
+                }
+                if (choice == 1){
+                    if (participateactivity.getVerifystate() == 0){
+                        continue;
+                    }
+                }else if(choice == -1){
+                    if (participateactivity.getVerifystate() == 1){
+                        continue;
+                    }
                 }
                 phonelist.add(participateactivity.getUid());
             }

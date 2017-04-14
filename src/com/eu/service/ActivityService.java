@@ -27,7 +27,13 @@ public interface ActivityService {
 
     public ParticipatorListResult getParticipatorPhoneList(int avid);
 
-    public UserListResult getParticipatorMemberList(int avid);
+    /**
+     * 获取参与者列表
+     * @param avid 活动 ID
+     * @param choice 活动选择 0所有参加者（排出被T的） 1完成签到 －1未完成签到
+     * @return
+     */
+    public UserListResult getParticipatorMemberList(int avid, int choice);
 
     public RequestResult deleteActivity(int avid,String uid);
 

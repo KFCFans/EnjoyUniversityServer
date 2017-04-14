@@ -343,7 +343,7 @@
   </select>
 
   <select id="increaseReputation" parameterType="java.lang.Long">
-    UPDATE userinfo set reputation = reputation + 5 WHERE uid in
+    UPDATE userinfo set reputation = reputation + 10 WHERE uid in
     <if test="list!=null">
       <foreach collection="list" open="(" close=")" item="uid" separator=",">
         #{uid}
