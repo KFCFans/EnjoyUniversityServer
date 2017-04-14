@@ -28,7 +28,6 @@ public interface UserInfoService {
 
     public RequestResult increaseReputation(List<Long> uidlist);
 
-    public RequestResult correctReputation(List<Long> uidlist);
 
 
 

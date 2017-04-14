@@ -37,5 +37,4 @@ public interface UserinfoMapper {
 
     void increaseReputation(List<Long> uidlist);
 
-    void correctReputation(List<Long> uidlist);
 }

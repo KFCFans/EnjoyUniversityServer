@@ -147,15 +147,6 @@ public class UserInfoServiceImpl implements UserInfoService {
         return new RequestResult(200,"OK",null);
     }
 
-    @Override
-    public RequestResult correctReputation(List<Long> uidlist) {
-        try {
-            userinfoMapper.correctReputation(uidlist);
-        }catch (Exception e){
-            return new RequestResult(500,"faild",e.getMessage());
-        }
-        return new RequestResult(200,"OK",null);
-    }
 
 
 }

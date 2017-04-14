@@ -43,6 +43,7 @@ public class ActivityServiceImpl implements ActivityService {
         ActivityExample example = new ActivityExample();
         ActivityExample.Criteria criteria = example.createCriteria();
         criteria.andAvStarttimeGreaterThan(new Date());
+        criteria.andAvStateNotEqualTo(-1);
         example.setOrderByClause("av_starttime asc LIMIT "+count.toString());
 
         try{
@@ -431,7 +432,7 @@ public class ActivityServiceImpl implements ActivityService {
         int flag = 0;
         Activity activity = new Activity();
         activity.setAvid(avid);
-        activity.setAvRegister(-1);
+        activity.setAvState(-1);
         try {
            flag= activityMapper.updateByPrimaryKeySelective(activity);
         }catch (Exception e){
@@ -455,12 +456,8 @@ public class ActivityServiceImpl implements ActivityService {
                 increaseuidlist.add(participateactivity.getUid());
             }
         }
-
         userInfoService.deductReputation(deductuidlist);
         userInfoService.increaseReputation(increaseuidlist);
-        if (increaseuidlist.size() > 0){
-            userInfoService.correctReputation(increaseuidlist);
-        }
 
         return new RequestResult(200,"OK",null);
     }
