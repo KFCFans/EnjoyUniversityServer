@@ -65,7 +65,10 @@ public class ActivityController {
 
     @RequestMapping("/changeav")
     @ResponseBody
-    public RequestResult changeActivity(Activity activity,String uid){
+    public RequestResult changeActivity(Activity activity,String uid,String avendtime,String avstarttime,String avenrolldeadline){
+        activity.setAvEndtime(new Date((Long.parseLong(avendtime))));
+        activity.setAvEnrolldeadline(new Date(Long.parseLong(avenrolldeadline)));
+        activity.setAvStarttime(new Date(Long.parseLong(avstarttime)));
         return activityService.changeActivity(activity, uid);
     }
 
