@@ -16,7 +16,7 @@ public interface CommunityService {
 
     public CommunityListResult getMyCollectedCommunities(String uid);
 
-    public PhoneListResult getMemberPhoneList(int cmid);
+    public CommunityMemberListResult getMemberPhoneList(int cmid);
 
     public UserListResult getCommunityMemberList(int cmid);
 

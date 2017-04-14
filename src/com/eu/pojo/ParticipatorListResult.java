@@ -3,9 +3,9 @@ package com.eu.pojo;
 import java.util.List;
 
 /**
- * Created by lip on 17/4/8.
+ * Created by lip on 17/4/14.
  */
-public class PhoneListResult {
+public class ParticipatorListResult {
 
     // 200 成功，400 失败， 500 异常
     private Integer status;
@@ -13,17 +13,10 @@ public class PhoneListResult {
     // ok／错误信息
     private String msg;
 
-    // 传递的数据 登陆成功返回 token，验证返回true／false，短信验证返回验证码
-    private List<Long> data;
-
-    public PhoneListResult(Integer status, String msg, List<Long> data) {
-        this.status = status;
-        this.msg = msg;
-        this.data = data;
-    }
+    // 传递的数据
+    private List<Participateactivity> data;
 
     public Integer getStatus() {
-
         return status;
     }
 
@@ -39,11 +32,18 @@ public class PhoneListResult {
         this.msg = msg;
     }
 
-    public List<Long> getData() {
+    public List<Participateactivity> getData() {
         return data;
     }
 
-    public void setData(List<Long> data) {
+    public void setData(List<Participateactivity> data) {
+        this.data = data;
+    }
+
+    public ParticipatorListResult(Integer status, String msg, List<Participateactivity> data) {
+
+        this.status = status;
+        this.msg = msg;
         this.data = data;
     }
 }

@@ -37,13 +37,13 @@ public class CommunityController {
         return communityService.getMyCollectedCommunities(uid);
     }
 
-    @RequestMapping("/phonelist")
+    @RequestMapping("/memberlist")
     @ResponseBody
-    public PhoneListResult getMemberPhoneList(int cmid){
+    public CommunityMemberListResult getMemberPhoneList(int cmid){
         return communityService.getMemberPhoneList(cmid);
     }
 
-    @RequestMapping("/memberlist")
+    @RequestMapping("/memberinfolist")
     @ResponseBody
     public UserListResult getCommunityMemberList(int cmid){
         return communityService.getCommunityMemberList(cmid);

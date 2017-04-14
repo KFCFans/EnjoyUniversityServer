@@ -45,13 +45,13 @@ public class ActivityController {
         return activityService.getMyCollectedActivities(uid);
     }
 
-    @RequestMapping("/phonelist")
+    @RequestMapping("/memberlist")
     @ResponseBody
-    public PhoneListResult getParticipatorPhoneList(int avid){
+    public ParticipatorListResult getParticipatorPhoneList(int avid){
         return activityService.getParticipatorPhoneList(avid);
     }
 
-    @RequestMapping("/memberlist")
+    @RequestMapping("/memberinfolist")
     @ResponseBody
     public UserListResult getParticipatorMemberList(int avid){
         return activityService.getParticipatorMemberList(avid);

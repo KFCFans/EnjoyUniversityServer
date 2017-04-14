@@ -137,23 +137,18 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public PhoneListResult getParticipatorPhoneList(int avid) {
+    public ParticipatorListResult getParticipatorPhoneList(int avid) {
 
         ParticipateactivityExample participateactivityExample = new ParticipateactivityExample();
         ParticipateactivityExample.Criteria criteria = participateactivityExample.createCriteria();
         criteria.andAvidEqualTo(avid);
-        List<Long> phonelist = new ArrayList<>();
+        List<Participateactivity> participateactivityList;
         try {
-            List<Participateactivity> list = participateactivityMapper.selectByExample(participateactivityExample);
-            for(Participateactivity participateactivity:list){
-                phonelist.add(participateactivity.getUid());
-            }
-        }catch (Exception e){
-            return new PhoneListResult(500,e.getMessage(),null);
+            participateactivityList= participateactivityMapper.selectByExample(participateactivityExample);
+        }catch (Exception e) {
+            return new ParticipatorListResult(500, e.getMessage(), null);
         }
-
-
-        return new PhoneListResult(200,"OK",phonelist);
+        return new ParticipatorListResult(200,"OK",participateactivityList);
     }
 
     @Override
@@ -349,10 +344,15 @@ public class ActivityServiceImpl implements ActivityService {
         participateactivity.setUid(Long.parseLong(uid));
         participateactivity.setAvid(avid);
         participateactivity.setVerifystate(1);
+        int count = 0;
         try {
-            participateactivityMapper.updateByPrimaryKeySelective(participateactivity);
+            count = participateactivityMapper.updateByPrimaryKeySelective(participateactivity);
+
         }catch (Exception e){
             return new RequestResult(500,"faild",e.getMessage());
+        }
+        if (count == 0){
+            return new RequestResult(400,"faild",null);
         }
         return new RequestResult(200,"OK",null);
     }

@@ -100,31 +100,32 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
-    public PhoneListResult getMemberPhoneList(int cmid) {
+    public CommunityMemberListResult getMemberPhoneList(int cmid) {
 
         CommunityauthorityExample example = new CommunityauthorityExample();
         CommunityauthorityExample.Criteria criteria = example.createCriteria();
-        List<Long> phonelist = new ArrayList<>();
         criteria.andCmidEqualTo(cmid);
+        List<Communityauthority> communityauthorityList;
         try {
-            List<Communityauthority> communityauthorityList = communityauthorityMapper.selectByExample(example);
-            for (Communityauthority communityauthority:communityauthorityList){
-                phonelist.add(communityauthority.getUid());
-            }
+             communityauthorityList = communityauthorityMapper.selectByExample(example);
         }catch (Exception e){
-            return new PhoneListResult(500,e.getMessage(),null);
+            return new CommunityMemberListResult(500,e.getMessage(),null);
         }
 
-        return new PhoneListResult(200,"OK",phonelist);
+        return new CommunityMemberListResult(200,"OK",communityauthorityList);
     }
 
     @Override
     public UserListResult getCommunityMemberList(int cmid) {
 
         List<Userinfo> list;
+        List<Long> phonelist = new ArrayList<>();
+        for (Communityauthority communityauthority: getMemberPhoneList(cmid).getData()){
+            phonelist.add(communityauthority.getUid());
+        }
         try {
 
-            list = userInfoService.getParticipatorList(getMemberPhoneList(cmid).getData()).getData();
+            list = userInfoService.getParticipatorList(phonelist).getData();
 
         }catch (Exception e){
             return new UserListResult(500,e.getMessage(),null);
