@@ -49,6 +49,10 @@ public interface CommunityService {
     public CommunityResult getCommunityInfoByID(int cmid);
 
     // 设置下一次默认的社团
+    /**
+     * 操作逻辑 查询的时候得到值排序，最大的就是上次选中的，默认显示最大的
+     * 点击后，最大值＋1回传数据库
+     */
     public RequestResult setDefaultCommunity(String uid,int cmid,int num);
 
 }
