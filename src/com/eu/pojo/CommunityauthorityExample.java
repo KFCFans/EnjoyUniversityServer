@@ -353,6 +353,136 @@ public class CommunityauthorityExample {
             addCriterion("reason not between", value1, value2, "reason");
             return (Criteria) this;
         }
+
+        public Criteria andCmnameIsNull() {
+            addCriterion("cmname is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmnameIsNotNull() {
+            addCriterion("cmname is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmnameEqualTo(String value) {
+            addCriterion("cmname =", value, "cmname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmnameNotEqualTo(String value) {
+            addCriterion("cmname <>", value, "cmname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmnameGreaterThan(String value) {
+            addCriterion("cmname >", value, "cmname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmnameGreaterThanOrEqualTo(String value) {
+            addCriterion("cmname >=", value, "cmname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmnameLessThan(String value) {
+            addCriterion("cmname <", value, "cmname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmnameLessThanOrEqualTo(String value) {
+            addCriterion("cmname <=", value, "cmname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmnameLike(String value) {
+            addCriterion("cmname like", value, "cmname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmnameNotLike(String value) {
+            addCriterion("cmname not like", value, "cmname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmnameIn(List<String> values) {
+            addCriterion("cmname in", values, "cmname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmnameNotIn(List<String> values) {
+            addCriterion("cmname not in", values, "cmname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmnameBetween(String value1, String value2) {
+            addCriterion("cmname between", value1, value2, "cmname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCmnameNotBetween(String value1, String value2) {
+            addCriterion("cmname not between", value1, value2, "cmname");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastselectIsNull() {
+            addCriterion("lastselect is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastselectIsNotNull() {
+            addCriterion("lastselect is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastselectEqualTo(Integer value) {
+            addCriterion("lastselect =", value, "lastselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastselectNotEqualTo(Integer value) {
+            addCriterion("lastselect <>", value, "lastselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastselectGreaterThan(Integer value) {
+            addCriterion("lastselect >", value, "lastselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastselectGreaterThanOrEqualTo(Integer value) {
+            addCriterion("lastselect >=", value, "lastselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastselectLessThan(Integer value) {
+            addCriterion("lastselect <", value, "lastselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastselectLessThanOrEqualTo(Integer value) {
+            addCriterion("lastselect <=", value, "lastselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastselectIn(List<Integer> values) {
+            addCriterion("lastselect in", values, "lastselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastselectNotIn(List<Integer> values) {
+            addCriterion("lastselect not in", values, "lastselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastselectBetween(Integer value1, Integer value2) {
+            addCriterion("lastselect between", value1, value2, "lastselect");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastselectNotBetween(Integer value1, Integer value2) {
+            addCriterion("lastselect not between", value1, value2, "lastselect");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

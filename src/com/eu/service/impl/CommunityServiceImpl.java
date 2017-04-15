@@ -58,24 +58,18 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
-    public CommunityListResult getMyCommunities(String uid) {
+    public CommunityNameListResult getMyCommunities(String uid) {
 
         CommunityauthorityExample example = new CommunityauthorityExample();
         CommunityauthorityExample.Criteria  criteria= example.createCriteria();
         criteria.andUidEqualTo(Long.parseLong(uid));
-        List<Community> list;
+        List<Communityauthority> list;
         try {
-            List<Communityauthority> communityauthorityList = communityauthorityMapper.selectByExample(example);
-            List<Integer> cmidList = new ArrayList<>();
-            for (Communityauthority communityauthority:communityauthorityList){
-                cmidList.add(communityauthority.getCmid());
-            }
-            list = selectCommunities(cmidList);
+            list = communityauthorityMapper.selectByExample(example);
         }catch (Exception e){
-            return new CommunityListResult(500,e.getMessage(),null);
+            return new CommunityNameListResult(500,e.getMessage(),null);
         }
-        return new CommunityListResult(200,"OK",list);
-
+        return new CommunityNameListResult(200,"OK",list);
     }
 
     @Override
@@ -304,6 +298,21 @@ public class CommunityServiceImpl implements CommunityService {
             return new CommunityResult(500,e.getMessage(),null);
         }
 
+    }
+
+    @Override
+    public RequestResult setDefaultCommunity(String uid, int cmid,int num) {
+
+        Communityauthority communityauthority = new Communityauthority();
+        communityauthority.setCmid(cmid);
+        communityauthority.setUid(Long.parseLong(uid));
+        communityauthority.setLastselect(num);
+        try {
+            communityauthorityMapper.updateByPrimaryKeySelective(communityauthority);
+        }catch (Exception e){
+            return new RequestResult(500,e.getMessage(),null);
+        }
+        return new RequestResult(200,"OK",null);
     }
 
 

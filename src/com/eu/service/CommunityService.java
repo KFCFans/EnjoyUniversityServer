@@ -12,7 +12,8 @@ public interface CommunityService {
     //FIXME: 只有正在招新的社团才能显示在推荐列表中
     public CommunityListResult getCommonCommunities(Integer page, Integer rows);
 
-    public CommunityListResult getMyCommunities(String uid);
+    // 获取我的社团名称列表以及上次选中的社团（用于下拉选择框）
+    public CommunityNameListResult getMyCommunities(String uid);
 
     public CommunityListResult getMyCollectedCommunities(String uid);
 
@@ -46,5 +47,8 @@ public interface CommunityService {
 
     // 根据社团 ID 获取社团信息
     public CommunityResult getCommunityInfoByID(int cmid);
+
+    // 设置下一次默认的社团
+    public RequestResult setDefaultCommunity(String uid,int cmid,int num);
 
 }

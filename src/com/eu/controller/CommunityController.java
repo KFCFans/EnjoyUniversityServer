@@ -25,9 +25,9 @@ public class CommunityController {
         return communityService.getCommonCommunities(page, rows);
     }
 
-    @RequestMapping("/joinedcm")
+    @RequestMapping("/mycommunitylist")
     @ResponseBody
-    public CommunityListResult getMyCommunitys(String uid){
+    public CommunityNameListResult getMyCommunitys(String uid){
         return communityService.getMyCommunities(uid);
     }
 
@@ -107,5 +107,11 @@ public class CommunityController {
     @ResponseBody
     public CommunityResult getCommunityByID(int cmid){
         return communityService.getCommunityInfoByID(cmid);
+    }
+
+    @RequestMapping("/setdefaultcm")
+    @ResponseBody
+    public RequestResult setDefaultCommunity(int cmid,String uid,int num){
+        return communityService.setDefaultCommunity(uid, cmid, num);
     }
 }
