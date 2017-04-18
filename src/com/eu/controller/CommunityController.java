@@ -51,8 +51,8 @@ public class CommunityController {
 
     @RequestMapping("participatecm")
     @ResponseBody
-    public RequestResult participateCommunity(String uid,String reason,int cmid){
-        return communityService.participateCommunity(uid, cmid, reason);
+    public RequestResult participateCommunity(String uid,String reason,int cmid,String cmname){
+        return communityService.participateCommunity(uid, cmid, reason,cmname);
     }
 
     @RequestMapping("/leavecm")

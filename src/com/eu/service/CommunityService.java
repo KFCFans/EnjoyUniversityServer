@@ -21,7 +21,7 @@ public interface CommunityService {
 
     public UserListResult getCommunityMemberList(int cmid);
 
-    public RequestResult participateCommunity(String uid, int cmid,String reason);
+    public RequestResult participateCommunity(String uid, int cmid,String reason,String cmname);
 
     public RequestResult leaveCommunity(String uid,int cmid);
 

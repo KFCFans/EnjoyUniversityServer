@@ -93,12 +93,19 @@ public class CommunityServiceImpl implements CommunityService {
         return new CommunityListResult(200,"OK",communityList);
     }
 
+    /**
+     *  获取参加社团的用户简易信息已经上次进去的社团（只查询 CommunityAuthority 表）
+     * @param cmid 社团 ID
+     * @return CommunityAuthority 数组
+     */
     @Override
     public CommunityMemberListResult getMemberPhoneList(int cmid) {
 
         CommunityauthorityExample example = new CommunityauthorityExample();
         CommunityauthorityExample.Criteria criteria = example.createCriteria();
         criteria.andCmidEqualTo(cmid);
+        // 大于 0 的才出现在我的社团中（还在申请的为－1）
+        criteria.andLastselectGreaterThanOrEqualTo(0);
         List<Communityauthority> communityauthorityList;
         try {
              communityauthorityList = communityauthorityMapper.selectByExample(example);
@@ -109,6 +116,11 @@ public class CommunityServiceImpl implements CommunityService {
         return new CommunityMemberListResult(200,"OK",communityauthorityList);
     }
 
+    /**
+     * 获取社团参与者的详细信息
+     * @param cmid 社团ID
+     * @return 用户信息列表
+     */
     @Override
     public UserListResult getCommunityMemberList(int cmid) {
 
@@ -127,14 +139,24 @@ public class CommunityServiceImpl implements CommunityService {
         return new UserListResult(200,"OK",list);
     }
 
+    /**
+     * 申请加入社团
+     * @param uid 用户 ID
+     * @param cmid 社团 ID
+     * @param reason 申请理由
+     * @param cmname 社团名称（增加冗余换取性能）
+     * @return 200 500
+     */
     @Override
-    public RequestResult participateCommunity(String uid, int cmid, String reason) {
+    public RequestResult participateCommunity(String uid, int cmid, String reason,String cmname) {
 
         Communityauthority communityauthority = new Communityauthority();
         communityauthority.setPosition(-3);
         communityauthority.setReason(reason);
         communityauthority.setCmid(cmid);
         communityauthority.setUid(Long.parseLong(uid));
+        communityauthority.setCmname(cmname);
+        communityauthority.setLastselect(-1);
         try {
             communityauthorityMapper.insert(communityauthority);
         }catch (Exception e){
@@ -167,7 +189,7 @@ public class CommunityServiceImpl implements CommunityService {
      * @param uid 要设置的人的 uid
      * @param cmid  要设置社团的 cmid
      * @param position 要设置的职位
-     * @return
+     * @return 200 400 500
      */
     @Override
     public RequestResult manageCommunity(String uid, int cmid, int position) {
@@ -176,6 +198,9 @@ public class CommunityServiceImpl implements CommunityService {
         communityauthority.setPosition(position);
         communityauthority.setUid(Long.parseLong(uid));
         communityauthority.setCmid(cmid);
+        if (position > 0){
+            communityauthority.setLastselect(0);
+        }
         int succeed = 0;
         try {
             succeed=communityauthorityMapper.updateByPrimaryKeySelective(communityauthority);
