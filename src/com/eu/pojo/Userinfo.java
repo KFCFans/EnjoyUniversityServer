@@ -25,6 +25,8 @@ public class Userinfo {
 
     private Integer verified;
 
+    private Integer grade;
+
     public Long getUid() {
         return uid;
     }
@@ -119,6 +121,14 @@ public class Userinfo {
 
     public void setVerified(Integer verified) {
         this.verified = verified;
+    }
+
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
     }
 
 
