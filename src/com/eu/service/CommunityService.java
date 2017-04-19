@@ -48,6 +48,9 @@ public interface CommunityService {
     // 根据社团 ID 获取社团信息
     public CommunityResult getCommunityInfoByID(int cmid);
 
+    // 获取社团通讯录（包括头像，姓名，性别，年级，职位，手机号）
+    public CommunityContactsListResult getCommunityContactsByID(int cmid);
+
     // 设置下一次默认的社团
     /**
      * 操作逻辑 查询的时候得到值排序，最大的就是上次选中的，默认显示最大的

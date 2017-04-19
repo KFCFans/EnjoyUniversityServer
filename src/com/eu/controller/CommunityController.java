@@ -114,4 +114,10 @@ public class CommunityController {
     public RequestResult setDefaultCommunity(int cmid,String uid,int num){
         return communityService.setDefaultCommunity(uid, cmid, num);
     }
+
+    @RequestMapping("/contacts")
+    @ResponseBody
+    public CommunityContactsListResult getCommunityContactsListByID(int cmid){
+        return communityService.getCommunityContactsByID(cmid);
+    }
 }

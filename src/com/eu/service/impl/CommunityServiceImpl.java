@@ -3,6 +3,7 @@ package com.eu.service.impl;
 import com.eu.mapper.CommunityMapper;
 import com.eu.mapper.CommunityauthorityMapper;
 import com.eu.mapper.CommunitycollectionMapper;
+import com.eu.mapper.MultiTableQueryMapper;
 import com.eu.pojo.*;
 import com.eu.service.CommunityService;
 import com.eu.service.UserInfoService;
@@ -30,6 +31,9 @@ public class CommunityServiceImpl implements CommunityService {
 
     @Autowired
     private UserInfoService userInfoService;
+
+    @Autowired
+    private MultiTableQueryMapper multiTableQueryMapper;
 
     @Override
     public CommunityListResult getCommonCommunities(Integer page,Integer rows) {
@@ -323,6 +327,15 @@ public class CommunityServiceImpl implements CommunityService {
             return new CommunityResult(500,e.getMessage(),null);
         }
 
+    }
+
+    @Override
+    public CommunityContactsListResult getCommunityContactsByID(int cmid) {
+        try {
+            return new CommunityContactsListResult(200,"OK",multiTableQueryMapper.selectContactsByCmid(cmid));
+        }catch (Exception e){
+            return new CommunityContactsListResult(500,e.getMessage(),null);
+        }
     }
 
     @Override
