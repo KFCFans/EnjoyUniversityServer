@@ -17,12 +17,28 @@ public class CommunityContacts {
 
     private Integer gender;
 
-    public Long getUid() {
-        return uid;
+    private Long studentid;
+
+    private String professionclass;
+
+    public CommunityContacts(String name, String avatar, Integer position, Long uid, Integer grade, Integer gender, Long studentid, String professionclass) {
+        this.name = name;
+        this.avatar = avatar;
+        this.position = position;
+        this.uid = uid;
+        this.grade = grade;
+        this.gender = gender;
+        this.studentid = studentid;
+        this.professionclass = professionclass;
     }
 
-    public void setUid(Long uid) {
-        this.uid = uid;
+    public String getName() {
+
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAvatar() {
@@ -33,20 +49,20 @@ public class CommunityContacts {
         this.avatar = avatar;
     }
 
-    public Integer getGender() {
-        return gender;
+    public Integer getPosition() {
+        return position;
     }
 
-    public void setGender(Integer gender) {
-        this.gender = gender;
+    public void setPosition(Integer position) {
+        this.position = position;
     }
 
-    public String getName() {
-        return name;
+    public Long getUid() {
+        return uid;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUid(Long uid) {
+        this.uid = uid;
     }
 
     public Integer getGrade() {
@@ -57,20 +73,27 @@ public class CommunityContacts {
         this.grade = grade;
     }
 
-    public Integer getPosition() {
-        return position;
+    public Integer getGender() {
+        return gender;
     }
 
-    public void setPosition(Integer position) {
-        this.position = position;
-    }
-
-    public CommunityContacts(String name, String avatar, Integer position, Long uid, Integer grade, Integer gender) {
-        this.name = name;
-        this.avatar = avatar;
-        this.position = position;
-        this.uid = uid;
-        this.grade = grade;
+    public void setGender(Integer gender) {
         this.gender = gender;
+    }
+
+    public Long getStudentid() {
+        return studentid;
+    }
+
+    public void setStudentid(Long studentid) {
+        this.studentid = studentid;
+    }
+
+    public String getProfessionclass() {
+        return professionclass;
+    }
+
+    public void setProfessionclass(String professionclass) {
+        this.professionclass = professionclass;
     }
 }

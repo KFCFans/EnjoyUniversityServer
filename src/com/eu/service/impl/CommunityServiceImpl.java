@@ -353,6 +353,38 @@ public class CommunityServiceImpl implements CommunityService {
         return new RequestResult(200,"OK",null);
     }
 
+    /**
+     * 转交社团
+     * @param newboss 新任社长
+     * @param oldboss 旧社长
+     * @param cmid 社团ID
+     * @return 400 200 500
+     */
+    @Override
+    public RequestResult deliverCommunity(String newboss, String oldboss, int cmid) {
+        Community community = new Community();
+        community.setCmBoss(Long.parseLong(newboss));
+        community.setCmid(cmid);
+
+        Communityauthority old = new Communityauthority();
+        old.setUid(Long.parseLong(oldboss));
+        old.setCmid(cmid);
+        old.setPosition(2);
+
+        Communityauthority newcm = new Communityauthority();
+        newcm.setUid(Long.parseLong(newboss));
+        newcm.setCmid(cmid);
+        newcm.setPosition(3);
+        try {
+            communityMapper.updateByPrimaryKeySelective(community);
+            communityauthorityMapper.updateByPrimaryKeySelective(old);
+            communityauthorityMapper.updateByPrimaryKeySelective(newcm);
+        }catch (Exception e){
+            return new RequestResult(500,e.getMessage(),null);
+        }
+        return new RequestResult(200,"OK",null);
+    }
+
 
     /// 查询一组 id 对应的社团
     private List<Community> selectCommunities(List<Integer> cmidlist) throws Exception{

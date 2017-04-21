@@ -120,4 +120,10 @@ public class CommunityController {
     public CommunityContactsListResult getCommunityContactsListByID(int cmid){
         return communityService.getCommunityContactsByID(cmid);
     }
+
+    @RequestMapping("/delivercm")
+    @ResponseBody
+    public RequestResult deliverCommunity(String oldboss,String newboss,int cmid){
+        return communityService.deliverCommunity(newboss,oldboss,cmid);
+    }
 }

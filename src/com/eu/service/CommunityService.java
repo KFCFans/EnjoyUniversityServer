@@ -58,4 +58,6 @@ public interface CommunityService {
      */
     public RequestResult setDefaultCommunity(String uid,int cmid,int num);
 
+    public RequestResult deliverCommunity(String newboss,String oldboss,int cmid);
+
 }

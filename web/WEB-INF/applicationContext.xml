@@ -64,6 +64,7 @@
             <tx:method name="create*" propagation="REQUIRED" />
             <tx:method name="delete*" propagation="REQUIRED" />
             <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="deliverCommunity" propagation="REQUIRED"/>
             <tx:method name="verify*" read-only="true" propagation="SUPPORTS"/>
             <tx:method name="find*" propagation="SUPPORTS" read-only="true" />
             <tx:method name="select*" propagation="SUPPORTS" read-only="true" />

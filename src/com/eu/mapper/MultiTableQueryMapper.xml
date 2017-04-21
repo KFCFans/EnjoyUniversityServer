@@ -3,7 +3,7 @@
 <mapper namespace="com.eu.mapper.MultiTableQueryMapper" >
 
     <select id="selectContactsByCmid" parameterType="java.lang.Integer" resultType="com.eu.pojo.CommunityContacts">
-        select userinfo.`name`,userinfo.avatar,communityauthority.position,userinfo.uid,userinfo.grade,userinfo.gender from userinfo,communityauthority where userinfo.uid = communityauthority.uid and communityauthority.cmid = #{cmid}
+        select userinfo.`name`,userinfo.avatar,communityauthority.position,userinfo.uid,userinfo.grade,userinfo.gender,userinfo.studentid,userinfo.professionclass from userinfo,communityauthority where userinfo.uid = communityauthority.uid and communityauthority.cmid = #{cmid}
     </select>
 
 </mapper>
