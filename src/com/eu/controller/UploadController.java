@@ -57,7 +57,7 @@ public class UploadController {
     public RequestResult uploadCommunityLogo(@RequestParam("file") CommonsMultipartFile file){
 
         //文件名
-        String filename = Long.toString(System.currentTimeMillis()) + ".jpg";
+        String filename = Long.toString(System.currentTimeMillis());
         String path = "D:\\picture\\community\\logo";
         try {
             uploadFile(filename,path,file);
