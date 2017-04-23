@@ -84,6 +84,22 @@ public class UploadController {
 
     }
 
+    @RequestMapping("/verify")
+    @ResponseBody
+    public RequestResult uploadVerifyPhoto(@RequestParam("file") CommonsMultipartFile file){
+
+        String filename = file.getOriginalFilename();
+        
+        String path = "D:\\picture\\verify";
+        try {
+            uploadFile(filename,path,file);
+        }catch (Exception e){
+            return new RequestResult(500,e.getMessage(),null);
+        }
+        return new RequestResult(200,"OK",filename);
+
+    }
+
     void uploadFile(String filename,String path,CommonsMultipartFile file) throws Exception{
 
         InputStream is = file.getInputStream();
