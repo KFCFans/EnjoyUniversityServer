@@ -10,4 +10,10 @@ import java.util.List;
 public interface MultiTableQueryMapper {
 
     List<CommunityContacts> selectContactsByCmid(Integer cmid);
+
+    Integer searchActivityCountByKeyword(String keyword);
+
+    Integer searchCommunityCountByKeyword(String keyword);
+
+    Integer searchUserCountByKeyword(String keyword);
 }

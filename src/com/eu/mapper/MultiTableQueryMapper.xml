@@ -6,4 +6,16 @@
         select userinfo.`name`,userinfo.avatar,communityauthority.position,userinfo.uid,userinfo.grade,userinfo.gender,userinfo.studentid,userinfo.professionclass from userinfo,communityauthority where userinfo.uid = communityauthority.uid and communityauthority.cmid = #{cmid}
     </select>
 
+    <select id="searchActivityCountByKeyword" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) FROM activity where av_title like #{keyword}
+    </select>
+
+    <select id="searchCommunityCountByKeyword" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) FROM community where cm_name like #{keyword}
+    </select>
+    
+    <select id="searchUserCountByKeyword" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) FROM userinfo where `name` like #{keywrod}
+    </select>
+
 </mapper>

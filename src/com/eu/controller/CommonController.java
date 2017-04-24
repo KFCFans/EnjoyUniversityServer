@@ -32,4 +32,10 @@ public class CommonController {
         return commonService.getBugOrProblem();
     }
 
+    @RequestMapping("/searchnum")
+    @ResponseBody
+    public RequestResult getSearchNum(String keyword){
+        return commonService.getSearchResultNum(keyword);
+    }
+
 }

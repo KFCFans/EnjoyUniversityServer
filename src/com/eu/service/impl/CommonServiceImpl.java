@@ -1,10 +1,7 @@
 package com.eu.service.impl;
 
-import com.eu.mapper.BugMapper;
-import com.eu.pojo.Bug;
-import com.eu.pojo.BugExample;
-import com.eu.pojo.BugListResult;
-import com.eu.pojo.RequestResult;
+import com.eu.mapper.*;
+import com.eu.pojo.*;
 import com.eu.service.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +17,8 @@ public class CommonServiceImpl implements CommonService {
     @Autowired
     private BugMapper bugMapper;
 
+    @Autowired
+    private MultiTableQueryMapper multiTableQueryMapper;
 
     @Override
     public RequestResult reportBugOrProblem(String uid,String bug,String contactinfo) {
@@ -47,5 +46,23 @@ public class CommonServiceImpl implements CommonService {
         }catch (Exception e){
             return new BugListResult(500,e.getMessage(),null);
         }
+    }
+
+    @Override
+    public RequestResult getSearchResultNum(String keyword) {
+
+        Integer activitynum;
+        Integer communitynum;
+        Integer usernum;
+        try {
+            activitynum = multiTableQueryMapper.searchActivityCountByKeyword("%"+keyword+"%");
+            communitynum = multiTableQueryMapper.searchCommunityCountByKeyword("%"+keyword+"%");
+            usernum = multiTableQueryMapper.searchUserCountByKeyword("%"+keyword+"%");
+        }catch (Exception e){
+            return new RequestResult(500,e.getMessage(),null);
+        }
+        // 拼接 json
+        String resultdata = "{\"activityNum\":"+activitynum+",\"communityNum\":"+communitynum+",\"userNum\":"+usernum+"}";
+        return new RequestResult(200,"OK",resultdata);
     }
 }

@@ -17,5 +17,8 @@ public interface CommonService {
     // 开发者查看反馈接口
     public BugListResult getBugOrProblem();
 
+    // 获取搜索结果个数
+    public RequestResult getSearchResultNum(String keyword);
+
 
 }
