@@ -89,7 +89,7 @@ public class UploadController {
     public RequestResult uploadVerifyPhoto(@RequestParam("file") CommonsMultipartFile file){
 
         String filename = file.getOriginalFilename();
-        
+
         String path = "D:\\picture\\verify";
         try {
             uploadFile(filename,path,file);
