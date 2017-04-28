@@ -49,7 +49,7 @@ public class CommonServiceImpl implements CommonService {
     }
 
     @Override
-    public RequestResult getSearchResultNum(String keyword) {
+    public SerchNumResult getSearchResultNum(String keyword) {
 
         Integer activitynum;
         Integer communitynum;
@@ -59,10 +59,10 @@ public class CommonServiceImpl implements CommonService {
             communitynum = multiTableQueryMapper.searchCommunityCountByKeyword("%"+keyword+"%");
             usernum = multiTableQueryMapper.searchUserCountByKeyword("%"+keyword+"%");
         }catch (Exception e){
-            return new RequestResult(500,e.getMessage(),null);
+            return new SerchNumResult(500,e.getMessage(),null);
         }
         // 拼接 json
-        String resultdata = "{\"activityNum\":"+activitynum+",\"communityNum\":"+communitynum+",\"userNum\":"+usernum+"}";
-        return new RequestResult(200,"OK",resultdata);
+
+        return new SerchNumResult(200,"OK",new SearchNum(activitynum,communitynum,usernum));
     }
 }

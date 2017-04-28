@@ -2,6 +2,7 @@ package com.eu.controller;
 
 import com.eu.pojo.BugListResult;
 import com.eu.pojo.RequestResult;
+import com.eu.pojo.SerchNumResult;
 import com.eu.service.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,7 @@ public class CommonController {
 
     @RequestMapping("/searchnum")
     @ResponseBody
-    public RequestResult getSearchNum(String keyword){
+    public SerchNumResult getSearchNum(String keyword){
         return commonService.getSearchResultNum(keyword);
     }
 

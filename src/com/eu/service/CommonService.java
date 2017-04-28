@@ -3,6 +3,7 @@ package com.eu.service;
 import com.eu.pojo.Bug;
 import com.eu.pojo.BugListResult;
 import com.eu.pojo.RequestResult;
+import com.eu.pojo.SerchNumResult;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface CommonService {
     public BugListResult getBugOrProblem();
 
     // 获取搜索结果个数
-    public RequestResult getSearchResultNum(String keyword);
+    public SerchNumResult getSearchResultNum(String keyword);
 
 
 }
