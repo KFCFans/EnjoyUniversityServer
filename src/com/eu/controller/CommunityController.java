@@ -126,4 +126,10 @@ public class CommunityController {
     public RequestResult deliverCommunity(String oldboss,String newboss,int cmid){
         return communityService.deliverCommunity(newboss,oldboss,cmid);
     }
+
+    @RequestMapping("/verifylist")
+    @ResponseBody
+    public RequestResult veriftApplyList(String uids,int cmid,int position){
+        return communityService.verifyApplyCommunityMemberList(uids, cmid, position);
+    }
 }

@@ -385,6 +385,24 @@ public class CommunityServiceImpl implements CommunityService {
         return new RequestResult(200,"OK",null);
     }
 
+    @Override
+    public RequestResult verifyApplyCommunityMemberList(String uids, int cmid, int position) {
+        String[] uidarray = uids.split(",");
+        Communityauthority communityauthority = new Communityauthority();
+        communityauthority.setCmid(cmid);
+        communityauthority.setPosition(position);
+        communityauthority.setLastselect(0);
+        try {
+            for(String uid:uidarray){
+                communityauthority.setUid(Long.parseLong(uid));
+                communityauthorityMapper.updateByPrimaryKeySelective(communityauthority);
+            }
+        }catch (Exception e){
+            return new RequestResult(500,e.getMessage(),null);
+        }
+        return new RequestResult(200,"OK",null);
+    }
+
 
     /// 查询一组 id 对应的社团
     private List<Community> selectCommunities(List<Integer> cmidlist) throws Exception{

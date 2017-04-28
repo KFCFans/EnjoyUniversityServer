@@ -60,4 +60,13 @@ public interface CommunityService {
 
     public RequestResult deliverCommunity(String newboss,String oldboss,int cmid);
 
+    /**
+     * 批量修改用户申请社团状态
+     * @param uids 用户 uid ，用逗号隔开 ,eg 15061883391，15061884292
+     * @param cmid  社团 ID
+     * @param position 职位
+     * @return 400 200
+     */
+    public RequestResult verifyApplyCommunityMemberList(String uids,int cmid,int position);
+
 }
