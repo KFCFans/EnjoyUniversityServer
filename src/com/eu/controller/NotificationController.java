@@ -2,6 +2,7 @@ package com.eu.controller;
 
 import com.eu.pojo.AVNotificationListResult;
 import com.eu.pojo.CMNotificationListResult;
+import com.eu.pojo.NotificationResult;
 import com.eu.pojo.SYSNotificationListResult;
 import com.eu.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,12 @@ public class NotificationController {
     @ResponseBody
     public SYSNotificationListResult getAllSystemNotifications(){
         return notificationService.getAllSystemNotifications();
+    }
+
+    @RequestMapping("/msglite")
+    @ResponseBody
+    public NotificationResult getNotificationLite(String uid){
+        return notificationService.getNotificationLiteResult(uid);
     }
 
 }

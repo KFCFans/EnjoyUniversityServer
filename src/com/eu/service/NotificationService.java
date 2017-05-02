@@ -2,6 +2,7 @@ package com.eu.service;
 
 import com.eu.pojo.AVNotificationListResult;
 import com.eu.pojo.CMNotificationListResult;
+import com.eu.pojo.NotificationResult;
 import com.eu.pojo.SYSNotificationListResult;
 
 /**
@@ -14,5 +15,7 @@ public interface NotificationService {
     public AVNotificationListResult getAllActivityNotifications(String uid);
 
     public CMNotificationListResult getAllCommunityNotifications(String uid);
+
+    public NotificationResult getNotificationLiteResult(String uid);
 
 }
