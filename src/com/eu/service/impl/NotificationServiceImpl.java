@@ -29,7 +29,7 @@ public class NotificationServiceImpl implements NotificationService{
     public SYSNotificationListResult getAllSystemNotifications() {
 
         SystemnotificationExample example = new SystemnotificationExample();
-        example.setOrderByClause("sendtime asc");
+        example.setOrderByClause("sendtime DESC");
         List<Systemnotification> list;
         try {
             list =  systemnotificationMapper.selectByExample(example);
@@ -46,7 +46,7 @@ public class NotificationServiceImpl implements NotificationService{
         ActivitynotificationExample example = new ActivitynotificationExample();
         ActivitynotificationExample.Criteria criteria = example.createCriteria();
         criteria.andUidEqualTo(Long.parseLong(uid));
-        example.setOrderByClause("sendtime asc");
+        example.setOrderByClause("sendtime DESC");
         List<Activitynotification> list;
         try {
             list = activitynotificationMapper.selectByExample(example);
@@ -61,7 +61,7 @@ public class NotificationServiceImpl implements NotificationService{
         CommunitynotificationExample example = new CommunitynotificationExample();
         CommunitynotificationExample.Criteria criteria = example.createCriteria();
         criteria.andUidEqualTo(Long.parseLong(uid));
-        example.setOrderByClause("sendtime asc");
+        example.setOrderByClause("sendtime DESC");
         List<Communitynotification> list;
         try {
             list = communitynotificationMapper.selectByExample(example);

@@ -53,7 +53,7 @@ public class PushController {
      */
     @RequestMapping("/activitytagpush")
     @ResponseBody
-    public RequestResult pushNotificationByTag(String alert,int avid) {
+    public RequestResult pushNotificationByTag(String alert,int avid,String avname) {
 
         JPushClient jpushClient = new JPushClient(masterSecret, appKey, null, ClientConfig.getInstance());
 
@@ -81,6 +81,7 @@ public class PushController {
         activitynotification.setMsg(alert);
         activitynotification.setSendtime(new Date());
         activitynotification.setAvid(avid);
+        activitynotification.setSender(avname);
         for(Participateactivity participateactivity:participateactivityList){
             activitynotification.setUid(participateactivity.getUid());
             activitynotificationMapper.insert(activitynotification);
@@ -97,7 +98,7 @@ public class PushController {
      */
     @RequestMapping("/communitytagpush")
     @ResponseBody
-    public RequestResult pushCommunityNotificationByTag(String alert,int cmid) {
+    public RequestResult pushCommunityNotificationByTag(String alert,int cmid,String cmname) {
 
         JPushClient jpushClient = new JPushClient(masterSecret, appKey, null, ClientConfig.getInstance());
 
@@ -125,6 +126,7 @@ public class PushController {
         communitynotification.setMsg(alert);
         communitynotification.setSendtime(new Date());
         communitynotification.setCmid(cmid);
+        communitynotification.setSender(cmname);
         for(Communityauthority communityauthority:communityauthorities){
             communitynotification.setUid(communityauthority.getUid());
             communitynotificationMapper.insert(communitynotification);
@@ -143,7 +145,7 @@ public class PushController {
      */
     @RequestMapping("/communityaliaspush")
     @ResponseBody
-    public RequestResult pushNotificationByAlias(String alias,String alert,int cmid){
+    public RequestResult pushNotificationByAlias(String alias,String alert,int cmid,String cmname){
 
         Collection<String> aliases = new ArrayList<>();
         String[] aliasarray = alias.split(",");
@@ -166,6 +168,7 @@ public class PushController {
         communitynotification.setMsg(alert);
         communitynotification.setSendtime(new Date());
         communitynotification.setCmid(cmid);
+        communitynotification.setSender(cmname);
         for (String uid:aliases){
             communitynotification.setUid(Long.parseLong(uid));
             communitynotificationMapper.insert(communitynotification);

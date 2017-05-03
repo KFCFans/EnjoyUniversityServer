@@ -9,6 +9,10 @@ public class Systemnotification {
 
     private Date sendtime;
 
+    private String sender;
+
+    private String nexturl;
+
     public Integer getId() {
         return id;
     }
@@ -31,5 +35,21 @@ public class Systemnotification {
 
     public void setSendtime(Date sendtime) {
         this.sendtime = sendtime;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender == null ? null : sender.trim();
+    }
+
+    public String getNexturl() {
+        return nexturl;
+    }
+
+    public void setNexturl(String nexturl) {
+        this.nexturl = nexturl == null ? null : nexturl.trim();
     }
 }

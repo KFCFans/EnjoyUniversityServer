@@ -5,6 +5,8 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="msg" property="msg" jdbcType="VARCHAR" />
     <result column="sendtime" property="sendtime" jdbcType="TIMESTAMP" />
+    <result column="sender" property="sender" jdbcType="VARCHAR" />
+    <result column="nexturl" property="nexturl" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, msg, sendtime
+    id, msg, sendtime, sender, nexturl
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eu.pojo.SystemnotificationExample" >
     select
@@ -98,10 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.eu.pojo.Systemnotification" >
-    insert into systemnotification (id, msg, sendtime
-      )
-    values (#{id,jdbcType=INTEGER}, #{msg,jdbcType=VARCHAR}, #{sendtime,jdbcType=TIMESTAMP}
-      )
+    insert into systemnotification (id, msg, sendtime, 
+      sender, nexturl)
+    values (#{id,jdbcType=INTEGER}, #{msg,jdbcType=VARCHAR}, #{sendtime,jdbcType=TIMESTAMP}, 
+      #{sender,jdbcType=VARCHAR}, #{nexturl,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.eu.pojo.Systemnotification" >
     insert into systemnotification
@@ -115,6 +117,12 @@
       <if test="sendtime != null" >
         sendtime,
       </if>
+      <if test="sender != null" >
+        sender,
+      </if>
+      <if test="nexturl != null" >
+        nexturl,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -125,6 +133,12 @@
       </if>
       <if test="sendtime != null" >
         #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sender != null" >
+        #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="nexturl != null" >
+        #{nexturl,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -146,6 +160,12 @@
       <if test="record.sendtime != null" >
         sendtime = #{record.sendtime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.sender != null" >
+        sender = #{record.sender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nexturl != null" >
+        nexturl = #{record.nexturl,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -155,7 +175,9 @@
     update systemnotification
     set id = #{record.id,jdbcType=INTEGER},
       msg = #{record.msg,jdbcType=VARCHAR},
-      sendtime = #{record.sendtime,jdbcType=TIMESTAMP}
+      sendtime = #{record.sendtime,jdbcType=TIMESTAMP},
+      sender = #{record.sender,jdbcType=VARCHAR},
+      nexturl = #{record.nexturl,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -169,13 +191,21 @@
       <if test="sendtime != null" >
         sendtime = #{sendtime,jdbcType=TIMESTAMP},
       </if>
+      <if test="sender != null" >
+        sender = #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="nexturl != null" >
+        nexturl = #{nexturl,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.eu.pojo.Systemnotification" >
     update systemnotification
     set msg = #{msg,jdbcType=VARCHAR},
-      sendtime = #{sendtime,jdbcType=TIMESTAMP}
+      sendtime = #{sendtime,jdbcType=TIMESTAMP},
+      sender = #{sender,jdbcType=VARCHAR},
+      nexturl = #{nexturl,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

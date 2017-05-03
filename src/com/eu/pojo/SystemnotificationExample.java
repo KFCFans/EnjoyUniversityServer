@@ -294,6 +294,146 @@ public class SystemnotificationExample {
             addCriterion("sendtime not between", value1, value2, "sendtime");
             return (Criteria) this;
         }
+
+        public Criteria andSenderIsNull() {
+            addCriterion("sender is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSenderIsNotNull() {
+            addCriterion("sender is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSenderEqualTo(String value) {
+            addCriterion("sender =", value, "sender");
+            return (Criteria) this;
+        }
+
+        public Criteria andSenderNotEqualTo(String value) {
+            addCriterion("sender <>", value, "sender");
+            return (Criteria) this;
+        }
+
+        public Criteria andSenderGreaterThan(String value) {
+            addCriterion("sender >", value, "sender");
+            return (Criteria) this;
+        }
+
+        public Criteria andSenderGreaterThanOrEqualTo(String value) {
+            addCriterion("sender >=", value, "sender");
+            return (Criteria) this;
+        }
+
+        public Criteria andSenderLessThan(String value) {
+            addCriterion("sender <", value, "sender");
+            return (Criteria) this;
+        }
+
+        public Criteria andSenderLessThanOrEqualTo(String value) {
+            addCriterion("sender <=", value, "sender");
+            return (Criteria) this;
+        }
+
+        public Criteria andSenderLike(String value) {
+            addCriterion("sender like", value, "sender");
+            return (Criteria) this;
+        }
+
+        public Criteria andSenderNotLike(String value) {
+            addCriterion("sender not like", value, "sender");
+            return (Criteria) this;
+        }
+
+        public Criteria andSenderIn(List<String> values) {
+            addCriterion("sender in", values, "sender");
+            return (Criteria) this;
+        }
+
+        public Criteria andSenderNotIn(List<String> values) {
+            addCriterion("sender not in", values, "sender");
+            return (Criteria) this;
+        }
+
+        public Criteria andSenderBetween(String value1, String value2) {
+            addCriterion("sender between", value1, value2, "sender");
+            return (Criteria) this;
+        }
+
+        public Criteria andSenderNotBetween(String value1, String value2) {
+            addCriterion("sender not between", value1, value2, "sender");
+            return (Criteria) this;
+        }
+
+        public Criteria andNexturlIsNull() {
+            addCriterion("nexturl is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNexturlIsNotNull() {
+            addCriterion("nexturl is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNexturlEqualTo(String value) {
+            addCriterion("nexturl =", value, "nexturl");
+            return (Criteria) this;
+        }
+
+        public Criteria andNexturlNotEqualTo(String value) {
+            addCriterion("nexturl <>", value, "nexturl");
+            return (Criteria) this;
+        }
+
+        public Criteria andNexturlGreaterThan(String value) {
+            addCriterion("nexturl >", value, "nexturl");
+            return (Criteria) this;
+        }
+
+        public Criteria andNexturlGreaterThanOrEqualTo(String value) {
+            addCriterion("nexturl >=", value, "nexturl");
+            return (Criteria) this;
+        }
+
+        public Criteria andNexturlLessThan(String value) {
+            addCriterion("nexturl <", value, "nexturl");
+            return (Criteria) this;
+        }
+
+        public Criteria andNexturlLessThanOrEqualTo(String value) {
+            addCriterion("nexturl <=", value, "nexturl");
+            return (Criteria) this;
+        }
+
+        public Criteria andNexturlLike(String value) {
+            addCriterion("nexturl like", value, "nexturl");
+            return (Criteria) this;
+        }
+
+        public Criteria andNexturlNotLike(String value) {
+            addCriterion("nexturl not like", value, "nexturl");
+            return (Criteria) this;
+        }
+
+        public Criteria andNexturlIn(List<String> values) {
+            addCriterion("nexturl in", values, "nexturl");
+            return (Criteria) this;
+        }
+
+        public Criteria andNexturlNotIn(List<String> values) {
+            addCriterion("nexturl not in", values, "nexturl");
+            return (Criteria) this;
+        }
+
+        public Criteria andNexturlBetween(String value1, String value2) {
+            addCriterion("nexturl between", value1, value2, "nexturl");
+            return (Criteria) this;
+        }
+
+        public Criteria andNexturlNotBetween(String value1, String value2) {
+            addCriterion("nexturl not between", value1, value2, "nexturl");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

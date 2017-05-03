@@ -2,10 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.eu.mapper.CommunitynotificationMapper" >
   <resultMap id="BaseResultMap" type="com.eu.pojo.Communitynotification" >
-    <id column="cmid" property="cmid" jdbcType="INTEGER" />
-    <id column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="cmid" property="cmid" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="BIGINT" />
     <result column="msg" property="msg" jdbcType="VARCHAR" />
     <result column="sendtime" property="sendtime" jdbcType="TIMESTAMP" />
+    <result column="sender" property="sender" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    cmid, uid, msg, sendtime
+    cmid, uid, msg, sendtime, sender
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eu.pojo.CommunitynotificationExample" >
     select
@@ -82,18 +83,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.eu.pojo.CommunitynotificationKey" >
-    select 
-    <include refid="Base_Column_List" />
-    from communitynotification
-    where cmid = #{cmid,jdbcType=INTEGER}
-      and uid = #{uid,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.eu.pojo.CommunitynotificationKey" >
-    delete from communitynotification
-    where cmid = #{cmid,jdbcType=INTEGER}
-      and uid = #{uid,jdbcType=BIGINT}
-  </delete>
   <delete id="deleteByExample" parameterType="com.eu.pojo.CommunitynotificationExample" >
     delete from communitynotification
     <if test="_parameter != null" >
@@ -102,9 +91,9 @@
   </delete>
   <insert id="insert" parameterType="com.eu.pojo.Communitynotification" >
     insert into communitynotification (cmid, uid, msg, 
-      sendtime)
+      sendtime, sender)
     values (#{cmid,jdbcType=INTEGER}, #{uid,jdbcType=BIGINT}, #{msg,jdbcType=VARCHAR}, 
-      #{sendtime,jdbcType=TIMESTAMP})
+      #{sendtime,jdbcType=TIMESTAMP}, #{sender,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.eu.pojo.Communitynotification" >
     insert into communitynotification
@@ -121,6 +110,9 @@
       <if test="sendtime != null" >
         sendtime,
       </if>
+      <if test="sender != null" >
+        sender,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="cmid != null" >
@@ -134,6 +126,9 @@
       </if>
       <if test="sendtime != null" >
         #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sender != null" >
+        #{sender,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -158,6 +153,9 @@
       <if test="record.sendtime != null" >
         sendtime = #{record.sendtime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.sender != null" >
+        sender = #{record.sender,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -168,29 +166,10 @@
     set cmid = #{record.cmid,jdbcType=INTEGER},
       uid = #{record.uid,jdbcType=BIGINT},
       msg = #{record.msg,jdbcType=VARCHAR},
-      sendtime = #{record.sendtime,jdbcType=TIMESTAMP}
+      sendtime = #{record.sendtime,jdbcType=TIMESTAMP},
+      sender = #{record.sender,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.eu.pojo.Communitynotification" >
-    update communitynotification
-    <set >
-      <if test="msg != null" >
-        msg = #{msg,jdbcType=VARCHAR},
-      </if>
-      <if test="sendtime != null" >
-        sendtime = #{sendtime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where cmid = #{cmid,jdbcType=INTEGER}
-      and uid = #{uid,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.eu.pojo.Communitynotification" >
-    update communitynotification
-    set msg = #{msg,jdbcType=VARCHAR},
-      sendtime = #{sendtime,jdbcType=TIMESTAMP}
-    where cmid = #{cmid,jdbcType=INTEGER}
-      and uid = #{uid,jdbcType=BIGINT}
   </update>
 </mapper>
