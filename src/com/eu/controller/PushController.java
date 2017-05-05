@@ -49,9 +49,9 @@ public class PushController {
     @Autowired
     private CommunityauthorityMapper communityauthorityMapper;
 
-    private static String masterSecret = "507fa5d70928e7a037ab22cd";
+    private static String masterSecret = "ed8024455aec831690cd1873";
 
-    private static String appKey = "7dd9d0f83f93c23e2c295dc0";
+    private static String appKey = "e950097ccf5b347c00354679";
 
     /**
      * 根据活动标签推送活动信息
