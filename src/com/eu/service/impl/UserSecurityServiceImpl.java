@@ -51,7 +51,7 @@ public class UserSecurityServiceImpl implements UserSecurityService {
         // 发送短信
         TaobaoClient client = new DefaultTaobaoClient("https://eco.taobao.com/router/rest", "23708874", "094ea180fed761b671b3b059aac6f09f");
         AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
-        req.setExtend( "" );
+
         req.setSmsType( "normal" );
         req.setSmsFreeSignName( "EU科技" );
         req.setSmsParamString( "{number:'"+code+"'}" );
@@ -59,7 +59,7 @@ public class UserSecurityServiceImpl implements UserSecurityService {
         req.setSmsTemplateCode( "SMS_56610387" );
         AlibabaAliqinFcSmsNumSendResponse rsp = null;
         try {
-            rsp = client.execute(req);
+            client.execute(req);
         } catch (ApiException e) {
             status = 500;
             msg = e.getErrMsg();

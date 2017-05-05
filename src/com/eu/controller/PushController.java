@@ -226,13 +226,13 @@ public class PushController {
         // 发送短信
         TaobaoClient client = new DefaultTaobaoClient("https://eco.taobao.com/router/rest", "23708874", "094ea180fed761b671b3b059aac6f09f");
         AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
-        req.setExtend( "" );
+
         req.setSmsType( "normal" );
         req.setSmsFreeSignName( "EU科技");
         req.setSmsParamString("{notification:'"+alert+"'}");
         req.setRecNum(phonelist);
         req.setSmsTemplateCode( "SMS_65195085" );
-        AlibabaAliqinFcSmsNumSendResponse rsp = null;
+
         try {
             client.execute(req);
         } catch (ApiException e) {
