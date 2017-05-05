@@ -15,6 +15,11 @@ import com.eu.mapper.CommunityauthorityMapper;
 import com.eu.mapper.CommunitynotificationMapper;
 import com.eu.mapper.ParticipateactivityMapper;
 import com.eu.pojo.*;
+import com.taobao.api.ApiException;
+import com.taobao.api.DefaultTaobaoClient;
+import com.taobao.api.TaobaoClient;
+import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
+import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -117,11 +122,20 @@ public class PushController {
 
         String pushtag = "cm" + cmid;
 
+        // 构建推送
+        Notification notification =  Notification.newBuilder().
+                addPlatformNotification(IosNotification.newBuilder()
+                        .setAlert(alert)
+                        .incrBadge(1)
+                        .build()
+                )
+                .addPlatformNotification(AndroidNotification.alert(alert)).build();
+
         // For push, all you need do is to build PushPayload object.
         PushPayload payload = PushPayload.newBuilder()
                 .setPlatform(Platform.android_ios())
                 .setAudience(Audience.tag(pushtag))
-                .setNotification(Notification.alert(alert)).build();
+                .setNotification(notification).build();
         // 推送消息
         try {
             jpushClient.sendPush(payload);
@@ -166,10 +180,19 @@ public class PushController {
             aliases.add(uid);
         }
         JPushClient jPushClient = new JPushClient(masterSecret,appKey);
+        // 构建推送
+        Notification notification =  Notification.newBuilder().
+                addPlatformNotification(IosNotification.newBuilder()
+                        .setAlert(alert)
+                        .incrBadge(1)
+                        .build()
+                )
+                .addPlatformNotification(AndroidNotification.alert(alert)).build();
+
         PushPayload pushPayload = PushPayload.newBuilder()
                 .setPlatform(Platform.android_ios())
                 .setAudience(Audience.alias(aliases))
-                .setNotification(Notification.alert(alert)).build();
+                .setNotification(notification).build();
         try {
             jPushClient.sendPush(pushPayload);
         }catch (Exception e){
@@ -189,5 +212,33 @@ public class PushController {
 
         return new RequestResult(200,"OK",null);
 
+    }
+
+    /**
+     * 短信群发接口
+     * @param alert 发送内容
+     * @param phonelist 手机号列表 英文逗号隔开
+     * @return 200 500
+     */
+    @RequestMapping("/sms")
+    @ResponseBody
+    public RequestResult pushSms(String alert,String phonelist){
+        // 发送短信
+        TaobaoClient client = new DefaultTaobaoClient("https://eco.taobao.com/router/rest", "23708874", "094ea180fed761b671b3b059aac6f09f");
+        AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
+        req.setExtend( "" );
+        req.setSmsType( "normal" );
+        req.setSmsFreeSignName( "EU科技");
+        req.setSmsParamString("{notification:'"+alert+"'}");
+        req.setRecNum(phonelist);
+        req.setSmsTemplateCode( "SMS_65195085" );
+        AlibabaAliqinFcSmsNumSendResponse rsp = null;
+        try {
+            client.execute(req);
+        } catch (ApiException e) {
+            return new RequestResult(500,e.getErrMsg(),null);
+        }
+
+        return new RequestResult(200,"OK",null);
     }
 }

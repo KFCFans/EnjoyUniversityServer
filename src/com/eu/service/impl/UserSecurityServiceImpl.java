@@ -65,8 +65,6 @@ public class UserSecurityServiceImpl implements UserSecurityService {
             msg = e.getErrMsg();
         }
 
-        System.out.println(rsp.getResult().getSuccess());
-
 
        // 返回验证码数据
         return new RequestResult(status,msg,code);
