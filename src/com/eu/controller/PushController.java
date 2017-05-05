@@ -6,7 +6,10 @@ import cn.jpush.api.push.PushResult;
 import cn.jpush.api.push.model.Platform;
 import cn.jpush.api.push.model.PushPayload;
 import cn.jpush.api.push.model.audience.Audience;
+import cn.jpush.api.push.model.notification.AndroidNotification;
+import cn.jpush.api.push.model.notification.IosNotification;
 import cn.jpush.api.push.model.notification.Notification;
+import cn.jpush.api.push.model.notification.PlatformNotification;
 import com.eu.mapper.ActivitynotificationMapper;
 import com.eu.mapper.CommunityauthorityMapper;
 import com.eu.mapper.CommunitynotificationMapper;
@@ -59,13 +62,23 @@ public class PushController {
 
         String pushtag = "av" + avid;
 
+        // 构建推送
+        Notification notification =  Notification.newBuilder().
+                addPlatformNotification(IosNotification.newBuilder()
+                        .setAlert(alert)
+                        .incrBadge(1)
+                        .build()
+                )
+                .addPlatformNotification(AndroidNotification.alert(alert)).build();
         // For push, all you need do is to build PushPayload object.
         PushPayload payload = PushPayload.newBuilder()
                 .setPlatform(Platform.android_ios())
                 .setAudience(Audience.tag(pushtag))
-                .setNotification(Notification.alert(alert)).build();
+                .setNotification(notification).build();
+
         // 推送消息
         try {
+
             jpushClient.sendPush(payload);
 
         } catch (Exception e) {
