@@ -11,6 +11,9 @@ import java.io.*;
  * Created by lip on 17/4/5.
  */
 
+/**
+ * ⚠️已废弃！⚠️已废弃！⚠️已废弃！⚠️已废弃！⚠️已废弃！⚠️已废弃！⚠️已废弃！⚠️已废弃！⚠️已废弃！⚠️已废弃！⚠️已废弃！⚠️已废弃！⚠️已废弃！
+ */
 @Controller
 @RequestMapping("/upload")
 public class UploadController {

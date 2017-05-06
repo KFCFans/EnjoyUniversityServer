@@ -57,7 +57,7 @@ public class COSController {
     public String uploadVerifyPhoto(@RequestParam("file") CommonsMultipartFile file){
 
         String filename = file.getOriginalFilename();
-        String filePath = "/verift/" + filename + ".jpg";
+        String filePath = "/verify/" + filename;
         return uploadToCOS(file,filePath);
     }
 
