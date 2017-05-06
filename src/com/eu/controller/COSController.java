@@ -27,28 +27,28 @@ public class COSController {
     @RequestMapping("/activity")
     @ResponseBody
     public String uploadActivityLogoToCos(@RequestParam("file") CommonsMultipartFile file){
-        String filePath = "/activity/av" + Long.toString(System.currentTimeMillis()) + ".jpg";
+        String filePath = "/activity/av" + file.getOriginalFilename() + ".jpg";
         return uploadToCOS(file,filePath);
     }
 
     @RequestMapping("/user")
     @ResponseBody
     public String uploadUserLogoToCos(@RequestParam("file") CommonsMultipartFile file){
-        String filePath = "/user/user" + Long.toString(System.currentTimeMillis()) + ".jpg";
+        String filePath = "/user/user" + file.getOriginalFilename() + ".jpg";
         return uploadToCOS(file,filePath);
     }
 
     @RequestMapping("/community/logo")
     @ResponseBody
     public String uploadCommunityLogo(@RequestParam("file") CommonsMultipartFile file){
-        String filePath = "/community/logo/cmlogo" + Long.toString(System.currentTimeMillis()) + ".png";
+        String filePath = "/community/logo/cmlogo" + file.getOriginalFilename() + ".png";
         return uploadToCOS(file,filePath);
     }
 
     @RequestMapping("/community/background")
     @ResponseBody
     public String uploadCommunityBackground(@RequestParam("file") CommonsMultipartFile file){
-        String filePath = "/community/background/cmbg" + Long.toString(System.currentTimeMillis()) + ".jpg";
+        String filePath = "/community/background/cmbg" + file.getOriginalFilename() + ".jpg";
         return uploadToCOS(file,filePath);
     }
 
@@ -57,7 +57,7 @@ public class COSController {
     public String uploadVerifyPhoto(@RequestParam("file") CommonsMultipartFile file){
 
         String filename = file.getOriginalFilename();
-        String filePath = "/verify/" + filename;
+        String filePath = "/verify/" + filename + ".jpg";
         return uploadToCOS(file,filePath);
     }
 
