@@ -5,9 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.util.Date;
 
 /**
  * Created by lip on 17/4/5.
@@ -16,6 +14,9 @@ import java.util.Date;
 @Controller
 @RequestMapping("/upload")
 public class UploadController {
+
+    /// 上传接口全面更新 此类只是为了以防万一，无特别需求不再使用！
+
 
     @RequestMapping("/activity")
     @ResponseBody
@@ -33,7 +34,6 @@ public class UploadController {
         }
 
         return new RequestResult(200,"OK",filename);
-
     }
 
     @RequestMapping("/user")
@@ -97,7 +97,6 @@ public class UploadController {
             return new RequestResult(500,e.getMessage(),null);
         }
         return new RequestResult(200,"OK",filename);
-
     }
 
     void uploadFile(String filename,String path,CommonsMultipartFile file) throws Exception{

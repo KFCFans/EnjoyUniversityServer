@@ -231,7 +231,7 @@ public class PushController {
         req.setSmsFreeSignName( "EU科技");
         req.setSmsParamString("{notification:'"+alert+"'}");
         req.setRecNum(phonelist);
-        req.setSmsTemplateCode( "SMS_65195085" );
+        req.setSmsTemplateCode( "SMS_65570018" );
 
         try {
             client.execute(req);
