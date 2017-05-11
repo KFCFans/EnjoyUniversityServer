@@ -15,6 +15,7 @@ import com.eu.mapper.CommunityauthorityMapper;
 import com.eu.mapper.CommunitynotificationMapper;
 import com.eu.mapper.ParticipateactivityMapper;
 import com.eu.pojo.*;
+import com.eu.service.ActivityService;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
@@ -44,21 +45,157 @@ public class PushController {
     private ActivitynotificationMapper activitynotificationMapper;
 
     @Autowired
-    private ParticipateactivityMapper participateactivityMapper;
-
-    @Autowired
-    private CommunityauthorityMapper communityauthorityMapper;
+    private ActivityService activityService;
 
     private static String masterSecret = "ed8024455aec831690cd1873";
 
     private static String appKey = "e950097ccf5b347c00354679";
 
     /**
-     * 根据活动标签推送活动信息
-     * @param alert 推送内容
+     * 根据别名发送活动通知
+     * @param alias 别名串，ID 与 ID之间逗号隔开
+     * @param alert 通知内容
      * @param avid 活动 ID
-     * @return 执行结果
+     * @param avname 活动名称
+     * @return 推送结果
      */
+    @RequestMapping("/activityaliaspush")
+    @ResponseBody
+    public RequestResult pushAvtivityNotificationByAlias(String alias,String alert,int avid,String avname){
+
+        Collection<String> aliases = new ArrayList<>();
+        String[] aliasarray = alias.split(",");
+        for (String uid:aliasarray){
+            aliases.add(uid);
+        }
+        JPushClient jPushClient = new JPushClient(masterSecret,appKey);
+        // 构建推送
+        Notification notification =  Notification.newBuilder().
+                addPlatformNotification(IosNotification.newBuilder()
+                        .setAlert(alert)
+                        .incrBadge(1)
+                        .build()
+                )
+                .addPlatformNotification(AndroidNotification.alert(alert)).build();
+
+        PushPayload pushPayload = PushPayload.newBuilder()
+                .setPlatform(Platform.android_ios())
+                .setAudience(Audience.alias(aliases))
+                .setNotification(notification).build();
+        try {
+            jPushClient.sendPush(pushPayload);
+        }catch (Exception e){
+            return new RequestResult(500,e.getMessage(),null);
+        }
+
+        // 将推送的消息写入数据库
+        Activitynotification activitynotification = new Activitynotification();
+        activitynotification.setSender(avname);
+        activitynotification.setAvid(avid);
+        activitynotification.setSendtime(new Date());
+        activitynotification.setMsg(alert);
+        for (String uid:aliases){
+            activitynotification.setUid(Long.parseLong(uid));
+            activitynotificationMapper.insert(activitynotification);
+        }
+        return new RequestResult(200,"OK",null);
+    }
+
+
+    /**
+     * 根据别名推送社团通知
+     * @param alias 别名，ID 与 ID 之间用 , 隔开
+     * @param alert 推送内容
+     * @param cmid 社团 ID
+     * @return 推送结果
+     */
+    @RequestMapping("/communityaliaspush")
+    @ResponseBody
+    public RequestResult pushNotificationByAlias(String alias,String alert,int cmid,String cmname){
+
+        Collection<String> aliases = new ArrayList<>();
+        String[] aliasarray = alias.split(",");
+        for (String uid:aliasarray){
+            aliases.add(uid);
+        }
+        JPushClient jPushClient = new JPushClient(masterSecret,appKey);
+        // 构建推送
+        Notification notification =  Notification.newBuilder().
+                addPlatformNotification(IosNotification.newBuilder()
+                        .setAlert(alert)
+                        .incrBadge(1)
+                        .build()
+                )
+                .addPlatformNotification(AndroidNotification.alert(alert)).build();
+
+        PushPayload pushPayload = PushPayload.newBuilder()
+                .setPlatform(Platform.android_ios())
+                .setAudience(Audience.alias(aliases))
+                .setNotification(notification).build();
+        try {
+            jPushClient.sendPush(pushPayload);
+        }catch (Exception e){
+            return new RequestResult(500,e.getMessage(),null);
+        }
+
+        // 将推送的消息写入数据库
+        Communitynotification communitynotification = new Communitynotification();
+        communitynotification.setMsg(alert);
+        communitynotification.setSendtime(new Date());
+        communitynotification.setCmid(cmid);
+        communitynotification.setSender(cmname);
+        for (String uid:aliases){
+            communitynotification.setUid(Long.parseLong(uid));
+            communitynotificationMapper.insert(communitynotification);
+        }
+
+        return new RequestResult(200,"OK",null);
+    }
+
+    @RequestMapping("activityPush")
+    @ResponseBody
+    public RequestResult pushActivityNotification(String alert,int avid,String avname){
+
+        UserListResult userListResult = activityService.getParticipatorMemberList(avid,0);
+        List<Userinfo> userinfoList = userListResult.getData();
+        String alias = "";
+        for (Userinfo userinfo:userinfoList){
+            alias = alias + userinfo.getUid() + ",";
+        }
+        return pushAvtivityNotificationByAlias(alias,alert,avid,avname);
+    }
+
+    /**
+     * 短信群发接口
+     * @param alert 发送内容
+     * @param phonelist 手机号列表 英文逗号隔开
+     * @return 200 500
+     */
+    @RequestMapping("/sms")
+    @ResponseBody
+    public RequestResult pushSms(String alert,String phonelist){
+        // 发送短信
+        TaobaoClient client = new DefaultTaobaoClient("https://eco.taobao.com/router/rest", "23708874", "094ea180fed761b671b3b059aac6f09f");
+        AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
+
+        req.setSmsType( "normal" );
+        req.setSmsFreeSignName( "EU科技");
+        req.setSmsParamString("{notification:'"+alert+"'}");
+        req.setRecNum(phonelist);
+        req.setSmsTemplateCode( "SMS_65570018" );
+
+        try {
+            client.execute(req);
+        } catch (ApiException e) {
+            return new RequestResult(500,e.getErrMsg(),null);
+        }
+
+        return new RequestResult(200,"OK",null);
+    }
+
+
+    /*
+    // 根据活动标签发送短信，已废弃
     @RequestMapping("/activitytagpush")
     @ResponseBody
     public RequestResult pushNotificationByTag(String alert,int avid,String avname) {
@@ -108,12 +245,7 @@ public class PushController {
         return new RequestResult(200, "OK", null);
     }
 
-    /**
-     * 通过社团标签推送社团通知
-     * @param alert 通知内容
-     * @param cmid 社团 ID
-     * @return 执行结果
-     */
+    // 根据社团标签发送通知，已废弃
     @RequestMapping("/communitytagpush")
     @ResponseBody
     public RequestResult pushCommunityNotificationByTag(String alert,int cmid,String cmname) {
@@ -161,84 +293,5 @@ public class PushController {
 
         return new RequestResult(200, "OK", null);
     }
-
-
-    /**
-     * 根据社团别名推送社团通知
-     * @param alias 别名，ID 与 ID 之间用 , 隔开
-     * @param alert 推送内容
-     * @param cmid 社团 ID
-     * @return 推送结果
-     */
-    @RequestMapping("/communityaliaspush")
-    @ResponseBody
-    public RequestResult pushNotificationByAlias(String alias,String alert,int cmid,String cmname){
-
-        Collection<String> aliases = new ArrayList<>();
-        String[] aliasarray = alias.split(",");
-        for (String uid:aliasarray){
-            aliases.add(uid);
-        }
-        JPushClient jPushClient = new JPushClient(masterSecret,appKey);
-        // 构建推送
-        Notification notification =  Notification.newBuilder().
-                addPlatformNotification(IosNotification.newBuilder()
-                        .setAlert(alert)
-                        .incrBadge(1)
-                        .build()
-                )
-                .addPlatformNotification(AndroidNotification.alert(alert)).build();
-
-        PushPayload pushPayload = PushPayload.newBuilder()
-                .setPlatform(Platform.android_ios())
-                .setAudience(Audience.alias(aliases))
-                .setNotification(notification).build();
-        try {
-            jPushClient.sendPush(pushPayload);
-        }catch (Exception e){
-            return new RequestResult(500,e.getMessage(),null);
-        }
-
-        // 将推送的消息写入数据库
-        Communitynotification communitynotification = new Communitynotification();
-        communitynotification.setMsg(alert);
-        communitynotification.setSendtime(new Date());
-        communitynotification.setCmid(cmid);
-        communitynotification.setSender(cmname);
-        for (String uid:aliases){
-            communitynotification.setUid(Long.parseLong(uid));
-            communitynotificationMapper.insert(communitynotification);
-        }
-
-        return new RequestResult(200,"OK",null);
-
-    }
-
-    /**
-     * 短信群发接口
-     * @param alert 发送内容
-     * @param phonelist 手机号列表 英文逗号隔开
-     * @return 200 500
-     */
-    @RequestMapping("/sms")
-    @ResponseBody
-    public RequestResult pushSms(String alert,String phonelist){
-        // 发送短信
-        TaobaoClient client = new DefaultTaobaoClient("https://eco.taobao.com/router/rest", "23708874", "094ea180fed761b671b3b059aac6f09f");
-        AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
-
-        req.setSmsType( "normal" );
-        req.setSmsFreeSignName( "EU科技");
-        req.setSmsParamString("{notification:'"+alert+"'}");
-        req.setRecNum(phonelist);
-        req.setSmsTemplateCode( "SMS_65570018" );
-
-        try {
-            client.execute(req);
-        } catch (ApiException e) {
-            return new RequestResult(500,e.getErrMsg(),null);
-        }
-
-        return new RequestResult(200,"OK",null);
-    }
+    */
 }

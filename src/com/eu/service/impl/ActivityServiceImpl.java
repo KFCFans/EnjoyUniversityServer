@@ -152,6 +152,12 @@ public class ActivityServiceImpl implements ActivityService {
         return new ParticipatorListResult(200,"OK",participateactivityList);
     }
 
+    /**
+     * 获取参与活动的用户列表
+     * @param avid 活动 ID
+     * @param choice 活动选择 0所有参加者（排出被T的） 1完成签到 －1未完成签到
+     * @return 用户列表
+     */
     @Override
     public UserListResult getParticipatorMemberList(int avid,int choice) {
         ParticipateactivityExample participateactivityExample = new ParticipateactivityExample();
