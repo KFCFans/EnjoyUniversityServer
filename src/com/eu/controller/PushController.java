@@ -9,20 +9,17 @@ import cn.jpush.api.push.model.audience.Audience;
 import cn.jpush.api.push.model.notification.AndroidNotification;
 import cn.jpush.api.push.model.notification.IosNotification;
 import cn.jpush.api.push.model.notification.Notification;
-import cn.jpush.api.push.model.notification.PlatformNotification;
 import com.eu.mapper.ActivitynotificationMapper;
-import com.eu.mapper.CommunityauthorityMapper;
 import com.eu.mapper.CommunitynotificationMapper;
-import com.eu.mapper.ParticipateactivityMapper;
 import com.eu.pojo.*;
 import com.eu.service.ActivityService;
-import com.taobao.api.ApiException;
-import com.taobao.api.DefaultTaobaoClient;
-import com.taobao.api.TaobaoClient;
-import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
-import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
+import com.yunpian.sdk.model.ResultDO;
+import com.yunpian.sdk.model.SendBatchSmsInfo;
+import com.yunpian.sdk.service.SmsOperator;
+import com.yunpian.sdk.service.YunpianRestClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -37,6 +34,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/push")
 public class PushController {
+
+    public static YunpianRestClient yunpianRestClient = new YunpianRestClient("5e7c841e5afdf3851262e1d0c644e3cb");
 
     @Autowired
     private CommunitynotificationMapper communitynotificationMapper;
@@ -57,11 +56,12 @@ public class PushController {
      * @param alert 通知内容
      * @param avid 活动 ID
      * @param avname 活动名称
+     * @param sendsms 是否发送短信 0不发送 1发送
      * @return 推送结果
      */
     @RequestMapping("/activityaliaspush")
     @ResponseBody
-    public RequestResult pushAvtivityNotificationByAlias(String alias,String alert,int avid,String avname){
+    public RequestResult pushAvtivityNotificationByAlias(String alias,String alert,int avid,String avname,Integer sendsms){
 
         Collection<String> aliases = new ArrayList<>();
         String[] aliasarray = alias.split(",");
@@ -86,6 +86,10 @@ public class PushController {
             jPushClient.sendPush(pushPayload);
         }catch (Exception e){
             return new RequestResult(500,e.getMessage(),null);
+        }
+        // 是否发送短信
+        if (sendsms == 1){
+            sendActivitySms(alert,alias,avname);
         }
 
         // 将推送的消息写入数据库
@@ -111,7 +115,7 @@ public class PushController {
      */
     @RequestMapping("/communityaliaspush")
     @ResponseBody
-    public RequestResult pushNotificationByAlias(String alias,String alert,int cmid,String cmname){
+    public RequestResult pushNotificationByAlias(String alias,String alert,int cmid,String cmname,Integer sendsms){
 
         Collection<String> aliases = new ArrayList<>();
         String[] aliasarray = alias.split(",");
@@ -138,6 +142,11 @@ public class PushController {
             return new RequestResult(500,e.getMessage(),null);
         }
 
+        // 是否发送短信
+        if (sendsms == 1){
+            sendCommunitySms(alert,alias,cmname);
+        }
+
         // 将推送的消息写入数据库
         Communitynotification communitynotification = new Communitynotification();
         communitynotification.setMsg(alert);
@@ -152,9 +161,16 @@ public class PushController {
         return new RequestResult(200,"OK",null);
     }
 
+    /**
+     * 发送活动接口 调用上面的 pushAvtivityNotificationByAlias，封装了数据库查询操作
+     * @param alert 通知内容
+     * @param avid 活动 ID
+     * @param avname 活动名称
+     * @return 200 500
+     */
     @RequestMapping("activityPush")
     @ResponseBody
-    public RequestResult pushActivityNotification(String alert,int avid,String avname){
+    public RequestResult pushActivityNotification(String alert,int avid,String avname,Integer sendsms){
 
         UserListResult userListResult = activityService.getParticipatorMemberList(avid,0);
         List<Userinfo> userinfoList = userListResult.getData();
@@ -162,36 +178,50 @@ public class PushController {
         for (Userinfo userinfo:userinfoList){
             alias = alias + userinfo.getUid() + ",";
         }
-        return pushAvtivityNotificationByAlias(alias,alert,avid,avname);
+        return pushAvtivityNotificationByAlias(alias,alert,avid,avname,sendsms);
     }
 
     /**
-     * 短信群发接口
-     * @param alert 发送内容
-     * @param phonelist 手机号列表 英文逗号隔开
+     * 发送社团通知
+     * @param alert 通知内容
+     * @param phonelist 手机号列表 英文逗号隔开 eg. 15061883391，15061883392
+     * @param cmname 社团名称
      * @return 200 500
      */
-    @RequestMapping("/sms")
+    @RequestMapping("/communitysms")
     @ResponseBody
-    public RequestResult pushSms(String alert,String phonelist){
-        // 发送短信
-        TaobaoClient client = new DefaultTaobaoClient("https://eco.taobao.com/router/rest", "23708874", "094ea180fed761b671b3b059aac6f09f");
-        AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
+    public RequestResult sendCommunitySms(String alert,String phonelist,String cmname){
 
-        req.setSmsType( "normal" );
-        req.setSmsFreeSignName( "EU科技");
-        req.setSmsParamString("{notification:'"+alert+"'}");
-        req.setRecNum(phonelist);
-        req.setSmsTemplateCode( "SMS_65570018" );
+        String sendtext = "【EU科技】"+cmname+"通知您，"+alert+"，详情请登录EU查看。";
+        return sendSmsByYunPian(phonelist,sendtext);
 
-        try {
-            client.execute(req);
-        } catch (ApiException e) {
-            return new RequestResult(500,e.getErrMsg(),null);
-        }
-
-        return new RequestResult(200,"OK",null);
     }
+
+    /**
+     * 发送活动通知
+     * @param alert 活动内容
+     * @param phonelist 手机号列表 同上
+     * @param avname 活动名称
+     * @return 200 500
+     */
+    @RequestMapping("/activitysms")
+    @ResponseBody
+    public RequestResult sendActivitySms(String  alert,String phonelist,String avname){
+
+        String sendtext = "【EU科技】您参加的活动"+avname+"提醒您，"+alert+"，详情请登录EU查看。";
+        return sendSmsByYunPian(phonelist,sendtext);
+    }
+
+    public RequestResult sendSmsByYunPian(String phonelist,String sendtext){
+        SmsOperator smsOperator = yunpianRestClient.getSmsOperator();//获取所需操作类
+        ResultDO<SendBatchSmsInfo> result = smsOperator.batchSend(phonelist, sendtext);//batchSend还有个重载函数接受List<String>号码集合,可按需灵活使用
+        if (result.isSuccess()){
+            return new RequestResult(200,"OK",null);
+        }else{
+            return new RequestResult(500,result.getE().getMessage(),null);
+        }
+    }
+
 
 
     /*
