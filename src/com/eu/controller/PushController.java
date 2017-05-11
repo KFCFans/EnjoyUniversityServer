@@ -208,7 +208,7 @@ public class PushController {
     @ResponseBody
     public RequestResult sendActivitySms(String  alert,String phonelist,String avname){
 
-        String sendtext = "【EU科技】您参加的活动"+avname+"提醒您，"+alert+"，详情请登录EU查看。";
+        String sendtext = "【EU科技】您参加的活动\""+avname+"\"提醒您，"+alert+"，详情请登录EU查看。";
         return sendSmsByYunPian(phonelist,sendtext);
     }
 
